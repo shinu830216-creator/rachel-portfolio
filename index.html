@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rachel Hou — Portfolio</title>
+<style>
+  :root {
+    --gold: #C8AA78;
+    --dark: #111111;
+    --mid: #1E1E1E;
+    --light-bg: #F8F7F4;
+    --text-main: #1A1A1A;
+    --text-sub: #666666;
+    --text-light: #999999;
+    --white: #FFFFFF;
+    --radius: 12px;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Helvetica Neue',Arial,'PingFang TC','Microsoft JhengHei',sans-serif; background:var(--light-bg); color:var(--text-main); }
+
+  /* NAV */
+  nav { position:fixed; top:0; left:0; right:0; z-index:200; display:flex; align-items:center; justify-content:space-between; padding:18px 60px; background:rgba(17,17,17,0.96); backdrop-filter:blur(10px); }
+  .nav-logo { font-size:16px; font-weight:700; letter-spacing:0.12em; color:var(--gold); text-transform:uppercase; }
+  .nav-links { display:flex; gap:32px; list-style:none; }
+  .nav-links a { color:#aaa; text-decoration:none; font-size:13px; letter-spacing:0.08em; transition:color 0.2s; }
+  .nav-links a:hover { color:var(--white); }
+
+  /* HERO */
+  .hero { background:var(--dark); min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:120px 40px 80px; position:relative; overflow:hidden; }
+  .hero::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:var(--gold); }
+  .hero::after { content:''; position:absolute; bottom:0; left:0; right:0; height:3px; background:var(--gold); }
+  .hero-eyebrow { font-size:12px; letter-spacing:0.3em; color:var(--gold); text-transform:uppercase; margin-bottom:24px; }
+  .hero-name { font-size:clamp(52px,8vw,96px); font-weight:800; color:var(--white); letter-spacing:-0.02em; line-height:1; margin-bottom:48px; }
+  .hero-name span { color:var(--gold); }
+  .hero-tags { display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-bottom:60px; }
+  .hero-tag { border:1px solid #333; color:#aaa; padding:8px 20px; border-radius:100px; font-size:13px; letter-spacing:0.05em; }
+  .scroll-hint { position:absolute; bottom:32px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:8px; color:#555; font-size:11px; letter-spacing:0.15em; text-transform:uppercase; }
+  .scroll-arrow { width:1px; height:40px; background:linear-gradient(to bottom,#555,transparent); animation:scrollPulse 2s ease-in-out infinite; }
+  @keyframes scrollPulse { 0%,100%{opacity:0.3} 50%{opacity:1} }
+
+  /* SECTION */
+  section.cases { max-width:1280px; margin:0 auto; padding:80px 40px 120px; }
+  .section-header { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:48px; flex-wrap:wrap; gap:24px; }
+  .section-title { font-size:13px; letter-spacing:0.25em; text-transform:uppercase; color:var(--text-sub); margin-bottom:8px; }
+  .section-count { font-size:clamp(32px,4vw,48px); font-weight:800; color:var(--text-main); letter-spacing:-0.02em; }
+
+  /* FILTERS */
+  .filters { display:flex; gap:10px; flex-wrap:wrap; }
+  .filter-btn { padding:8px 20px; border-radius:100px; border:1.5px solid #ddd; background:transparent; font-size:13px; font-family:inherit; color:var(--text-sub); cursor:pointer; transition:all 0.2s; letter-spacing:0.03em; }
+  .filter-btn:hover { border-color:var(--dark); color:var(--dark); }
+  .filter-btn.active { background:var(--dark); border-color:var(--dark); color:var(--white); }
+
+  /* GRID */
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(360px,1fr)); gap:24px; }
+
+  /* CARD */
+  .card { background:var(--white); border-radius:var(--radius); overflow:hidden; transition:transform 0.3s ease,box-shadow 0.3s ease; cursor:pointer; display:flex; flex-direction:column; }
+  .card:hover { transform:translateY(-6px); box-shadow:0 20px 48px rgba(0,0,0,0.12); }
+  .card.hidden { display:none; }
+  .card-image { height:200px; background:var(--mid); position:relative; overflow:hidden; }
+  .card-image img { width:100%; height:100%; object-fit:cover; transition:transform 0.4s ease; }
+  .card:hover .card-image img { transform:scale(1.05); }
+  .card-image-placeholder { width:100%; height:100%; display:flex; align-items:center; justify-content:center; }
+  .card-image-placeholder .brand-big { font-size:28px; font-weight:800; letter-spacing:0.1em; opacity:0.35; }
+  .card-category-badge { position:absolute; top:14px; left:14px; padding:5px 12px; border-radius:100px; font-size:11px; font-weight:600; letter-spacing:0.06em; backdrop-filter:blur(6px); background:rgba(255,255,255,0.18); color:var(--white); border:1px solid rgba(255,255,255,0.3); }
+  .card-year-badge { position:absolute; top:14px; right:14px; padding:5px 12px; border-radius:100px; font-size:11px; font-weight:600; background:rgba(0,0,0,0.5); color:rgba(255,255,255,0.8); backdrop-filter:blur(6px); }
+  .accent-bar { height:3px; }
+  .card-body { padding:22px 24px 24px; display:flex; flex-direction:column; flex:1; }
+  .card-company { font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-light); margin-bottom:6px; }
+  .card-brand { font-size:20px; font-weight:800; letter-spacing:0.03em; margin-bottom:4px; line-height:1.2; }
+  .card-title { font-size:14px; color:var(--text-sub); margin-bottom:16px; line-height:1.5; }
+  .card-divider { height:1px; background:#eee; margin-bottom:16px; }
+  .card-role { display:inline-flex; align-items:center; gap:6px; padding:6px 14px; border-radius:6px; font-size:12px; font-weight:600; margin-bottom:16px; align-self:flex-start; }
+  .card-objective { font-size:13px; color:var(--text-main); line-height:1.7; margin-bottom:16px; flex:1; }
+  .card-bullets { list-style:none; display:flex; flex-direction:column; gap:6px; }
+  .card-bullets li { display:flex; align-items:flex-start; gap:8px; font-size:12.5px; color:var(--text-sub); line-height:1.5; }
+  .bullet-dot { width:5px; height:5px; border-radius:50%; flex-shrink:0; margin-top:6px; }
+  .card-scale { margin-top:16px; padding:10px 14px; background:var(--light-bg); border-radius:8px; font-size:12px; color:var(--text-sub); line-height:1.5; }
+  .card-scale strong { color:var(--text-main); font-size:10px; letter-spacing:0.1em; text-transform:uppercase; display:block; margin-bottom:3px; }
+  .card-click-hint { margin-top:14px; display:flex; align-items:center; gap:6px; font-size:11px; color:#bbb; letter-spacing:0.05em; }
+  .card-click-hint svg { opacity:0.5; }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    position:fixed; inset:0; z-index:500;
+    background:rgba(0,0,0,0.7);
+    backdrop-filter:blur(4px);
+    display:flex; align-items:center; justify-content:center;
+    padding:24px;
+    opacity:0; pointer-events:none;
+    transition:opacity 0.3s ease;
+  }
+  .modal-overlay.open { opacity:1; pointer-events:all; }
+
+  .modal {
+    background:var(--white);
+    border-radius:16px;
+    width:100%; max-width:860px;
+    max-height:90vh;
+    overflow-y:auto;
+    position:relative;
+    transform:translateY(20px) scale(0.98);
+    transition:transform 0.3s ease;
+    scrollbar-width:thin;
+  }
+  .modal-overlay.open .modal { transform:translateY(0) scale(1); }
+
+  .modal-close {
+    position:absolute; top:16px; right:16px;
+    width:36px; height:36px;
+    border-radius:50%;
+    background:rgba(0,0,0,0.07);
+    border:none; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    font-size:16px; color:#666;
+    transition:background 0.2s;
+    z-index:10;
+  }
+  .modal-close:hover { background:rgba(0,0,0,0.14); }
+
+  /* Modal Header (replaces hero image) */
+  .modal-header {
+    padding:32px 36px 28px;
+    border-top:5px solid var(--modal-accent,#C8AA78);
+    border-radius:16px 16px 0 0;
+    background:var(--white);
+  }
+  .modal-header-category {
+    display:inline-block; padding:4px 16px; border-radius:100px;
+    font-size:11px; font-weight:600; letter-spacing:0.08em;
+    border:1.5px solid var(--modal-accent,#C8AA78);
+    color:var(--modal-accent,#C8AA78);
+    margin-bottom:16px;
+  }
+  .modal-header-brand { font-size:30px; font-weight:800; color:var(--text-main); letter-spacing:0.02em; line-height:1.1; margin-bottom:8px; }
+  .modal-header-title { font-size:15px; color:var(--text-sub); line-height:1.6; }
+
+  /* Modal Slides — full images, no cropping */
+  .modal-slides { display:flex; flex-direction:column; gap:36px; }
+  .slide-num { font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--text-light); margin-bottom:10px; }
+  .slide-img-wrap {
+    background:#f0f0ef; border-radius:10px; overflow:hidden;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .slide-img-wrap img { width:100%; height:auto; display:block; }
+  .slide-caption {
+    margin-top:12px; font-size:13.5px; color:var(--text-sub);
+    line-height:1.8; padding:0 2px;
+  }
+
+  .modal-body { padding:32px; }
+  .modal-meta-row {
+    display:flex; gap:24px; flex-wrap:wrap;
+    padding-bottom:24px; border-bottom:1px solid #eee; margin-bottom:28px;
+  }
+  .modal-meta-item { display:flex; flex-direction:column; gap:4px; }
+  .modal-meta-label { font-size:10px; letter-spacing:0.15em; text-transform:uppercase; color:var(--text-light); }
+  .modal-meta-value { font-size:14px; font-weight:600; color:var(--text-main); }
+
+  .modal-section { margin-bottom:28px; }
+  .modal-section-title {
+    font-size:11px; letter-spacing:0.2em; text-transform:uppercase;
+    color:var(--text-light); margin-bottom:14px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .modal-section-title::after { content:''; flex:1; height:1px; background:#eee; }
+
+  .modal-objective { font-size:15px; line-height:1.8; color:var(--text-main); }
+
+  .modal-bullets { list-style:none; display:flex; flex-direction:column; gap:10px; }
+  .modal-bullets li { display:flex; align-items:flex-start; gap:12px; font-size:14px; color:var(--text-sub); line-height:1.6; }
+  .modal-bullet-dot { width:6px; height:6px; border-radius:50%; flex-shrink:0; margin-top:7px; }
+
+  .modal-extra { font-size:14px; line-height:1.8; color:var(--text-sub); white-space:pre-line; }
+
+  .modal-scale-box {
+    background:var(--light-bg); border-radius:10px;
+    padding:16px 20px;
+    font-size:14px; color:var(--text-sub); line-height:1.7;
+  }
+  .modal-scale-box strong { display:block; font-size:10px; letter-spacing:0.15em; text-transform:uppercase; color:var(--text-main); margin-bottom:6px; }
+
+  .modal-images { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:12px; }
+  .modal-images img { width:100%; border-radius:8px; object-fit:cover; aspect-ratio:4/3; }
+
+  /* PDF embed */
+  .modal-pdf-wrap {
+    background:#f0f0ef; border-radius:10px; overflow:hidden;
+    position:relative;
+  }
+  .modal-pdf-wrap iframe {
+    width:100%; height:600px; border:none; display:block;
+  }
+  .modal-pdf-wrap.site-mode iframe {
+    height:80vh;
+  }
+
+  /* FOOTER */
+  footer { background:var(--dark); color:#555; text-align:center; padding:40px 20px; font-size:13px; letter-spacing:0.05em; }
+  footer span { color:var(--gold); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Rachel Hou &nbsp;|&nbsp; 侯馨宇</div>
+  <ul class="nav-links">
+    <li><a href="#cases">Cases</a></li>
+    <li><a href="mailto:shinu830216@gmail.com">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Creative Planner &nbsp;·&nbsp; Brand Experience &nbsp;·&nbsp; Social Marketing</div>
+  <div class="hero-name">RACHEL<br><span>HOU</span></div>
+  <div class="hero-tags">
+    <span class="hero-tag">Brand Events</span>
+    <span class="hero-tag">Pop-up Activations</span>
+    <span class="hero-tag">Social Strategy</span>
+    <span class="hero-tag">Integrated Marketing</span>
+    <span class="hero-tag">Luxury &amp; Fashion</span>
+  </div>
+  <div class="scroll-hint"><div class="scroll-arrow"></div>Scroll</div>
+</div>
+
+<!-- CASES -->
+<section class="cases" id="cases">
+  <div class="section-header">
+    <div>
+      <div class="section-title">Work Experience</div>
+      <div class="section-count">Selected Cases <span id="count-display" style="font-size:20px;font-weight:400;color:#999;margin-left:8px;"></span></div>
+    </div>
+    <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+      <div class="filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="strategy">策略企劃</button>
+        <button class="filter-btn" data-filter="social">社群行銷</button>
+        <button class="filter-btn" data-filter="offline">線下活動</button>
+      </div>
+      <button id="sort-btn" style="display:flex;align-items:center;gap:6px;padding:8px 16px;border-radius:100px;border:1.5px solid #ddd;background:transparent;font-size:13px;font-family:inherit;color:var(--text-sub);cursor:pointer;transition:all 0.2s;letter-spacing:0.03em;white-space:nowrap;">
+        <span id="sort-icon">↑</span><span id="sort-label">最新優先</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="grid" id="grid">
+
+    <!-- ① PRADA 2020 -->
+    <div class="card" data-category="strategy" data-id="prada">
+      <div class="card-image"><img src="cover_images/Prada.jpg" alt="PRADA" onerror="this.parentElement.style.background='linear-gradient(135deg,#0a0a0a,#1a1a1a)';this.remove()"><span class="card-category-badge" style="background:rgba(0,0,0,0.55);color:#fff;border-color:rgba(0,0,0,0.2)">整合行銷企劃（競賽）</span><span class="card-year-badge" style="background:rgba(0,0,0,0.6);color:#fff">2020</span></div>
+      <div class="accent-bar" style="background:#d2d2d2"></div>
+      <div class="card-body">
+        <div class="card-company">WBSA 行銷人認證</div>
+        <div class="card-brand" style="color:#0a0a0a">PRADA</div>
+        <div class="card-title">第一系列高奢彩妝行銷企劃</div>
+        <div class="card-divider"></div>
+        <div class="card-role" style="background:#f5f5f5;color:#333">✦ 職場備考 · 自主應考</div>
+        <div class="card-objective">出社會後自主報考 WBSA 行銷認證，以 PRADA 彩妝市場進入策略為題，驗證自己對行銷的熱情與實力。</div>
+        <ul class="card-bullets">
+          <li><span class="bullet-dot" style="background:#d2d2d2"></span>STP 市場分析 + 7P 行銷策略</li>
+          <li><span class="bullet-dot" style="background:#d2d2d2"></span>完整整合行銷企劃書</li>
+        </ul>
+        <div class="card-click-hint"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>點擊查看完整案例</div>
+      </div>
+    </div>
+
+    <!-- ② AIGLE 2021 -->
+    <div class="card" data-category="offline" data-id="aigle">
+      <div class="card-image"><img src="cover_images/Aigle.png" alt="AIGLE" onerror="this.parentElement.style.background='linear-gradient(135deg,#1C4824,#2d6b35)';this.remove()"><span class="card-category-badge" style="background:rgba(0,0,0,0.55);color:#fff;border-color:rgba(0,0,0,0.2)">活動策劃</span><span class="card-year-badge" style="background:rgba(0,0,0,0.6);color:#fff">2021</span></div>
+      <div class="accent-bar" style="background:#6EB95F"></div>
+      <div class="card-body">
+        <div class="card-company">Lesmor Creative</div>
+        <div class="card-brand" style="color:#1C4824">AIGLE</div>
+        <div class="card-title">FW2021 品牌代言人發布會暨時裝秀</div>
+        <div class="card-divider"></div>
+        <div class="card-role" style="background:#e8f5e9;color:#1C4824">✦ Junior Creative Planner · 部分執行</div>
+        <div class="card-objective">參與執行 AIGLE 品牌代言人發布會暨時裝秀，協助規劃現場活動流程與品牌體驗細節。</div>
+        <ul class="card-bullets">
+          <li><span class="bullet-dot" style="background:#6EB95F"></span>主題：WINTER URBAN PARK RE/CONNECT</li>
+          <li><span class="bullet-dot" style="background:#6EB95F"></span>場地：上海 1862 Theatre | 300 位嘉賓</li>
+        </ul>
+        <div class="card-click-hint"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>點擊查看完整案例</div>
+      </div>
+    </div>
+
+    <!-- ② BVLGARI -->
+    <div class="card" data-category="offline" data-id="bvlgari">
+      <div class="card-image"><img src="cover_images/Bvlgari.png" alt="BVLGARI" onerror="this.parentElement.style.background='linear-gradient(135deg,#1a1410,#2c221a)';this.remove()"><span class="card-category-badge">奢華晚宴活動</span><span class="card-year-badge">2021</span></div>
+      <div class="accent-bar" style="background:#C5A55A"></div>
+      <div class="card-body">
+        <div class="card-company">Apax Group</div>
+        <div class="card-brand" style="color:#1a1410">BVLGARI</div>
+        <div class="card-title">Magnifica 高珠寶系列 Gala Dinner 上海 2021</div>
+        <div class="card-divider"></div>
+        <div class="card-role" style="background:#fdf8ed;color:#7a5a10">✦ 活動執行</div>
+        <div class="card-objective">主責後期執行統籌，包含模特選角、場地確認、嘉賓動線規劃，確保 Gala Dinner 現場完美呈現。</div>
+        <ul class="card-bullets">
+          <li><span class="bullet-dot" style="background:#C5A55A"></span>上海 Aurora Museum | Red Carpet + Celebrity 動線</li>
+          <li><span class="bullet-dot" style="background:#C5A55A"></span>VIP Mingle + HJ Show + 高珠寶 Safe House</li>
+        </ul>
+        <div class="card-click-hint"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>點擊查看完整案例</div>
+      </div>
+    </div>
+
+    <!-- ③ DIOR -->
+    <div class="card" data-category="offline" data-id="dior">
+      <div class="card-image"><img src="cover_images/Dior.png" alt="DIOR" onerror="this.parentElement.style.background='linear-gradient(135deg,#28231E,#3a3028)';this.remove()"><span class="card-category-badge">品牌員工活動</span><span class="card-year-badge">2021</span></div>
+      <div class="accent-bar" style="background:#BE9664"></div>
+      <div class="card-body">
+        <div class="card-company">Lesmor Creative</div>
+        <div class="card-brand" style="color:#28231E">DIOR</div>
+        <div class="card-title">PCD Annual Dinner Sanya</div>
+        <div class="card-divider"></div>
+        <div class="card-role" style="background:#fdf6ec;color:#8a6030">✦ Junior Creative Planner · 部分執行</div>
+        <div class="card-objective">參與執行 DIOR 年度員工晚宴，協助規劃沉浸式活動體驗細節與現場執行。</div>
+        <ul class="card-bullets">
+          <li><span class="bullet-dot" style="background:#BE9664"></span>主題：A Story of Passion / Bohemian Riviera</li>
+          <li><span class="bullet-dot" style="background:#BE9664"></span>場地：三亞亞特蘭蒂斯酒店 | 500 位員工</li>
+        </ul>
+        <div class="card-click-hint"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>點擊查看完整案例</div>
+      </div>
+    </div>
+
+    <!-- ④ IWC -->
+    <div class="card" data-category="offline" data-id="iwc">
+      <div class="card-image"><img src="cover_images/IWC.png" alt="IWC" onerror="this.parentElement.style.background='linear-gradient(135deg,#141928,#1e2535)';this.remove()"><span class="card-category-badge">線上+線下雙城活動</span><span class="card-year-badge">2021</span></div>
+      <div class="accent-bar" style="background:#B49B64"></div>
+      <div class="card-body">
+        <div class="card-company">Lesmor Creative</div>
+        <div class="card-brand" style="color:#141928">IWC SCHAFFHAUSEN</div>
+        <div class="card-title">FY22 The Big Pilot 系列活動</div>
+        <div class="card-divider"></div>
+        <div class="card-role" style="background:#f8f4ec;color:#7a6530">✦ Junior Creative Planner · 部分執行</div>
+        <div class="card-objective">參與執行 IWC FY22 雙城巡迴活動，協助規劃線上線下 O2O 活動流程與體驗細節。</div>
+        <ul class="card-bullets">
+          <li><span class="bullet-dot" style="background:#B49B64"></span>概念：DARING VISIONARIES | 雙城巡迴</li>
+          <li><span class="bullet-dot" style="background:#B49B64"></span>成都太古里 + 上海太古匯 VIP Gala Dinner</li>
+        </ul>
+        <div class="card-click-hint"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>點擊查看完整案例</div>
+      </div>
+    </div>
+
+    <!-- ⑤ STUART WEITZMAN -->
+    <div class="card" data-category="offline" data-id="sw">
+      <div class="card-image"><img src="cover_images/Stuart_Weitzman.png" alt="Stuart Weitzman" onerror="this.parentElement.style.background='linear-gradient(135deg,#0a0a0a,#1a1a1a)';this.remove()"><span class="card-category-badge" style="background:rgba(0,0,0,0.55);color:#fff;border-color:rgba(0,0,0,0.2)">快閃店活動</span><span class="card-year-badge" style="background:rgba(0,0,0,0.6);color:#fff">2021</span></div>
+      <div class="accent-bar" style="background:#DCC8B4"></div>
+      <div class="card-body">
+        <div class="card-company">Lesmor Creative</div>
+        <div class="card-brand" style="color:#0a0a0a">STUART WEITZMAN</div>
+        <div class="card-title">七夕快閃店 — LOVE, OUT OF THE BOX</div>
+        <div class="card-divider"></div>
+        <div class="card-role" style="background:#f5f0eb;color:#5a4a3a">✦ Lead Creative Planner · 獨立全程策劃</div>
+        <div class="card-objective">全程獨立策劃 Stuart Weitzman 七夕快閃店，從創意概念到現場執行一手包辦，突破傳統七夕框架吸引多元族群。</div>
+        <ul class="card-bullets">
+          <li><span class="bullet-dot" style="background:#DCC8B4"></span>上海靜安嘉里中心（7/28 – 8/18）</li>
+          <li><span class="bullet-dot" style="background:#DCC8B4"></span>擁抱販賣機 / 拍立得 / 時尚插畫 / DIY 串珠</li>
+        </ul>
+        <div class="card-click-hint"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>點擊查看完整案例</div>
+      </div>
+    </div>
+
+    <!-- ⑥ COACH -->
+    <div class="card" data-category="offline" data-id="coach">
+      <div class="card-image"><img src="cover_images/Coach.png" alt="Coach" onerror="this.parentElement.style.background='linear-gradient(135deg,#2d1e12,#3d2a18)';this.remove()"><span class="card-category-badge">零售活動</span><span class="card-year-badge">2021</span></div>
+      <div class="accent-bar" style="background:#C39B5A"></div>
+      <div class="card-body">
+        <div class="card-company">Lesmor Creative</div>
+        <div class="card-brand" style="color:#2d1e12">COACH</div>
+        <div class="card-title">Fall 2021 Pop-Up Outpost — Back to Retro</div>
+        <div class="card-divider"></div>
+        <div class="card-role" style="background:#fdf6ec;color:#7a5a20">✦ Junior Creative Planner · 部分執行</div>
+        <div class="card-objective">參與執行 COACH Fall 2021 Pop-Up，協助規劃互動裝置與 VIP 活動的現場執行細節。</div>
+        <ul class="card-bullets">
+          <li><span class="bullet-dot" style="background:#C39B5A"></span>3D 大頭照 + Pop Art 拍照機 + 串珠 DIY</li>
+          <li><span class="bullet-dot" style="background:#C39B5A"></span>VIP Cinema：Trunk Show + 品牌導覽 Mingle</li>
+        </ul>
+        <div class="card-click-hint"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>點擊查看完整案例</div>
+      </div>
+    </div>
+
+    <!-- ⑦ UBER EATS 周年 -->
+    <div class="card" data-category="social" data-id="ubereats1">
+      <div class="card-image"><img src="cover_images/UberEats.png" alt="Uber Eats" style="object-position:center bottom" onerror="this.parentElement.style.background='linear-gradient(135deg,#000,#111)';this.remove()"><span class="card-category-badge">社群行銷 + 線下活動</span><span class="card-year-badge">2022</span></div>
+      <div class="accent-bar" style="background:#06D34D"></div>
+      <div class="card-body">
+        <div class="card-company">Ogilvy</div>
+        <div class="card-brand" style="color:#000">UBER EATS</div>
+        <div class="card-title">品牌社群行銷統籌 — 週年慶 · 折扣活動 · Move with Pride</div>
+        <div class="card-divider"></div>
+        <div class="card-role" style="background:#e8fdf1;color:#006620">✦ Senior Account Executive（品牌 AE）</div>
+        <div class="card-objective">擔任 Uber Eats 台灣品牌 AE，統籌社群行銷企劃，包含 6 周年線上貼文、折扣活動文案、趣味社群互動，及 Move with Pride 專案。</div>
+        <ul class="card-bullets">
+          <li><span class="bullet-dot" style="background:#06D34D"></span>品牌社群貼文企劃 · 折扣活動文案 · 趣味互動貼文</li>
+          <li><span class="bullet-dot" style="background:#06D34D"></span>Move with Pride 專案社群規劃統籌</li>
+        </ul>
+        <div class="card-click-hint"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>點擊查看完整案例</div>
+      </div>
+    </div>
+
+    <!-- ⑧ UBER EATS 月報 -->
+    <div class="card" data-category="social" data-id="ubereats2">
+      <div class="card-image" style="background:linear-gradient(135deg,#0a0f0a,#0d1a0e);"><div class="card-image-placeholder"><span class="brand-big" style="color:#06D34D;font-size:22px;opacity:0.5">SOCIAL<br>REPORT</span></div><span class="card-category-badge">社群管理</span><span class="card-year-badge">2022</span></div>
+      <div class="accent-bar" style="background:#06D34D"></div>
+      <div class="card-body">
+        <div class="card-company">Ogilvy</div>
+        <div class="card-brand" style="color:#000">UBER EATS</div>
+        <div class="card-title">社群月報管理 — 8月 至 12月</div>
+        <div class="card-divider"></div>
+        <div class="card-role" style="background:#e8fdf1;color:#006620">✦ Senior Account Executive</div>
+        <div class="card-objective">追蹤每月社群表現，提供數據洞察與後續策略建議，建立系統性 KPI 追蹤框架。</div>
+        <ul class="card-bullets">
+          <li><span class="bullet-dot" style="background:#06D34D"></span>共 5 份月報（8月至12月）</li>
+          <li><span class="bullet-dot" style="background:#06D34D"></span>FB / IG 數據追蹤 + 優化建議</li>
+        </ul>
+        <div class="card-click-hint"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>點擊查看完整案例</div>
+      </div>
+    </div>
+
+    <!-- ⑨ WYETH S-26 -->
+    <div class="card" data-category="social" data-id="wyeth">
+      <div class="card-image"><img src="cover_images/Wyeth.jpg" alt="Wyeth S-26" onerror="this.parentElement.style.background='linear-gradient(135deg,#6E4B0F,#8a6020)';this.remove()"><span class="card-category-badge" style="background:rgba(0,0,0,0.55);color:#fff;border-color:rgba(0,0,0,0.2)">社群策略</span><span class="card-year-badge" style="background:rgba(0,0,0,0.6);color:#fff">2022</span></div>
+      <div class="accent-bar" style="background:#E1BE69"></div>
+      <div class="card-body">
+        <div class="card-company">Ogilvy</div>
+        <div class="card-brand" style="color:#6E4B0F">WYETH 惠氏 S-26</div>
+        <div class="card-title">S-26 社群行銷 — 巧虎 & 敏兒樂</div>
+        <div class="card-divider"></div>
+        <div class="card-role" style="background:#fdf8ec;color:#7a5a10">✦ Senior Account Executive</div>
+        <div class="card-objective">為 S-26 嬰幼兒配方奶粉制定 KOC 合作方案與競品研究策略，強化差異化定位。</div>
+        <ul class="card-bullets">
+          <li><span class="bullet-dot" style="background:#E1BE69"></span>KOC 合作 Brief + 拍攝 Styling Brief</li>
+          <li><span class="bullet-dot" style="background:#E1BE69"></span>深度競品研究 26頁（vs. 能恩系列）</li>
+        </ul>
+        <div class="card-click-hint"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>點擊查看完整案例</div>
+      </div>
+    </div>
+
+    <!-- ⑩ MAGNUM -->
+    <div class="card" data-category="social" data-id="magnum">
+      <div class="card-image"><img src="cover_images/Magnum.png" alt="Magnum" onerror="this.parentElement.style.background='linear-gradient(135deg,#1a0a00,#2e1500)';this.remove()"><span class="card-category-badge">Global TVC</span><span class="card-year-badge">2022</span></div>
+      <div class="accent-bar" style="background:#D4A843"></div>
+      <div class="card-body">
+        <div class="card-company">Fred &amp; Farid</div>
+        <div class="card-brand" style="color:#1a0a00">MAGNUM 夢龍</div>
+        <div class="card-title">Intense Dark 系列 Global TVC 製作</div>
+        <div class="card-divider"></div>
+        <div class="card-role" style="background:#fdf8ec;color:#8a5a10">✦ Account Executive</div>
+        <div class="card-objective">主責 Magnum Intense Dark 系列 Global TVC 剪輯製作與 Storyboard 開發，Mini Cup 為延伸小專案。</div>
+        <ul class="card-bullets">
+          <li><span class="bullet-dot" style="background:#D4A843"></span>Intense Dark Global TVC 剪輯 · STB 開發（主責）</li>
+          <li><span class="bullet-dot" style="background:#D4A843"></span>Mini Cup 社群創意提案（延伸小專案）</li>
+        </ul>
+        <div class="card-click-hint"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>點擊查看完整案例</div>
+      </div>
+    </div>
+
+    <!-- ⑪ MIZONE -->
+    <div class="card" data-category="social" data-id="mizone">
+      <div class="card-image"><img src="cover_images/Mizone.png" alt="Mizone" onerror="this.parentElement.style.background='linear-gradient(135deg,#001a33,#002244)';this.remove()"><span class="card-category-badge" style="background:rgba(0,0,0,0.55);color:#fff;border-color:rgba(0,0,0,0.2)">品牌代言人 TVC</span><span class="card-year-badge" style="background:rgba(0,0,0,0.6);color:#fff">2022</span></div>
+      <div class="accent-bar" style="background:#0099CC"></div>
+      <div class="card-body">
+        <div class="card-company">Fred &amp; Farid</div>
+        <div class="card-brand" style="color:#001a33">MIZONE 脈動</div>
+        <div class="card-title">劉昊然代言 TVC「MY PULSE MY CALL」</div>
+        <div class="card-divider"></div>
+        <div class="card-role" style="background:#e8f6fc;color:#005577">✦ Account Executive</div>
+        <div class="card-objective">以品牌代言人劉昊然打造多場景 TVC，傳遞「脈動由我」的品牌精神。</div>
+        <ul class="card-bullets">
+          <li><span class="bullet-dot" style="background:#0099CC"></span>三支 15 秒 TVC：動作派 / 攝影師 / 探險家</li>
+          <li><span class="bullet-dot" style="background:#0099CC"></span>MY PULSE MY CALL · 4 VITAMINS · STATE ALL IN</li>
+        </ul>
+        <div class="card-click-hint"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>點擊查看完整案例</div>
+      </div>
+    </div>
+
+    <!-- ⑫ SHAKIRA -->
+    <div class="card" data-category="social" data-id="shakira">
+      <div class="card-image"><img src="cover_images/Shakira.png" alt="Shakira" onerror="this.parentElement.style.background='linear-gradient(135deg,#1a0030,#2d0050)';this.remove()"><span class="card-category-badge" style="background:rgba(0,0,0,0.55);color:#fff;border-color:rgba(0,0,0,0.2)">TVC + 品牌整合行銷</span><span class="card-year-badge" style="background:rgba(0,0,0,0.6);color:#fff">2022</span></div>
+      <div class="accent-bar" style="background:#9B59D0"></div>
+      <div class="card-body">
+        <div class="card-company">Fred &amp; Farid</div>
+        <div class="card-brand" style="color:#1a0030">SHAKIRA</div>
+        <div class="card-title">「靈氣瞬間」TVC 製作 &amp; 年會視頻剪輯</div>
+        <div class="card-divider"></div>
+        <div class="card-role" style="background:#f5eeff;color:#5a1a99">✦ Account Executive</div>
+        <div class="card-objective">以品牌 Slogan「靈氣瞬間」為核心，主責 TVC 製作與年會視頻剪輯，延伸至社群、KV 視覺全方位執行。</div>
+        <ul class="card-bullets">
+          <li><span class="bullet-dot" style="background:#9B59D0"></span>靈氣瞬間 Slogan · TVC 製作 · 年會視頻剪輯</li>
+          <li><span class="bullet-dot" style="background:#9B59D0"></span>KV 視覺方向 + 社群內容規劃</li>
+        </ul>
+        <div class="card-click-hint"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>點擊查看完整案例</div>
+      </div>
+    </div>
+
+    <!-- ⑬ EARNEST LIVING -->
+    <div class="card" data-category="strategy" data-id="earnestliving" data-url="Earnest%20Living/brand-case.html">
+      <div class="card-image"><img src="cover_images/EarnestLiving.jpg" alt="Earnest Living" onerror="this.parentElement.style.background='linear-gradient(135deg,#C4B49A,#a8946a)';this.remove()"><span class="card-category-badge" style="background:rgba(0,0,0,0.55);color:#fff;border-color:rgba(0,0,0,0.2)">品牌策略 × 電商視覺</span><span class="card-year-badge" style="background:rgba(0,0,0,0.6);color:#fff">2023–2026</span></div>
+      <div class="accent-bar" style="background:#C4B49A"></div>
+      <div class="card-body">
+        <div class="card-company">Jason Craft</div>
+        <div class="card-brand" style="color:#3A3A3A">EARNEST LIVING</div>
+        <div class="card-title">品牌全案操盤 — 策略 · 產品 · 社群 · 視覺落地</div>
+        <div class="card-divider"></div>
+        <div class="card-role" style="background:#f5f0e8;color:#5a4a2a">✦ Brand & Product Team Leader</div>
+        <div class="card-objective">主導品牌從 Amazon 白牌賣家轉型為生活方式品牌的完整策略，涵蓋品牌策略、受眾定位、產品架構、社群規劃和視覺落地。</div>
+        <ul class="card-bullets">
+          <li><span class="bullet-dot" style="background:#C4B49A"></span>品牌策略 · 受眾定位 · 產品架構</li>
+          <li><span class="bullet-dot" style="background:#C4B49A"></span>社群規劃 · 視覺落地 · 電商視覺製作</li>
+        </ul>
+        <div class="card-click-hint"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>點擊查看完整案例</div>
+      </div>
+    </div>
+
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>Rachel Hou &nbsp;·&nbsp; 侯馨宇 &nbsp;&nbsp;|&nbsp;&nbsp; <span>shinu830216@gmail.com</span></footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modal">
+    <button class="modal-close" id="modalClose">✕</button>
+    <div class="modal-header" id="modalHeader">
+      <div class="modal-header-category" id="modalCategory"></div>
+      <div class="modal-header-brand" id="modalBrand"></div>
+      <div class="modal-header-title" id="modalTitle"></div>
+    </div>
+    <div class="modal-body">
+      <div class="modal-meta-row" id="modalMeta"></div>
+
+      <div class="modal-section">
+        <div class="modal-section-title">核心目標</div>
+        <p class="modal-objective" id="modalObjective"></p>
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-title">主要執行內容</div>
+        <ul class="modal-bullets" id="modalBullets"></ul>
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-title">規模 / 成果</div>
+        <div class="modal-scale-box" id="modalScale"></div>
+      </div>
+
+      <div class="modal-section" id="modalVideoSection" style="display:none">
+        <div class="modal-section-title">TVC 影片</div>
+        <video id="modalVideo" controls style="width:100%;border-radius:8px;background:#000;max-height:480px"></video>
+      </div>
+
+      <div class="modal-section" id="modalSlidesSection" style="display:none">
+        <div class="modal-section-title">完整簡報</div>
+        <div id="modalPdfWrap" class="modal-pdf-wrap" style="display:none">
+          <iframe id="modalPdfFrame" src="" title="presentation"></iframe>
+        </div>
+        <div class="modal-slides" id="modalSlides"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Case Data ──────────────────────────────────────────────────────────
+const cases = {
+  aigle: {
+    image: 'cover_images/Aigle.png',
+    category: '活動策劃', brand: 'AIGLE', title: 'FW2021 品牌代言人發布會暨時裝秀',
+    accent: '#6EB95F',
+    meta: [
+      { label: 'Company', value: 'Lesmor Creative' },
+      { label: 'Role', value: 'Junior Creative Planner · 部分執行' },
+      { label: 'Year', value: '2021' },
+      { label: 'Type', value: '品牌活動 · 時裝秀' }
+    ],
+    objective: '發布品牌代言人竇驍（Shawn Dou），同步呈現 FW2021 時裝秀，打造完整沉浸式品牌體驗，強化 AIGLE 在中國市場的品牌形象。',
+    bullets: [
+      '主題：WINTER URBAN PARK RE/CONNECT',
+      '場地：上海 1862 Theatre',
+      '時裝秀 4 大主題：城市旅人 / 未來科技 / 燃情冬日 / 冬雪聖誕',
+      '品牌代言人發布儀式設計',
+      'After Party 規劃執行'
+    ],
+    slides: [],
+    pdfUrl: 'https://drive.google.com/file/d/1x4yDr0nd8FZe3Sz7xrkiTk2xCrFRrs8F/preview',
+    scale: '300 位嘉賓出席 | 媒體 + KOL + VIP 賓客'
+  },
+  bvlgari: {
+    image: 'cover_images/Bvlgari.png',
+    category: '奢華晚宴活動', brand: 'BVLGARI', title: 'Magnifica 高珠寶系列 Gala Dinner 上海 2021',
+    accent: '#C5A55A',
+    meta: [
+      { label: 'Company', value: 'Apax Group' },
+      { label: 'Role', value: '活動執行' },
+      { label: 'Year', value: '2021' },
+      { label: 'Type', value: '奢華晚宴 · HJ Show' }
+    ],
+    objective: '主責 BVLGARI Magnifica Gala Dinner 後期執行統籌，包含模特選角與 Fitting、場地確認、Celebrity 與 VIP 嘉賓動線規劃，確保頂級晚宴現場零誤差呈現。',
+    bullets: [
+      '模特選角 · Model Fitting Proposal 製作',
+      'Celebrity 與 VIP 嘉賓獨立動線規劃',
+      '場地：上海 Aurora Museum 空間確認與佈置統籌',
+      'Red Carpet 流程規劃執行',
+      '高珠寶 Safe House + Celebrity/Model 後台服務流程',
+      'F&B 動線 + 人員排班規劃'
+    ],
+    slides: [],
+    pdfUrl: 'presentations/bvlgari.pdf',
+    scale: '後期執行主責 | Celebrity + VIP 嘉賓動線 | 頂級名流晚宴現場統籌'
+  },
+  dior: {
+    image: 'cover_images/Dior.png',
+    category: '品牌員工活動', brand: 'DIOR', title: 'PCD Annual Dinner Sanya',
+    accent: '#BE9664',
+    meta: [
+      { label: 'Company', value: 'Lesmor Creative' },
+      { label: 'Role', value: 'Junior Creative Planner · 部分執行' },
+      { label: 'Year', value: '2021' },
+      { label: 'Type', value: '品牌員工年度晚宴' }
+    ],
+    objective: '打造結合 DIOR 品牌 DNA 與三亞熱帶風情的頂級員工年度晚宴，以沉浸式體驗強化員工對品牌的認同感與歸屬感。',
+    bullets: [
+      '主題：A Story of Passion / Bohemian Riviera',
+      '場地：三亞亞特蘭蒂斯酒店',
+      'DIOR Photo Tunnel 光影隧道打卡裝置',
+      'Dress Code 規劃（Bohemian 風格指引）',
+      '晚宴節目流程設計',
+      '幸運抽獎環節規劃'
+    ],
+    slides: [],
+    pdfUrl: 'presentations/dior.pdf',
+    scale: '500 位 DIOR 員工出席'
+  },
+  iwc: {
+    image: 'cover_images/IWC.png',
+    category: '線上+線下雙城活動', brand: 'IWC SCHAFFHAUSEN', title: 'FY22 The Big Pilot 系列活動',
+    accent: '#B49B64',
+    meta: [
+      { label: 'Company', value: 'Lesmor Creative' },
+      { label: 'Role', value: 'Junior Creative Planner · 部分執行' },
+      { label: 'Year', value: '2021' },
+      { label: 'Type', value: 'O2O 雙城活動' }
+    ],
+    objective: '為 IWC FY22 The Big Pilot 系列打造完整 O2O 體驗，線上引爆話題聲量，線下以雙城巡迴鞏固品牌與高端客群的深度連結，並積極開拓 Gen Z 新市場。',
+    bullets: [
+      '品牌概念：DARING VISIONARIES（敢夢者）',
+      '線上 KOL/KOC #敢夢者 UGC 話題行銷',
+      '第一站成都太古里：50人媒體 / KOL / 明星開幕活動',
+      '第二站上海太古匯：70-80人 VIP Gala Dinner',
+      '雙城展覽空間設計與活動流程規劃',
+      '週末公眾開放體驗活動'
+    ],
+    slides: [],
+    pdfUrl: 'presentations/iwc.pdf',
+    scale: '成都 50人開幕 + 上海 70-80人 VIP Gala + 週末公眾開放'
+  },
+  sw: {
+    image: 'cover_images/Stuart_Weitzman.png',
+    category: '快閃店活動', brand: 'STUART WEITZMAN', title: '七夕快閃店 — LOVE, OUT OF THE BOX',
+    accent: '#DCC8B4',
+    meta: [
+      { label: 'Company', value: 'Lesmor Creative' },
+      { label: 'Role', value: 'Lead Creative Planner · 獨立全程策劃' },
+      { label: 'Year', value: '2021' },
+      { label: 'Type', value: '快閃店 · 節慶行銷' }
+    ],
+    objective: '全程獨立策劃 Stuart Weitzman 七夕快閃店，從創意概念發想到互動裝置設計、商品規劃與現場執行，一手包辦完整企劃，突破傳統七夕框架，打造高話題性品牌體驗。',
+    bullets: [
+      '地點：上海靜安嘉里中心（7/28 – 8/18）',
+      '互動裝置：擁抱販賣機',
+      '互動裝置：拍立得打卡站',
+      '互動裝置：親吻愛心螢幕',
+      '店內服務：時尚插畫畫像',
+      '店內活動：DIY 串珠手作',
+      '七夕限定商品：男 / 女 / LGBT 多元設計版本'
+    ],
+    slides: [],
+    pdfUrl: 'presentations/sw.pdf',
+    scale: '公眾開放 21 天 | 多元族群 | 多個打卡裝置'
+  },
+  coach: {
+    image: 'cover_images/Coach.png',
+    category: '零售活動', brand: 'COACH', title: 'Fall 2021 Pop-Up Outpost — Back to Retro',
+    accent: '#C39B5A',
+    meta: [
+      { label: 'Company', value: 'Lesmor Creative' },
+      { label: 'Role', value: 'Junior Creative Planner · 部分執行' },
+      { label: 'Year', value: '2021' },
+      { label: 'Type', value: 'Pop-Up · 零售活動' }
+    ],
+    objective: '以「Back to Retro」復古主題打造雙軌行銷策略：透過戶外互動裝置吸引新客進店嘗鮮，同步以 VIP 獨家電影院體驗維繫忠誠客群，提升整體品牌體驗價值。',
+    bullets: [
+      'Ch.1 戶外互動裝置：3D 翻轉大頭照',
+      'Ch.1 戶外互動裝置：復古 Pop Art 風格拍照機',
+      'Ch.2 VIP Cinema：Trunk Show 展示',
+      'Ch.2 VIP Cinema：品牌導覽 Mingle 活動',
+      'Ch.3：Perler Beads 串珠 DIY 手作工作坊',
+      'VIP 邀請函設計：復古電影票樣式'
+    ],
+    slides: [],
+    pdfUrl: 'presentations/coach.pdf',
+    scale: 'VIP 私人活動 + 公眾互動裝置雙軌進行'
+  },
+  ubereats1: {
+    image: 'cover_images/UberEats.png',
+    category: '社群行銷 + 整合企劃', brand: 'UBER EATS', title: '品牌社群行銷統籌 — 週年慶 · 折扣活動 · Move with Pride',
+    accent: '#06D34D',
+    meta: [
+      { label: 'Company', value: 'Ogilvy' },
+      { label: 'Role', value: 'Senior Account Executive（品牌 AE）' },
+      { label: 'Year', value: '2022' },
+      { label: 'Type', value: '社群行銷 · 品牌整合企劃' }
+    ],
+    objective: '擔任 Uber Eats 台灣品牌 AE，全面統籌品牌社群行銷企劃，涵蓋 6 周年線上貼文系列、折扣活動文案、趣味互動貼文，以及 Move with Pride 專案社群規劃，強化品牌聲量與在地連結。',
+    bullets: [
+      '品牌社群貼文企劃統籌（FB/IG 中英雙語）',
+      '6 周年週年慶貼文系列規劃',
+      '折扣活動社群文案撰寫',
+      '趣味互動社群貼文企劃',
+      'Move with Pride 專案社群規劃統籌',
+      '線下「潮有市」三城夜市活動社群配合（台北 / 台中 / 高雄）'
+    ],
+    slides: [],
+    pdfUrl: 'presentations/ubereats1.pdf',
+    scale: '品牌 AE 主責 | 社群行銷全案統籌 | Move with Pride 專案'
+  },
+  ubereats2: {
+    image: '',
+    category: '社群管理', brand: 'UBER EATS', title: '社群月報管理 — 8月 至 12月',
+    accent: '#06D34D',
+    meta: [
+      { label: 'Company', value: 'Ogilvy' },
+      { label: 'Role', value: 'Senior Account Executive' },
+      { label: 'Year', value: '2022' },
+      { label: 'Type', value: '社群管理 · 數據分析' }
+    ],
+    objective: '系統性追蹤 Uber Eats 每月社群平台表現，整合數據洞察提供策略建議，協助客戶建立可持續優化的社群行銷框架。',
+    bullets: [
+      '共 5 份月報（8月至12月）',
+      '追蹤 Facebook 各貼文成效數據',
+      '追蹤 Instagram 各貼文成效數據',
+      '分析品牌整體社群表現趨勢',
+      '提出每月內容優化建議',
+      '建立系統性社群 KPI 追蹤框架'
+    ],
+    slides: [],
+    pdfUrl: 'presentations/ubereats2.pdf',
+    scale: '連續 5 個月社群管理 | 數據驅動策略優化'
+  },
+  wyeth: {
+    image: 'cover_images/Wyeth.jpg',
+    category: '社群策略', brand: 'WYETH 惠氏 S-26', title: 'S-26 社群行銷 — 巧虎 & 敏兒樂',
+    accent: '#E1BE69',
+    meta: [
+      { label: 'Company', value: 'Ogilvy' },
+      { label: 'Role', value: 'Senior Account Executive' },
+      { label: 'Year', value: '2022' },
+      { label: 'Type', value: '社群策略 · 競品研究' }
+    ],
+    objective: '為 Wyeth S-26 嬰幼兒配方奶粉系列制定完整社群行銷策略，包含 KOC 合作方案、拍攝規劃及深度競品研究，協助品牌強化市場差異化定位。',
+    bullets: [
+      'S-26 巧虎系列 KOC 合作需求說明書',
+      'S-26 敏兒樂系列拍攝 Styling Brief',
+      '深度競品研究報告 26 頁',
+      '競品對象：能恩極選 3',
+      '競品對象：能恩水解系列',
+      '分析 OTV 廣告策略',
+      '分析 KOL 合作模式',
+      '分析促銷活動策略'
+    ],
+    slides: [],
+    pdfUrl: 'https://drive.google.com/file/d/1YF9_A-w7b7fnkXhps_rnmN6DpuGGsIg-/preview',
+    scale: '競品分析報告 26 頁 | KOC Brief + 拍攝 Brief 全套文件'
+  },
+  magnum: {
+    image: 'cover_images/Magnum.png',
+    category: 'Global TVC', brand: 'MAGNUM 夢龍', title: 'Intense Dark 系列 Global TVC 製作',
+    accent: '#D4A843',
+    meta: [
+      { label: 'Company', value: 'Fred & Farid' },
+      { label: 'Role', value: 'Account Executive' },
+      { label: 'Year', value: '2022' },
+      { label: 'Type', value: 'Global TVC' }
+    ],
+    objective: '主責 Magnum Intense Dark 系列 Global TVC 剪輯製作與 Storyboard 開發，確保影像呈現符合品牌高端調性。Mini Cup 為延伸小專案，參與社群創意提案。',
+    bullets: [
+      'Intense Dark Global TVC 剪輯製作（主責）',
+      'Intense Dark TVC Storyboard（STB）開發',
+      '影像節奏 · 品牌調性 · 後製流程把關',
+      'Mini Cup 社群創意提案（延伸小專案）'
+    ],
+    slides: [],
+    pdfUrl: 'presentations/magnum_intense_dark.pdf',
+    scale: 'Intense Dark 系列 Global TVC 主責製作 | Mini Cup 延伸小專案'
+  },
+  mizone: {
+    image: 'cover_images/Mizone.png',
+    category: '品牌代言人 TVC', brand: 'MIZONE 脈動', title: '劉昊然代言 TVC「MY PULSE MY CALL」',
+    accent: '#0099CC',
+    meta: [
+      { label: 'Company', value: 'Fred & Farid' },
+      { label: 'Role', value: 'Account Executive' },
+      { label: 'Year', value: '2022' },
+      { label: 'Type', value: 'TVC · 品牌代言人' }
+    ],
+    objective: '以品牌代言人劉昊然（Liu Haoran）打造多場景 TVC 系列，透過「chosen path / go for better」概念傳遞「脈動由我」的品牌精神，強化 Gen Z 年輕族群的品牌共鳴。',
+    bullets: [
+      '品牌 Slogan：MY PULSE MY CALL',
+      'VO Message：4 VITAMINS · DRINK ALL IN · STATE ALL IN',
+      '第一支 TVC 15S：動作派（動作影集偵探場景）',
+      '第二支 TVC 15S：攝影師（創作者主題）',
+      '第三支 TVC 15S：探險家（戶外探險場景）',
+      'Storyboard 開發與視覺方向提案',
+      '拍攝方向提案與細節溝通'
+    ],
+    slides: [],
+    pdfUrl: 'presentations/mizone_stb.pdf',
+    videoUrl: 'media/mizone_tvc.m4v',
+    scale: '品牌代言人全國 TVC | 3 支 15 秒版本 | 多場景製作'
+  },
+  shakira: {
+    image: 'cover_images/Shakira.png',
+    category: 'TVC + 品牌整合行銷', brand: 'SHAKIRA', title: '「靈氣瞬間」TVC 製作 & 年會視頻剪輯',
+    accent: '#9B59D0',
+    meta: [
+      { label: 'Company', value: 'Fred & Farid' },
+      { label: 'Role', value: 'Account Executive' },
+      { label: 'Year', value: '2022' },
+      { label: 'Type', value: 'TVC · 年會視頻 · 品牌整合' }
+    ],
+    objective: '以品牌核心 Slogan「靈氣瞬間」（It all starts with a Ling Qi moment）為創意主軸，主責 TVC 製作與年會視頻剪輯，同時延伸至社群內容、KV 視覺及品牌全方位溝通。',
+    bullets: [
+      '品牌 Slogan：靈氣瞬間（Ling Qi Moment）— TVC 主題前核心概念',
+      'TVC 製作：從 Brief 到成片全程參與',
+      '年會視頻剪輯',
+      'KV 視覺方向（3D 產品主視覺）',
+      'Logo 規範：靈氣 Logo + 品牌 Logo 雙 Logo 應用',
+      '社群平台內容原則 + KOL 合作方向（抖音為主）'
+    ],
+    slides: [],
+    pdfUrl: 'presentations/shakira.pdf',
+    videoUrl: 'media/shakira_video.mp4',
+    scale: 'TVC 製作 + 年會視頻剪輯 | 靈氣瞬間品牌整合提案'
+  },
+  earnestliving: {
+    image: 'cover_images/EarnestLiving.jpg',
+    category: '品牌策略 × 電商視覺', brand: 'EARNEST LIVING', title: '品牌全案操盤 — 策略 · 產品 · 社群 · 視覺落地',
+    accent: '#C4B49A',
+    meta: [
+      { label: 'Company', value: 'Jason Craft' },
+      { label: 'Role', value: 'Brand & Product Team Leader' },
+      { label: 'Year', value: '2023–2026' },
+      { label: 'Type', value: '品牌轉型 · 電商策略' }
+    ],
+    objective: '主導 Earnest Living 從 Amazon 白牌賣家轉型為生活方式品牌，統籌品牌策略、受眾定位、產品架構、社群規劃和視覺落地，為品牌長期價值奠基。',
+    bullets: [
+      '品牌全面 Rebrand：核心識別、色彩系統、品牌語言建立',
+      '競品定位分析與 2026 品牌定位策略',
+      '三個核心受眾策略（主力 / 高端 / 品牌建設）',
+      '產品架構矩陣設計（Core / Premium / Artisanal 三線）',
+      '三平台差異化通路布局：Amazon / Etsy / Shopify DTC',
+      'Amazon 9-Shot Listing System · A+ Content 視覺製作',
+      '社群規劃 · 視覺落地 · KOL 合作策略'
+    ],
+    slides: [],
+    siteUrl: 'Earnest%20Living/brand-case.html',
+    scale: 'Jason Craft 品牌專案 | 品牌策略 + 社群規劃 + 視覺落地全方位執行 | 2023–2026'
+  },
+  prada: {
+    image: 'cover_images/Prada.jpg',
+    category: '整合行銷企劃（WBSA 認證）', brand: 'PRADA', title: '第一系列高奢彩妝行銷企劃',
+    accent: '#d2d2d2',
+    meta: [
+      { label: 'Certification', value: 'WBSA 行銷人認證' },
+      { label: 'Role', value: '職場備考 · 自主應考' },
+      { label: 'Year', value: '2020' },
+      { label: 'Type', value: '整合行銷企劃書' }
+    ],
+    objective: '出社會後自主報考 WBSA 行銷認證，以 PRADA 彩妝市場進入策略為考題，從 STP 分析到 7P 全面佈局，透過實戰題目驗證對行銷的熱情與核心能力。',
+    bullets: [
+      'STP 分析：Segmentation 市場區隔',
+      'STP 分析：Targeting 目標客群定義',
+      'STP 分析：Positioning 品牌定位策略',
+      '7P 行銷策略：Product / Price / Place / Promotion / People / Process / Physical Evidence',
+      '奢侈品牌彩妝市場進入策略規劃',
+      '完整整合行銷企劃書'
+    ],
+    slides: [],
+    pdfUrl: 'https://drive.google.com/file/d/12_uLdhH9Ok3ozpwVKq1MgsPl8R5b2FAH/preview',
+    scale: 'WBSA 行銷人認證考試作品 | 完整商業企劃書'
+  }
+};
+
+// ── Modal Logic ────────────────────────────────────────────────────────
+const overlay = document.getElementById('modalOverlay');
+const modal = document.getElementById('modal');
+const closeBtn = document.getElementById('modalClose');
+
+function openModal(id) {
+  const c = cases[id];
+  if (!c) return;
+
+  // Header
+  document.getElementById('modalCategory').textContent = c.category;
+  document.getElementById('modalBrand').textContent = c.brand;
+  document.getElementById('modalTitle').textContent = c.title;
+  const header = document.getElementById('modalHeader');
+  header.style.borderTopColor = c.accent;
+  header.style.setProperty('--modal-accent', c.accent);
+  document.querySelector('#modalHeader .modal-header-category').style.borderColor = c.accent;
+  document.querySelector('#modalHeader .modal-header-category').style.color = c.accent;
+
+  // Video
+  const videoSection = document.getElementById('modalVideoSection');
+  const videoEl = document.getElementById('modalVideo');
+  if (c.videoUrl) {
+    videoEl.src = c.videoUrl;
+    videoSection.style.display = 'block';
+  } else {
+    videoEl.src = '';
+    videoSection.style.display = 'none';
+  }
+
+  // Slides / PDF
+  const slidesSection = document.getElementById('modalSlidesSection');
+  const slidesEl = document.getElementById('modalSlides');
+  const pdfWrap = document.getElementById('modalPdfWrap');
+  const pdfFrame = document.getElementById('modalPdfFrame');
+
+  if (c.siteUrl) {
+    pdfFrame.src = c.siteUrl;
+    pdfWrap.classList.add('site-mode');
+    pdfWrap.style.display = 'block';
+    slidesEl.innerHTML = '';
+    slidesSection.style.display = 'block';
+  } else if (c.pdfUrl) {
+    const isDrive = c.pdfUrl.startsWith('https://');
+    pdfFrame.src = isDrive ? c.pdfUrl : c.pdfUrl + '#toolbar=0&navpanes=0';
+    pdfWrap.classList.remove('site-mode');
+    pdfWrap.style.display = 'block';
+    slidesEl.innerHTML = '';
+    slidesSection.style.display = 'block';
+  } else if (c.slides && c.slides.length > 0) {
+    pdfFrame.src = '';
+    pdfWrap.style.display = 'none';
+    slidesEl.innerHTML = c.slides.map((s, i) =>
+      `<div class="modal-slide">
+        <div class="slide-num">— ${String(i+1).padStart(2,'0')}</div>
+        <div class="slide-img-wrap"><img src="${s.img}" alt="slide ${i+1}" loading="lazy"></div>
+        ${s.caption ? `<div class="slide-caption">${s.caption}</div>` : ''}
+      </div>`
+    ).join('');
+    slidesSection.style.display = 'block';
+  } else {
+    pdfFrame.src = '';
+    pdfWrap.style.display = 'none';
+    slidesEl.innerHTML = '';
+    slidesSection.style.display = 'none';
+  }
+
+  // Meta
+  document.getElementById('modalMeta').innerHTML = c.meta.map(m =>
+    `<div class="modal-meta-item"><div class="modal-meta-label">${m.label}</div><div class="modal-meta-value">${m.value}</div></div>`
+  ).join('');
+
+  // Objective
+  document.getElementById('modalObjective').textContent = c.objective;
+
+  // Bullets
+  document.getElementById('modalBullets').innerHTML = c.bullets.map(b =>
+    `<li><span class="modal-bullet-dot" style="background:${c.accent}"></span>${b}</li>`
+  ).join('');
+
+  // Scale
+  document.getElementById('modalScale').innerHTML = `<strong>Scale / 成果</strong>${c.scale}`;
+
+  // Open
+  modal.scrollTop = 0;
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+  document.getElementById('modalPdfFrame').src = '';
+  document.getElementById('modalPdfWrap').classList.remove('site-mode');
+  const v = document.getElementById('modalVideo');
+  v.pause(); v.src = '';
+}
+
+// Card clicks
+document.querySelectorAll('.card').forEach(card => {
+  card.addEventListener('click', () => {
+    if (card.dataset.url) {
+      window.open(card.dataset.url, '_blank');
+    } else {
+      openModal(card.dataset.id);
+    }
+  });
+});
+
+// Close
+closeBtn.addEventListener('click', closeModal);
+overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// Filter + Sort
+const btns = document.querySelectorAll('.filter-btn');
+const countDisplay = document.getElementById('count-display');
+const grid = document.getElementById('grid');
+let sortNewest = true; // default: newest first (2023→2020)
+
+function getYear(card) {
+  const txt = card.querySelector('.card-year-badge').textContent; // e.g. "2020", "2023–2026"
+  return parseInt(txt.split('–').pop()); // take the last year for range
+}
+
+function applySort() {
+  const allCards = [...grid.querySelectorAll('.card')];
+  allCards.sort((a, b) => sortNewest ? getYear(b) - getYear(a) : getYear(a) - getYear(b));
+  allCards.forEach(c => grid.appendChild(c));
+}
+
+function updateCount() {
+  countDisplay.textContent = '(' + document.querySelectorAll('.card:not(.hidden)').length + ')';
+}
+
+btns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    btns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    document.querySelectorAll('.card').forEach(card =>
+      card.classList.toggle('hidden', filter !== 'all' && card.dataset.category !== filter)
+    );
+    updateCount();
+  });
+});
+
+const sortBtn = document.getElementById('sort-btn');
+const sortIcon = document.getElementById('sort-icon');
+const sortLabel = document.getElementById('sort-label');
+
+sortBtn.addEventListener('click', () => {
+  sortNewest = !sortNewest;
+  sortIcon.textContent = sortNewest ? '↑' : '↓';
+  sortLabel.textContent = sortNewest ? '最新優先' : '最舊優先';
+  sortBtn.style.borderColor = '#111';
+  sortBtn.style.color = '#111';
+  applySort();
+});
+
+// Init: newest first
+applySort();
+updateCount();
+</script>
+</body>
+</html>

@@ -1,0 +1,2052 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Earnest Living — Brand Case Study 2023–2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    @font-face { font-family: 'Argue'; src: url('Argue%20DEMO.otf') format('opentype'), local('Argue DEMO'), local('Argue'); }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --dark-grey: #3A3A3A;
+      --dark-beige: #C4B49A;
+      --light-beige: #EDE8E0;
+      --white: #FFFFFF;
+    }
+    html, body { width:100%; height:100%; overflow:hidden; font-family:'Montserrat',sans-serif; background:#1a1a1a; }
+
+    #deck { width:100vw; height:100vh; position:relative; }
+    .slide { position:absolute; inset:0; opacity:0; transition:opacity .55s ease; pointer-events:none; overflow:hidden; }
+    .slide.active { opacity:1; pointer-events:all; }
+
+    /* NAV */
+    .nav-btn {
+      position:fixed; top:50%; transform:translateY(-50%);
+      width:46px; height:46px; border-radius:50%;
+      background:rgba(196,180,154,.15); border:1px solid rgba(196,180,154,.4);
+      color:var(--dark-beige); font-size:22px; cursor:pointer; z-index:999;
+      display:flex; align-items:center; justify-content:center;
+      transition:all .25s; backdrop-filter:blur(6px);
+    }
+    .nav-btn:hover { background:var(--dark-beige); color:var(--dark-grey); }
+    #btn-prev { left:16px; } #btn-next { right:16px; }
+    .progress { position:fixed; bottom:0; left:0; height:2px; background:var(--dark-beige); z-index:999; transition:width .4s ease; }
+    .footer-brand { position:fixed; bottom:16px; left:24px; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:rgba(196,180,154,.5); z-index:999; }
+    .footer-page  { position:fixed; bottom:16px; right:24px; font-size:10px; letter-spacing:2px; color:rgba(196,180,154,.5); z-index:999; }
+
+    /* SHARED */
+    .argue { font-family:'Argue','Cormorant Garamond',Georgia,serif; }
+    .serif { font-family:'Cormorant Garamond',Georgia,serif; }
+    .label-tag { font-size:12px; font-weight:600; letter-spacing:3px; text-transform:uppercase; color:var(--dark-beige); }
+    .accent-bar { width:40px; height:1px; background:var(--dark-beige); margin:16px 0; }
+
+    /* ══ S1 COVER ══ */
+    #s1 { display:grid; grid-template-columns:1fr 1fr; background:var(--dark-grey); }
+    #s1 .left { padding:80px; display:flex; flex-direction:column; justify-content:center; }
+    #s1 h1 { font-family:'Argue','Cormorant Garamond',Georgia,serif; font-size:clamp(56px,7vw,100px); font-weight:400; color:var(--light-beige); letter-spacing:.06em; line-height:1.0; margin:16px 0 24px; }
+    #s1 .sub { font-size:13px; font-weight:400; letter-spacing:4px; text-transform:uppercase; color:rgba(196,180,154,.7); }
+    #s1 .tagline { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:22px; color:rgba(237,232,224,.5); margin-top:44px; }
+    #s1 .right { position:relative; overflow:hidden; }
+    #s1 .right img { width:100%; height:100%; object-fit:cover; }
+
+    /* ══ S2 HEADLINE (simplified) ══ */
+    .s2-headline { font-size:clamp(14px,1.6vw,20px); font-weight:400; color:rgba(237,232,224,.75); line-height:1.9; }
+
+    /* ══ S2b RESTRUCTURE ══ */
+    #s2b { display:flex; background:#fff; }
+    .ob-col { display:flex; flex-direction:column; }
+    .ob-col-left { width:52%; padding:48px 40px 48px 60px; border-right:1px solid rgba(58,58,58,.08); gap:18px; overflow:hidden; }
+    .ob-col-right { flex:1; padding:52px 56px; justify-content:center; }
+    .ob-col-lbl { font-size:10px; letter-spacing:2.5px; text-transform:uppercase; color:rgba(58,58,58,.35); margin-bottom:4px; }
+    .ob-logo-row { display:flex; align-items:center; gap:12px; }
+    .ob-logo-row img { width:40px; height:40px; object-fit:contain; }
+    .ob-hero-block { display:flex; align-items:center; gap:14px; padding:14px 0; border-top:1px dashed rgba(58,58,58,.1); border-bottom:1px dashed rgba(58,58,58,.1); }
+    .ob-hero-img-wrap { width:80px; height:80px; flex-shrink:0; }
+    .ob-hero-img-wrap img { width:100%; height:100%; object-fit:contain; }
+    .ob-hero-badge { font-size:10px; letter-spacing:1.5px; color:var(--dark-beige); font-weight:700; margin-bottom:4px; text-transform:uppercase; }
+    .ob-ext-section { display:flex; flex-direction:column; gap:10px; }
+    .ob-ext-header { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:rgba(58,58,58,.3); }
+    .ob-ext-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+    .ob-ext-card { display:flex; flex-direction:column; gap:5px; }
+    .ob-ext-img { aspect-ratio:1; overflow:hidden; background:rgba(58,58,58,.04); border:1px solid rgba(58,58,58,.08); }
+    .ob-ext-img img { width:100%; height:100%; object-fit:contain; }
+    .ob-ext-nm { font-size:10px; font-weight:600; color:var(--dark-grey); line-height:1.3; }
+    .ob-ext-note { font-size:9px; color:rgba(58,58,58,.4); }
+    .ob-add-note { font-size:9px; color:rgba(58,58,58,.2); font-style:italic; border:1px dashed rgba(58,58,58,.12); padding:6px 10px; border-radius:2px; }
+    .ob-prob-mega { display:flex; flex-direction:column; gap:0; }
+    .ob-prob-mega-lbl { font-size:10px; letter-spacing:2.5px; text-transform:uppercase; color:rgba(58,58,58,.35); margin-bottom:18px; }
+    .ob-prob-mega-divider { height:1px; background:rgba(58,58,58,.1); margin-bottom:0; }
+    .ob-prob-mega-item { display:flex; align-items:flex-start; gap:20px; padding:22px 0; border-bottom:1px solid rgba(58,58,58,.07); }
+    .ob-prob-mega-num { font-size:13px; font-weight:700; color:var(--dark-beige); flex-shrink:0; width:28px; padding-top:2px; }
+    .ob-prob-mega-main { font-size:16px; font-weight:500; color:var(--dark-grey); margin-bottom:4px; }
+    .ob-prob-mega-sub { font-size:12px; color:rgba(58,58,58,.5); line-height:1.6; }
+
+    /* ══ S6b BRAND VALUES REDESIGN ══ */
+    #s6b { padding:0; }
+    .val-evo-wrap { display:grid; grid-template-columns:1fr 1.7fr; height:100%; }
+    .val-evo-left { background:var(--dark-grey); padding:72px 48px; display:flex; flex-direction:column; justify-content:center; }
+    .val-evo-title { font-family:'Cormorant Garamond',Georgia,serif; font-size:clamp(40px,4.5vw,60px); font-weight:300; color:var(--light-beige); line-height:1.05; margin-bottom:20px; }
+    .val-evo-note { font-size:12px; color:rgba(237,232,224,.4); line-height:1.9; }
+    .val-evo-right { background:#f7f4ef; padding:64px 56px; display:flex; flex-direction:column; justify-content:center; gap:20px; }
+    .val-group-yr { font-size:10px; letter-spacing:2.5px; text-transform:uppercase; color:rgba(58,58,58,.35); margin-bottom:14px; }
+    .val-group-yr.new { color:var(--dark-beige); }
+    .val-cards-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+    .val-cards-2 { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; }
+    .val-card { padding:14px 16px; border:1px solid rgba(58,58,58,.1); border-radius:2px; background:#fff; }
+    .val-card.new { border-color:rgba(196,180,154,.35); background:rgba(196,180,154,.06); }
+    .val-num { font-size:10px; color:rgba(58,58,58,.25); letter-spacing:1px; margin-bottom:6px; }
+    .val-card.new .val-num { color:rgba(196,180,154,.5); }
+    .val-en { font-size:13px; font-weight:500; color:rgba(58,58,58,.7); }
+    .val-card.new .val-en { color:var(--dark-grey); }
+    .val-zh { font-size:11px; color:rgba(58,58,58,.4); margin-top:3px; }
+    .val-plus-divider { font-size:18px; color:rgba(196,180,154,.5); font-weight:300; text-align:left; padding-left:4px; }
+
+    /* ══ S8 PRODUCT QUAD IMAGES ══ */
+    .t-imgs-quad { display:grid; grid-template-columns:repeat(4,1fr); gap:6px; margin:12px 0; }
+    .t-img-q-item { display:flex; flex-direction:column; align-items:center; gap:4px; }
+    .t-img-q-item img { width:100%; aspect-ratio:1; object-fit:contain; background:rgba(240,236,228,.06); border-radius:2px; }
+    .t-img-q-name { font-size:9px; color:rgba(196,180,154,.5); letter-spacing:.5px; text-align:center; }
+
+    /* ══ NG-CELL SQUARE ══ */
+    .ng-cta-cell { display:flex; align-items:center; justify-content:center; background:#181818 !important; }
+    .ng-cta-inner { text-align:center; color:rgba(196,180,154,.35); font-size:12px; letter-spacing:1.5px; line-height:1.8; text-transform:uppercase; }
+    .ng-empty-cell { background:#f5f3ef !important; }
+
+    /* ══ S_PIVOT TILE 06 ══ */
+
+
+    
+    /* ══ S2 HEADLINE TITLE STYLE ══ */
+    .s2-headline { display:flex; flex-direction:column; gap:6px; }
+    .s2-hl-line { font-size:clamp(13px,1.5vw,18px); font-weight:300; color:rgba(237,232,224,.65); line-height:1.4; letter-spacing:.04em; }
+    .s2-hl-accent { font-size:clamp(16px,1.9vw,24px); font-weight:500; color:var(--light-beige); letter-spacing:.06em; }
+
+    /* ══ S_TRANSITION TILES ══ */
+    .trans-tile { padding:16px 20px !important; }
+    .trans-tile .pv-tile-num { font-size:22px !important; color:var(--dark-beige); opacity:.7; line-height:1; margin-bottom:8px; }
+    #s-transition .pv-right { justify-content:center; }
+    #s-transition .pv-grid { align-items:center; }
+
+    /* ══ S8 PRODUCT ARCHITECTURE MATRIX ══ */
+    #s8 { background:#fff; display:flex; flex-direction:column; padding:0; }
+    .pa-header { padding:36px 56px 20px; flex-shrink:0; }
+    .pa-header h2 { color:var(--dark-grey); margin-top:6px; }
+    .pa-matrix {
+      flex:1; display:grid;
+      grid-template-columns: 110px repeat(4, 1fr);
+      grid-template-rows: auto repeat(3, 1fr);
+      border-top:1px solid rgba(58,58,58,.08);
+      margin:0 40px 32px;
+      min-height:0;
+    }
+    .pa-corner { background:#fff; }
+    .pa-linegrp {
+      display:flex; flex-direction:column; align-items:center;
+      padding:10px 4px 8px;
+      border-left:1px solid rgba(58,58,58,.1);
+      background:#faf9f6;
+    }
+    .pa-linename { font-size:11px; font-weight:600; color:rgba(58,58,58,.65); letter-spacing:.8px; text-transform:uppercase; text-align:center; margin-bottom:6px; }
+    .pa-subsplit { display:flex; width:100%; justify-content:space-around; }
+    .pa-subsplit span { font-size:9px; color:rgba(58,58,58,.35); letter-spacing:.5px; }
+    .pa-subsplit.single { justify-content:center; }
+    .pa-tierlbl {
+      display:flex; flex-direction:column; justify-content:center; align-items:flex-end;
+      padding:8px 14px 8px 8px;
+      border-top:1px solid rgba(58,58,58,.08);
+      border-right:2px solid rgba(58,58,58,.08);
+      background:#faf9f6;
+      gap:2px;
+    }
+    .pa-tiername { font-size:12px; font-weight:700; color:var(--dark-grey); }
+    .pa-tierprice { font-size:9px; color:rgba(58,58,58,.4); }
+    .pa-tierdesc { font-size:9px; color:var(--dark-beige); letter-spacing:.5px; }
+    .pa-cell {
+      border-left:1px solid rgba(58,58,58,.06);
+      border-top:1px solid rgba(58,58,58,.06);
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      padding:8px; gap:4px; background:#fff;
+      min-height:0;
+    }
+    .pa-cell.has-img img { width:100%; max-height:70%; object-fit:contain; flex:1; min-height:0; }
+    .pa-cellname { font-size:9px; color:rgba(58,58,58,.45); text-align:center; flex-shrink:0; }
+    .pa-cell-multi .pa-multi-imgs { display:flex; gap:3px; width:100%; flex:1; min-height:0; }
+    .pa-cell-multi .pa-multi-imgs img { flex:1; object-fit:contain; min-width:0; max-height:100%; }
+
+    /* ══ S13 CHANNEL SEPARATION ══ */
+    .tl-top { margin-bottom:0; border-bottom:2px solid rgba(58,58,58,.06); padding-bottom:16px; }
+    #s13 .ch-grid { margin-top:16px; }
+
+    /* ══ S9 DIR HEADER ══ */
+    .dir-header { position:absolute; top:0; left:0; right:0; padding:20px 48px; z-index:2; display:flex; flex-direction:column; gap:4px; background:linear-gradient(to bottom, rgba(247,244,239,.95) 60%, transparent); }
+    .dir-header .label-tag { color:var(--dark-grey); }
+    .dir-header-title { font-size:12px; color:rgba(58,58,58,.5); letter-spacing:.5px; }
+
+    /* ══ NG-GRID SQUARE CELLS ══ */
+
+    /* ══ A+ DUAL SLIDE ══ */
+    .aplus-dual-wrap { flex:1; display:grid; grid-template-columns:1fr 1fr; gap:3px; min-height:0; }
+    .aplus-dual-item { display:flex; flex-direction:column; min-height:0; }
+    .aplus-dual-lbl { padding:8px 20px; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:rgba(196,180,154,.5); background:#111; flex-shrink:0; }
+    .aplus-dual-img { flex:1; overflow:hidden; min-height:0; }
+    .aplus-dual-img img { width:100%; height:100%; object-fit:contain; display:block; background:#1a1a1a; }
+    .aplus-slide { background:#111; display:flex; flex-direction:column; }
+
+    /* ══ S2b OLD BANNERS ══ */
+    .ob-banners-row { display:grid; grid-template-columns:repeat(4,1fr); gap:5px; }
+    .ob-banner-item { aspect-ratio:2/1.5; overflow:hidden; background:rgba(58,58,58,.04); border:1px solid rgba(58,58,58,.08); }
+    .ob-banner-item img { width:100%; height:100%; object-fit:cover; }
+    .ob-old-page { height:50px; overflow:hidden; border:1px solid rgba(58,58,58,.08); border-radius:2px; }
+    .ob-old-page img { width:100%; height:100%; object-fit:cover; object-position:top; }
+
+
+    
+    /* ══ S2 HEADLINE EDITORIAL ══ */
+    .s2-hl-context { font-size:11px; letter-spacing:2.5px; text-transform:uppercase; color:rgba(237,232,224,.35); }
+    .s2-hl-divider { width:24px; height:1px; background:rgba(196,180,154,.3); margin:12px 0; }
+    .s2-hl-main { font-family:'Cormorant Garamond',Georgia,serif; font-size:clamp(28px,3.5vw,46px); font-weight:300; color:var(--light-beige); line-height:1.15; }
+    .s2-tag-bold { color:var(--light-beige) !important; font-weight:600 !important; }
+
+    /* ══ S6b BRAND VALUES V2 ══ */
+    .val-group-2024 { margin-bottom:0; }
+    .val-card.s { padding:10px 14px; }
+    .val-card.s .val-en { font-size:12px; }
+    .val-connector { display:flex; align-items:center; gap:10px; margin:14px 0; }
+    .val-connector-line { flex:1; height:1px; background:rgba(58,58,58,.12); }
+    .val-connector-label { font-size:10px; letter-spacing:1.5px; color:var(--dark-beige); white-space:nowrap; }
+    .val-cards-2-big { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .val-card-big { background:var(--dark-grey); color:var(--light-beige); padding:20px 22px; border-radius:2px; border-left:3px solid var(--dark-beige); }
+    .val-big-num { font-size:10px; letter-spacing:1px; color:rgba(196,180,154,.5); margin-bottom:8px; }
+    .val-big-en { font-size:18px; font-weight:400; letter-spacing:.5px; margin-bottom:4px; }
+    .val-big-zh { font-size:12px; color:rgba(196,180,154,.7); margin-bottom:8px; }
+    .val-big-note { font-size:10px; color:rgba(237,232,224,.35); line-height:1.6; }
+
+    /* ══ S8 PRODUCT MATRIX V2 (8 cols) ══ */
+    #s8 { background:#fff; display:flex; flex-direction:column; padding:0; }
+    .pa-header { padding:28px 48px 16px; flex-shrink:0; }
+    .pa-matrix {
+      flex:1; display:grid;
+      grid-template-columns: 100px repeat(7, 1fr);
+      grid-template-rows: auto repeat(3, 1fr);
+      border-top:1px solid rgba(58,58,58,.07);
+      margin:0 32px 24px;
+      min-height:0;
+    }
+    .pa-cell-has { }
+    .pa-cell-has img { width:100%; max-height:65%; object-fit:contain; flex:1; min-height:0; }
+    .pa-cell-3 { overflow:hidden; }
+    .pa-3imgs { display:flex; gap:2px; width:100%; flex:1; min-height:0; }
+    .pa-3imgs img { flex:1; object-fit:contain; min-width:0; max-height:100%; }
+
+    /* ══ S13 TIMELINE LINE ══ */
+    .ch-timeline { padding:16px 32px 0; flex-shrink:0; border-bottom:1px solid rgba(58,58,58,.06); margin-bottom:0; }
+    .ch-tl-track { position:relative; display:flex; justify-content:space-between; padding:0 40px 20px; }
+    .ch-tl-line { position:absolute; top:7px; left:40px; right:40px; height:1px; background:rgba(58,58,58,.15); }
+    .ch-tl-pt { display:flex; flex-direction:column; align-items:center; gap:8px; z-index:1; }
+    .ch-tl-dot { width:13px; height:13px; border-radius:50%; background:#fff; border:2px solid rgba(196,180,154,.6); flex-shrink:0; }
+    .ch-tl-yr { font-size:11px; font-weight:700; color:var(--dark-beige); letter-spacing:.5px; }
+    .ch-tl-txt { font-size:11px; color:rgba(58,58,58,.55); line-height:1.65; text-align:center; }
+
+    /* ══ EXEC SLIDES CONSISTENT STYLING ══ */
+    .exec-slide { border-top:3px solid rgba(196,180,154,.2); }
+    .exec-slide .label-tag { color:var(--dark-beige); }
+
+    /* ══ S7 PERSONA PHOTO CENTERED ══ */
+    .p-photo { width:72px; height:72px; border-radius:50%; overflow:hidden; flex-shrink:0; background:rgba(58,58,58,.1); border:2px solid rgba(196,180,154,.2); }
+
+    /* ══ NG-GRID BASE (JS will override sizes) ══ */
+    .ng-grid { display:grid; gap:3px; }
+
+
+        /* ══ S2 BRAND JOURNEY ══ */
+    #s2 { background:var(--dark-grey); display:grid; grid-template-columns:1fr 2fr; }
+    .s2-left { padding:72px 40px 72px 80px; display:flex; flex-direction:column; justify-content:center; border-right:1px solid rgba(196,180,154,.1); }
+    .s2-left .label-tag { margin-bottom:20px; color:rgba(196,180,154,.55); }
+    .s2-title { font-family:'Argue','Cormorant Garamond',Georgia,serif; font-size:clamp(52px,5.5vw,76px); color:var(--light-beige); line-height:1.05; letter-spacing:.02em; margin-bottom:16px; }
+    .s2-sub { font-size:13px; font-weight:300; color:rgba(237,232,224,.4); line-height:1.8; }
+    .s2-right { padding:60px 80px 60px 60px; display:flex; align-items:center; }
+    .s2-nodes { display:flex; flex-direction:column; gap:0; width:100%; }
+    .s2-node { display:grid; grid-template-columns:88px 20px 1fr; align-items:start; gap:0 14px; padding:18px 0; border-bottom:1px solid rgba(196,180,154,.08); }
+    .s2-node:last-child { border-bottom:none; }
+    .s2-node.hl .s2-yr, .s2-node.hl .s2-tag { color:var(--dark-beige); }
+    .s2-yr { font-size:11px; font-weight:700; letter-spacing:1.5px; color:rgba(196,180,154,.4); padding-top:3px; }
+    .s2-dot-wrap { display:flex; flex-direction:column; align-items:center; padding-top:5px; }
+    .s2-dot { width:8px; height:8px; border-radius:50%; background:rgba(196,180,154,.3); flex-shrink:0; }
+    .s2-node.hl .s2-dot { background:var(--dark-beige); box-shadow:0 0 0 4px rgba(196,180,154,.15); }
+    .s2-content { display:flex; flex-direction:column; gap:4px; }
+    .s2-tag { font-size:16px; font-weight:500; color:var(--light-beige); }
+    .s2-desc { font-size:12px; font-weight:300; color:rgba(237,232,224,.4); line-height:1.65; }
+    .tl-wrap { position:relative; margin-top:56px; }
+    .tl-line { position:absolute; top:24px; left:0; right:0; height:1px; background:rgba(196,180,154,.3); }
+    .tl-items { display:grid; grid-template-columns:repeat(5,1fr); }
+    .tl-item { padding-top:54px; padding-right:20px; position:relative; }
+    .tl-dot { position:absolute; top:18px; left:0; width:13px; height:13px; border-radius:50%; background:var(--dark-beige); box-shadow:0 0 0 4px rgba(196,180,154,.2); }
+    .tl-year { font-family:'Cormorant Garamond',Georgia,serif; font-size:38px; color:var(--dark-beige); margin-bottom:8px; }
+    .tl-tag { font-size:17px; font-weight:600; letter-spacing:1px; color:var(--light-beige); margin-bottom:10px; }
+    .tl-desc { font-size:13px; font-weight:300; line-height:1.8; color:rgba(237,232,224,.65); }
+
+    /* ══ S2b ORIGINAL BRAND ══ */
+    #s2b { background:#252018; display:grid; grid-template-columns:1fr 1fr; }
+    /* Left: Logo + CD01 */
+    .ob-left { display:flex; flex-direction:column; padding:52px 40px 52px 64px; border-right:1px solid rgba(196,180,154,.1); }
+    .ob-logo-wrap { display:flex; align-items:center; gap:18px; margin-bottom:28px; flex-shrink:0; }
+    .ob-logo-wrap img { height:58px; opacity:.6; filter:sepia(30%) saturate(0.7) brightness(0.82); }
+    .ob-logo-meta { display:flex; flex-direction:column; gap:5px; }
+    .ob-logo-name { font-size:16px; font-weight:600; letter-spacing:3px; text-transform:uppercase; color:rgba(196,180,154,.5); }
+    .ob-logo-est  { font-size:11px; letter-spacing:1.5px; color:rgba(196,180,154,.32); }
+    .ob-cd01-wrap { flex:0 0 52%; overflow:hidden; background:#1c1814; }
+    .ob-cd01-wrap img { width:100%; height:100%; object-fit:contain; padding:20px; filter:grayscale(10%) saturate(0.85) brightness(0.88); }
+    .ob-cd01-badge { margin-top:20px; flex-shrink:0; display:flex; align-items:center; gap:14px; }
+    .ob-cd01-tag { font-size:10px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:var(--dark-beige); border:1px solid rgba(196,180,154,.35); padding:5px 14px; opacity:.75; }
+    .ob-cd01-desc { font-size:12px; color:rgba(196,180,154,.4); letter-spacing:.5px; }
+    /* Right: Extension products + Insight */
+    .ob-right { display:flex; flex-direction:column; justify-content:center; padding:52px 64px 52px 40px; gap:0; }
+    .ob-right-label { font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:rgba(196,180,154,.45); margin-bottom:18px; flex-shrink:0; }
+    .ob-prods-row { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; flex-shrink:0; }
+    .ob-prod { background:#1c1814; overflow:hidden; }
+    .ob-prod-img { height:178px; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+    .ob-prod-img img { width:100%; height:100%; object-fit:contain; padding:14px; filter:grayscale(20%) saturate(0.75) brightness(0.85); }
+    .ob-prod-foot { padding:11px 13px; border-top:1px solid rgba(196,180,154,.07); }
+    .ob-prod-name { font-size:10px; font-weight:600; letter-spacing:1px; color:rgba(237,232,224,.35); margin-bottom:7px; }
+    .ob-prod-tag  { display:inline-block; font-size:9px; letter-spacing:1px; text-transform:uppercase; color:rgba(196,180,154,.45); background:rgba(196,180,154,.05); border:1px solid rgba(196,180,154,.12); padding:3px 9px; }
+    /* Insight block */
+    .ob-insight-block { display:flex; flex-direction:column; padding-top:32px; flex-shrink:0; }
+    .ob-insight-line { width:36px; height:1px; background:rgba(196,180,154,.25); margin-bottom:20px; }
+    .ob-insight-text { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:26px; font-weight:300; color:rgba(237,232,224,.7); line-height:1.55; }
+    .ob-insight-sub { margin-top:14px; font-size:13px; color:rgba(196,180,154,.45); letter-spacing:.3px; line-height:1.75; }
+
+    /* ══ S3 PROBLEM ══ */
+    #s3 { display:grid; grid-template-columns:1fr 1fr; }
+    #s3 .left { background:var(--dark-beige); padding:80px 60px; display:flex; flex-direction:column; justify-content:center; }
+    #s3 .ghost-yr { font-family:'Cormorant Garamond',Georgia,serif; font-size:140px; font-weight:300; line-height:1; color:rgba(58,58,58,.1); margin-bottom:-24px; }
+    #s3 .left h2 { font-family:'Cormorant Garamond',Georgia,serif; font-size:56px; font-weight:300; color:var(--dark-grey); line-height:1.1; }
+    #s3 .left p { font-size:16px; font-weight:300; line-height:1.8; color:rgba(58,58,58,.7); margin-top:18px; }
+    #s3 .left-quote { margin-top:28px; padding-left:18px; border-left:2px solid var(--dark-grey); font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:17px; color:rgba(58,58,58,.65); line-height:1.6; }
+    #s3 .right { background:var(--dark-grey); padding:80px 60px; display:flex; flex-direction:column; justify-content:center; gap:22px; }
+    .prob-card { padding:24px 26px; border:1px solid rgba(196,180,154,.2); border-left:3px solid var(--dark-beige); }
+    .prob-num { font-family:'Cormorant Garamond',Georgia,serif; font-size:42px; color:var(--dark-beige); opacity:.65; line-height:1; margin-bottom:10px; }
+    .prob-card p { font-size:15px; font-weight:300; line-height:1.8; color:rgba(237,232,224,.78); }
+
+    /* ══ S4 AWARENESS ══ */
+    #s4 { display:grid; grid-template-columns:2fr 3fr; }
+    #s4 .left { background:var(--light-beige); padding:56px 44px; display:flex; flex-direction:column; justify-content:center; }
+    #s4 .big-yr { font-family:'Cormorant Garamond',Georgia,serif; font-size:100px; font-weight:300; line-height:1; color:rgba(196,180,154,.35); }
+    #s4 .left h2 { font-family:'Cormorant Garamond',Georgia,serif; font-size:30px; font-weight:300; color:var(--dark-grey); margin-top:-8px; line-height:1.2; }
+    .plat-list { margin-top:28px; display:flex; flex-direction:column; gap:18px; }
+    .plat-item { display:flex; align-items:flex-start; gap:16px; }
+    .plat-icon { width:38px; height:38px; border-radius:50%; background:var(--dark-beige); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:white; flex-shrink:0; }
+    .plat-info h4 { font-size:15px; font-weight:600; color:var(--dark-grey); margin-bottom:3px; }
+    .plat-info p { font-size:13px; color:rgba(58,58,58,.55); }
+    #s4 .right { background:var(--dark-grey); padding:44px 52px 32px 52px; display:flex; flex-direction:column; justify-content:flex-start; }
+    .stat-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:28px; }
+    .stat-card { padding:24px 18px; border:1px solid rgba(196,180,154,.18); text-align:center; }
+    .stat-num { font-family:'Cormorant Garamond',Georgia,serif; font-size:44px; font-weight:300; color:var(--dark-beige); line-height:1; }
+    .stat-lbl { font-size:11px; font-weight:500; letter-spacing:2px; text-transform:uppercase; color:rgba(237,232,224,.45); margin-top:8px; }
+    .kol-note { margin-top:22px; padding:18px 20px; background:rgba(196,180,154,.08); border-left:2px solid var(--dark-beige); font-size:13px; font-weight:300; line-height:1.8; color:rgba(237,232,224,.72); }
+
+    /* ══ S5 REBRAND ══ */
+    #s5 { background:var(--white); display:grid; grid-template-rows:auto 1fr; }
+    #s5 .hdr { padding:44px 80px 26px; border-bottom:1px solid var(--light-beige); display:flex; align-items:baseline; gap:28px; }
+    .yr-badge { font-family:'Cormorant Garamond',Georgia,serif; font-size:20px; color:var(--dark-beige); border:1px solid var(--dark-beige); padding:4px 16px; flex-shrink:0; }
+    #s5 .hdr h2 { font-family:'Cormorant Garamond',Georgia,serif; font-size:clamp(24px,3vw,42px); font-weight:300; color:var(--dark-grey); }
+    #s5 .hdr .vetica { margin-left:auto; font-size:12px; letter-spacing:2px; color:var(--dark-beige); }
+    #s5 .cols { display:grid; grid-template-columns:repeat(3,1fr); padding:36px 80px 48px; gap:44px; align-items:start; }
+    .col-hd { font-size:10px; font-weight:600; letter-spacing:3px; text-transform:uppercase; color:var(--dark-beige); padding-bottom:12px; border-bottom:1px solid var(--light-beige); margin-bottom:18px; }
+    .id-lbl { font-size:11px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--dark-beige); margin-bottom:6px; }
+    .id-val { font-family:'Cormorant Garamond',Georgia,serif; font-size:22px; color:var(--dark-grey); margin-bottom:18px; }
+    .id-val.it { font-style:italic; font-size:18px; }
+    .chips { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+    .chip { padding:7px 14px; border:1px solid var(--dark-beige); font-size:13px; color:var(--dark-grey); }
+    .swatch-r { display:flex; align-items:center; gap:14px; margin-bottom:12px; }
+    .swatch { width:40px; height:40px; border:1px solid rgba(0,0,0,.08); flex-shrink:0; }
+    .sw-name { font-size:14px; font-weight:500; color:var(--dark-grey); }
+    .sw-hex { font-size:11px; color:rgba(58,58,58,.45); }
+    .tov-item { font-size:14px; font-weight:300; line-height:1.6; color:var(--dark-grey); padding:9px 0; border-bottom:1px solid var(--light-beige); display:flex; gap:10px; }
+    .tov-item::before { content:'—'; color:var(--dark-beige); flex-shrink:0; }
+    .s5q { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:17px; color:rgba(58,58,58,.5); border-left:2px solid var(--dark-beige); padding-left:14px; margin-top:20px; line-height:1.6; }
+
+    /* ══ S6 VALUES ══ */
+    #s6 { display:grid; grid-template-columns:1fr 1fr; }
+    #s6 .left { background:var(--light-beige); padding:80px 60px; display:flex; flex-direction:column; justify-content:center; }
+    #s6 .left h2 { font-family:'Cormorant Garamond',Georgia,serif; font-size:40px; font-weight:300; color:var(--dark-grey); margin-top:10px; line-height:1.2; }
+    #s6 .left p { font-size:15px; font-weight:300; line-height:1.8; color:rgba(58,58,58,.65); margin-top:16px; }
+    .sustain-box { margin-top:28px; padding:24px 26px; background:rgba(196,180,154,.15); border:1px solid var(--dark-beige); }
+    .s-ttl { font-size:11px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--dark-grey); margin-bottom:14px; }
+    .s-item { display:flex; gap:12px; margin-bottom:10px; align-items:flex-start; }
+    .s-dot { width:5px; height:5px; border-radius:50%; background:var(--dark-beige); margin-top:7px; flex-shrink:0; }
+    .s-item p { font-size:13px; color:rgba(58,58,58,.7); line-height:1.6; }
+    #s6 .right { background:var(--dark-grey); padding:80px 60px; display:flex; flex-direction:column; justify-content:center; }
+    .val-list { display:flex; flex-direction:column; gap:10px; margin-top:24px; }
+    .val-pill { padding:14px 22px; border:1px solid rgba(196,180,154,.3); display:flex; align-items:center; gap:16px; }
+    .val-pill.nw { background:rgba(196,180,154,.1); border-color:var(--dark-beige); }
+    .v-yr { font-size:9px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--dark-beige); min-width:36px; }
+    .v-en { font-size:15px; color:rgba(237,232,224,.9); }
+    .v-zh { font-size:13px; color:var(--dark-beige); margin-left:auto; }
+    .plus-r { text-align:center; color:var(--dark-beige); font-size:20px; opacity:.4; }
+    .close-note { margin-top:28px; padding-left:16px; border-left:2px solid rgba(196,180,154,.3); font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:17px; color:rgba(237,232,224,.4); line-height:1.6; }
+
+    /* ══ S7 PERSONAS ══ */
+    #s7 { background:var(--white); padding:48px 80px 54px; display:grid; grid-template-rows:auto 1fr; }
+    #s7 h2 { font-family:'Cormorant Garamond',Georgia,serif; font-size:clamp(26px,3.2vw,44px); font-weight:300; color:var(--dark-grey); margin-top:8px; }
+    .p-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:30px; }
+    .p-card { border:1px solid var(--light-beige); overflow:hidden; }
+    .p-head { background:var(--dark-grey); padding:28px 22px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:10px; }
+    .p-av { width:54px; height:54px; border-radius:50%; background:var(--dark-beige); margin:0 auto 12px; display:flex; align-items:center; justify-content:center; font-family:'Cormorant Garamond',Georgia,serif; font-size:26px; color:var(--dark-grey); }
+    .p-name { font-family:'Cormorant Garamond',Georgia,serif; font-size:24px; color:var(--light-beige); margin-bottom:4px; }
+    .p-type { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--dark-beige); }
+    .p-body { padding:22px; }
+    .p-tags { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px; }
+    .p-tag { font-size:10px; background:var(--light-beige); color:var(--dark-grey); padding:4px 10px; }
+    .p-row { margin-bottom:12px; }
+    .p-lbl { font-size:10px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--dark-beige); margin-bottom:4px; }
+    .p-val { font-size:13px; font-weight:300; line-height:1.65; color:var(--dark-grey); }
+
+    /* ══ S8 PRODUCT ARCHITECTURE ══ */
+    #s8 { background:var(--dark-grey); padding:48px 72px 50px; display:flex; flex-direction:column; gap:0; }
+    #s8 h2 { font-family:'Cormorant Garamond',Georgia,serif; font-size:clamp(26px,3.2vw,44px); font-weight:300; color:var(--light-beige); margin-top:8px; margin-bottom:24px; }
+    .tier-row { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+    .tier-card { padding:22px 20px; border:1px solid rgba(196,180,154,.2); display:flex; flex-direction:column; }
+    .tier-card.hi { border-color:var(--dark-beige); background:rgba(196,180,154,.06); }
+    .t-lbl { font-size:10px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--dark-beige); margin-bottom:6px; }
+    .t-price { font-family:'Cormorant Garamond',Georgia,serif; font-size:26px; color:var(--light-beige); margin-bottom:10px; }
+    .t-theme { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:14px; color:var(--dark-beige); margin-bottom:8px; }
+    .t-desc { font-size:13px; font-weight:300; line-height:1.7; color:rgba(237,232,224,.55); }
+    /* tier product images */
+    .t-img-area { flex:1; display:flex; align-items:center; justify-content:center; min-height:110px; margin:12px 0; }
+    .t-img-area img { max-height:130px; width:auto; max-width:100%; object-fit:contain; }
+    .t-imgs-pair { flex:1; display:flex; gap:8px; margin:12px 0; min-height:110px; }
+    .t-img-pair-item { flex:1; display:flex; flex-direction:column; align-items:center; gap:6px; }
+    .t-img-pair-item img { width:100%; height:110px; object-fit:contain; }
+    .t-img-pair-name { font-size:9px; letter-spacing:1.5px; text-transform:uppercase; color:rgba(196,180,154,.45); text-align:center; }
+
+    /* 六大產品線 — 主角放大 */
+    .line-row { display:grid; grid-template-columns:repeat(6,1fr); gap:10px; margin-top:18px; flex:1; }
+    .line-card { padding:20px 10px; border:1px solid rgba(196,180,154,.22); text-align:center; display:flex; flex-direction:column; justify-content:center; min-height:130px; }
+    .line-n { font-family:'Cormorant Garamond',Georgia,serif; font-size:36px; color:var(--dark-beige); opacity:.3; line-height:1; }
+    .line-name { font-size:13px; font-weight:600; letter-spacing:.5px; color:var(--light-beige); margin-top:10px; margin-bottom:6px; line-height:1.3; }
+    .line-slogan { font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:13px; color:var(--dark-beige); }
+
+    /* ══ APPENDIX ══ */
+    #s-appendix { background:var(--dark-grey); display:flex; align-items:center; justify-content:center; }
+    .apx-wrap { text-align:center; max-width:500px; }
+    .apx-label { font-size:11px; font-weight:700; letter-spacing:4px; text-transform:uppercase; color:rgba(196,180,154,.4); margin-bottom:28px; }
+    .apx-title { font-family:'Argue','Cormorant Garamond',Georgia,serif; font-size:clamp(48px,5.5vw,78px); color:var(--light-beige); line-height:1.1; letter-spacing:.02em; margin-bottom:22px; }
+    .apx-sub { font-size:13px; color:rgba(237,232,224,.35); letter-spacing:.5px; line-height:1.7; }
+
+
+    /* ob-problems in S2b */
+    .ob-problems { padding-top:18px; border-top:2px solid rgba(196,180,154,.2); margin-top:20px; flex-shrink:0; }
+    .ob-prob-lbl { font-size:9px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:rgba(196,180,154,.45); margin-bottom:12px; }
+    .ob-prob-item { display:flex; align-items:baseline; gap:14px; padding:8px 0; border-bottom:1px solid rgba(196,180,154,.08); font-size:13px; font-weight:300; color:rgba(237,232,224,.75); line-height:1.55; }
+    .ob-prob-item:last-child { border-bottom:none; }
+    .ob-prob-num { font-size:9px; font-weight:700; letter-spacing:2px; color:var(--dark-beige); flex-shrink:0; min-width:20px; }
+    .ob-prob-divider { display:none; }
+
+    /* === NINE-GRID SHOWCASE === */
+    .ng-slide { background:#111; display:flex; flex-direction:column; padding:0; height:100%; align-items:center; overflow:hidden; }
+    .ng-header { padding:28px 48px 20px; display:flex; align-items:baseline; justify-content:space-between; flex-shrink:0; }
+    .ng-header h2 { font-family:'Cormorant Garamond',Georgia,serif; font-size:28px; font-weight:300; color:var(--light-beige); }
+    .ng-sub { font-size:11px; letter-spacing:2px; text-transform:uppercase; color:rgba(196,180,154,.45); }
+    .ng-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:3px; width:100%; }
+    .ng-cell { position:relative; background:#f5f3ef; overflow:hidden; }
+    .ng-cell img { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; display:block; background:#f5f3ef; }
+    .aplus-slide { background:#111; display:flex; flex-direction:column; }
+    .aplus-header { padding:28px 48px 20px; flex-shrink:0; display:flex; align-items:baseline; justify-content:space-between; }
+    .aplus-header h2 { font-family:'Cormorant Garamond',Georgia,serif; font-size:28px; font-weight:300; color:var(--light-beige); }
+    .aplus-img-wrap { flex:1; min-height:0; padding:0 48px 32px; }
+    .aplus-img-wrap img { width:100%; height:100%; object-fit:contain; display:block; }
+
+    /* val-compact in S5 */
+    .val-compact { display:flex; flex-direction:column; gap:0; margin-top:4px; }
+    .vc-row { display:flex; align-items:center; gap:10px; padding:6px 0; border-bottom:1px solid rgba(58,58,58,.08); }
+    .vc-row:last-child { border-bottom:none; }
+    .vc-row.new .vc-yr { color:var(--dark-beige); }
+    .vc-row.new .vc-val { color:var(--dark-grey); font-weight:500; }
+    .vc-yr { font-size:9px; font-weight:700; letter-spacing:1.5px; color:rgba(58,58,58,.35); background:rgba(58,58,58,.06); padding:2px 6px; flex-shrink:0; }
+    .vc-val { font-size:13px; color:rgba(58,58,58,.7); }
+    /* Persona photos */
+    .p-photo { width:72px; height:72px; border-radius:50%; overflow:hidden; flex-shrink:0; background:rgba(58,58,58,.1); border:2px solid rgba(196,180,154,.2); }
+    .p-photo img { width:100%; height:100%; object-fit:cover; display:block; }
+    /* ══ S9 DIRECTION ══ */
+    #s9 { display:grid; grid-template-columns:1fr 1fr; }
+    .dir-panel { padding:72px 60px; display:flex; flex-direction:column; justify-content:center; }
+    .dir-a { background:var(--light-beige); opacity:.6; }
+    .dir-b { background:var(--dark-grey); position:relative; }
+    .sel-badge { position:absolute; top:0; right:0; background:var(--dark-beige); color:var(--dark-grey); font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; padding:12px 28px; display:flex; align-items:center; gap:8px; }
+    .sel-badge::before { content:'✓'; font-size:16px; }
+    .dir-b::after { content:''; position:absolute; left:0; top:0; bottom:0; width:5px; background:var(--dark-beige); }
+    .dir-lbl { font-size:11px; font-weight:600; letter-spacing:3px; text-transform:uppercase; color:var(--dark-beige); margin-bottom:14px; }
+    .dir-title { font-family:'Cormorant Garamond',Georgia,serif; font-size:42px; font-weight:400; line-height:1.1; margin-bottom:22px; }
+    .dir-a .dir-title { color:var(--dark-grey); }
+    .dir-b .dir-title { color:var(--light-beige); }
+    .ref-chips { display:flex; flex-wrap:wrap; gap:7px; margin-bottom:22px; }
+    .ref-chip { font-size:10px; font-weight:500; letter-spacing:2px; padding:5px 10px; border:1px solid currentColor; }
+    .dir-a .ref-chip { color:rgba(58,58,58,.4); }
+    .dir-b .ref-chip { color:rgba(196,180,154,.7); }
+    .kw-list { display:flex; flex-direction:column; gap:10px; }
+    .kw-item { font-size:14px; font-weight:300; display:flex; gap:10px; align-items:flex-start; }
+    .dir-a .kw-item { color:rgba(58,58,58,.65); }
+    .dir-b .kw-item { color:rgba(237,232,224,.78); }
+    .kw-item::before { content:'—'; color:var(--dark-beige); flex-shrink:0; }
+    .dir-note { margin-top:28px; padding:16px 18px; border:1px solid rgba(196,180,154,.25); font-size:13px; font-weight:300; line-height:1.75; color:rgba(237,232,224,.5); }
+
+    /* ══ S10 BEFORE / AFTER GALLERY ══ */
+    #s10 { background:var(--dark-grey); display:flex; flex-direction:column; }
+    .ba-header { padding:28px 60px 0; display:flex; align-items:center; gap:24px; flex-shrink:0; }
+    .ba-header h2 { font-family:'Cormorant Garamond',Georgia,serif; font-size:28px; font-weight:300; color:var(--light-beige); }
+    .ba-section { flex:1; display:flex; flex-direction:row; overflow:hidden; padding:16px 40px 28px; gap:0; }
+    .ba-col { flex:1; display:flex; flex-direction:column; }
+    .ba-divider { width:1px; background:rgba(196,180,154,.25); margin:0 20px; flex-shrink:0; }
+    .ba-col-label { display:flex; align-items:center; gap:14px; padding-bottom:12px; flex-shrink:0; }
+    .ba-col-tag { font-size:10px; font-weight:700; letter-spacing:3px; text-transform:uppercase; padding:4px 14px; }
+    .before-tag { background:rgba(80,80,80,.8); color:rgba(237,232,224,.65); }
+    .after-tag { background:var(--dark-beige); color:var(--dark-grey); }
+    .ba-col-sub { font-size:13px; color:rgba(237,232,224,.5); }
+    .ba-images { flex:1; display:grid; grid-template-columns:repeat(2,1fr); grid-template-rows:repeat(2,1fr); gap:8px; }
+    .ba-img-cell { position:relative; background:#111; }
+    .ba-img-cell img { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; display:block; }
+
+    /* ══ S11 CD01 COMPLETE IMAGES ══ */
+    #s11 { background:var(--dark-grey); padding:28px 50px 32px; display:flex; flex-direction:column; }
+    #s11 h2 { font-family:'Cormorant Garamond',Georgia,serif; font-size:26px; font-weight:300; color:var(--light-beige); margin-top:6px; margin-bottom:14px; }
+    .img-gallery { flex:1; display:grid; grid-template-columns:repeat(3,1fr); grid-template-rows:repeat(3,1fr); gap:8px; min-height:0; }
+    .gal-cell { position:relative; background:#111; min-height:0; }
+    .gal-cell img { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; display:block; }
+    .gal-lbl { position:absolute; bottom:6px; left:6px; background:rgba(40,40,40,.85); color:var(--dark-beige); font-size:10px; letter-spacing:2px; padding:3px 8px; text-transform:uppercase; backdrop-filter:blur(4px); }
+
+    /* ══ S12 MD GALLERY ══ */
+    #s12 { background:var(--dark-grey); display:flex; flex-direction:column; }
+    .md-section { flex:1; display:flex; flex-direction:column; }
+    .md-sec-label { padding:10px 60px; flex-shrink:0; display:flex; align-items:center; gap:14px; }
+    .md-sec-tag { font-size:10px; font-weight:700; letter-spacing:3px; text-transform:uppercase; padding:4px 14px; }
+    .md-sec-before { background:rgba(80,80,80,.8); color:rgba(237,232,224,.65); }
+    .md-sec-after  { background:var(--dark-beige); color:var(--dark-grey); }
+    .md-sec-title { font-size:14px; font-weight:500; letter-spacing:1px; color:var(--dark-beige); }
+    .md-img-row { flex:1; display:grid; gap:6px; padding:0 60px; }
+    .md-img-row.cols4 { grid-template-columns:repeat(4,1fr); }
+    .md-img-row.cols3 { grid-template-columns:repeat(3,1fr); }
+    .md-img-cell { position:relative; overflow:hidden; background:#111; }
+    .md-img-cell img { width:100%; height:100%; object-fit:contain; display:block; }
+    .md-tag-overlay { position:absolute; top:8px; left:8px; background:rgba(40,40,40,.8); color:var(--dark-beige); font-size:9px; letter-spacing:2px; padding:3px 8px; text-transform:uppercase; }
+    .md-header-bar { padding:20px 60px 4px; flex-shrink:0; }
+    .md-header-bar h2 { font-family:'Cormorant Garamond',Georgia,serif; font-size:26px; font-weight:300; color:var(--light-beige); }
+
+    /* ══ S13 CHANNEL ══ */
+    #s13 { background:var(--white); padding:48px 80px 50px; display:flex; flex-direction:column; gap:0; }
+    #s13 h2 { font-family:'Cormorant Garamond',Georgia,serif; font-size:clamp(26px,3.2vw,44px); font-weight:300; color:var(--dark-grey); margin-top:8px; margin-bottom:26px; }
+    .ch-grid { display:grid; grid-template-columns:2fr 1.1fr 1.1fr; gap:18px; }
+    .ch-card { padding:28px 26px; border:1px solid var(--light-beige); }
+    .ch-card.primary { border-color:var(--dark-beige); }
+    .ch-icon { width:44px; height:44px; border:1px solid var(--dark-beige); display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; letter-spacing:1px; color:var(--dark-beige); margin-bottom:18px; }
+    .ch-name { font-family:'Cormorant Garamond',Georgia,serif; font-size:30px; color:var(--dark-grey); margin-bottom:5px; }
+    .ch-sub { font-size:11px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--dark-beige); margin-bottom:14px; }
+    .ch-desc { font-size:13px; font-weight:300; line-height:1.8; color:var(--dark-grey); }
+    .ch-prod { margin-top:14px; padding-top:14px; border-top:1px solid var(--light-beige); font-size:12px; color:rgba(58,58,58,.5); }
+    .tl-strip { margin-top:24px; display:grid; grid-template-columns:repeat(3,1fr); border:1px solid var(--light-beige); }
+    .tl-si { padding:16px 20px; border-right:1px solid var(--light-beige); }
+    .tl-si:last-child { border-right:none; }
+    .strip-q { font-family:'Cormorant Garamond',Georgia,serif; font-size:24px; color:var(--dark-beige); }
+    .strip-t { font-size:13px; font-weight:300; color:var(--dark-grey); margin-top:4px; line-height:1.55; }
+
+    /* ══ S5c COMPETITIVE LANDSCAPE ══ */
+    #s5c { background:var(--dark-grey); padding:50px 100px 60px; display:flex; flex-direction:column; }
+    #s5c > div:first-child h2 { font-family:'Cormorant Garamond',Georgia,serif; font-size:clamp(26px,3.2vw,44px); font-weight:300; color:var(--light-beige); margin-top:8px; }
+
+    /* ══ S14 POSITIONING MAP ══ */
+    #s14 { background:var(--dark-grey); padding:50px 100px 60px; display:flex; flex-direction:column; }
+    #s14 h2 { font-family:'Cormorant Garamond',Georgia,serif; font-size:clamp(26px,3.2vw,44px); font-weight:300; color:var(--light-beige); margin-top:8px; }
+    .map-wrap { flex:1; position:relative; margin-top:20px; }
+    /* axes */
+    .ax-h { position:absolute; top:50%; left:8%; right:8%; height:1px; background:rgba(196,180,154,.2); transform:translateY(-50%); }
+    .ax-v { position:absolute; left:50%; top:8%; bottom:8%; width:1px; background:rgba(196,180,154,.2); transform:translateX(-50%); }
+    /* axis labels — positioned well away from centre */
+    .ax-lbl { position:absolute; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:rgba(196,180,154,.4); white-space:nowrap; }
+    .ax-top    { top:4%; left:50%; transform:translateX(-50%); }
+    .ax-bottom { bottom:4%; left:50%; transform:translateX(-50%); }
+    .ax-left   { left:0; top:50%; transform:translateY(-50%); }
+    .ax-right  { right:0; top:50%; transform:translateY(-50%); }
+    /* brand dots */
+    .bd { position:absolute; transform:translate(-50%,-50%); text-align:center; }
+    .bd-dot { width:10px; height:10px; border-radius:50%; margin:0 auto 6px; }
+    .bd-dot.comp { background:rgba(196,180,154,.28); }
+    .bd-dot.el { width:15px; height:15px; background:var(--dark-beige); box-shadow:0 0 0 6px rgba(196,180,154,.18); }
+    .bd-dot.ref { background:transparent; border:1px solid rgba(196,180,154,.22); }
+    .bd-dot.el-old { width:13px; height:13px; background:transparent; border:2px dashed rgba(196,180,154,.35); }
+    .bd-name { font-size:12px; color:rgba(237,232,224,.55); white-space:nowrap; }
+    .bd-name.el { color:var(--dark-beige); font-size:14px; font-weight:500; }
+    .bd-name.el-old { font-size:11px; color:rgba(196,180,154,.38); font-style:italic; }
+    .map-arrow-svg { position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; overflow:visible; }
+    .bd-sub { font-size:10px; color:rgba(196,180,154,.5); margin-top:2px; }
+
+    /* ══ S4b VIRAL NATION RESULTS ══ */
+    #s4b { background:var(--dark-grey); display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr auto; }
+    .vn-amazon-bar { grid-column:1/-1; border-top:1px solid rgba(196,180,154,.15); padding:16px 56px; display:flex; align-items:center; gap:0; background:rgba(196,180,154,.04); flex-shrink:0; }
+    .vn-amz-title { font-size:9px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--dark-beige); margin-right:32px; white-space:nowrap; display:flex; align-items:center; gap:8px; }
+    .vn-amz-title::before { content:''; display:inline-block; width:6px; height:6px; background:var(--dark-beige); border-radius:50%; }
+    .vn-amz-metrics { display:flex; gap:32px; flex:1; align-items:center; }
+    .vn-amz-item { text-align:center; }
+    .vn-amz-num { font-size:18px; font-weight:600; color:var(--light-beige); line-height:1; }
+    .vn-amz-num.highlight { color:var(--dark-beige); }
+    .vn-amz-lbl { font-size:8px; letter-spacing:1.5px; text-transform:uppercase; color:rgba(237,232,224,.35); margin-top:3px; }
+    .vn-amz-note { margin-left:auto; padding-left:28px; border-left:1px solid rgba(196,180,154,.15); font-size:10px; color:rgba(237,232,224,.4); line-height:1.8; }
+    .vn-panel { padding:56px 56px; display:flex; flex-direction:column; justify-content:center; }
+    .vn-panel.left-p { border-right:1px solid rgba(196,180,154,.12); }
+    .vn-big { font-family:'Argue','Cormorant Garamond',Georgia,serif; font-size:68px; font-weight:400; color:var(--dark-beige); line-height:1; }
+    .vn-big-lbl { font-size:9px; letter-spacing:2px; text-transform:uppercase; color:rgba(237,232,224,.4); margin-top:5px; margin-bottom:24px; }
+    .vn-metrics { display:grid; grid-template-columns:1fr 1fr; gap:18px 28px; margin-bottom:22px; }
+    .vn-metric-num { font-size:26px; font-weight:600; color:var(--light-beige); line-height:1; }
+    .vn-metric-lbl { font-size:8px; letter-spacing:1.5px; text-transform:uppercase; color:rgba(237,232,224,.35); margin-top:4px; }
+    .vn-badge { display:inline-block; font-size:9px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:5px 14px; border:1px solid rgba(196,180,154,.45); color:var(--dark-beige); margin-bottom:22px; }
+    .vn-insight { padding:14px 18px; border-left:2px solid var(--dark-beige); font-size:12px; font-weight:300; line-height:1.85; color:rgba(237,232,224,.55); }
+    .vn-paid-row { display:flex; justify-content:space-between; align-items:baseline; padding:13px 0; border-bottom:1px solid rgba(196,180,154,.1); }
+    .vn-paid-row:last-child { border-bottom:none; }
+    .vn-paid-lbl { font-size:12px; color:rgba(237,232,224,.5); }
+    .vn-paid-val { font-size:20px; font-weight:600; color:var(--light-beige); }
+    .vn-paid-tag { font-size:9px; color:var(--dark-beige); margin-top:2px; text-align:right; }
+
+    /* ══ S4c CHRISTMAS BFCM CAMPAIGN ══ */
+    #s4c { background:var(--dark-grey); display:flex; }
+    .bfcm-left { width:32%; padding:56px 24px 56px 60px; display:flex; flex-direction:column; justify-content:space-between; border-right:1px solid rgba(196,180,154,.1); }
+    .bfcm-left-top { }
+    .bfcm-post-wrap { flex:1; min-height:0; margin:20px 0 8px; overflow:hidden; display:flex; align-items:center; }
+    .bfcm-post-wrap img { width:100%; max-height:100%; object-fit:contain; display:block; filter:contrast(1.06) saturate(1.04); }
+    .bfcm-caption { font-size:9px; letter-spacing:2px; text-transform:uppercase; color:rgba(196,180,154,.35); }
+    .bfcm-right { flex:1; padding:56px 60px 56px 40px; display:flex; flex-direction:column; justify-content:center; gap:18px; }
+    .bfcm-ads-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    .bfcm-ad-card { background:rgba(255,255,255,.04); border:1px solid rgba(196,180,154,.12); overflow:hidden; }
+    .bfcm-ad-img-wrap { height:220px; overflow:hidden; position:relative; background:#111; display:flex; align-items:center; justify-content:center; }
+    .bfcm-ad-img-wrap img { width:100%; height:100%; object-fit:contain; display:block; }
+    .bfcm-ad-body { padding:14px 16px; }
+    .bfcm-ad-tag { font-size:8px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:rgba(196,180,154,.5); margin-bottom:12px; }
+    .bfcm-ad-metrics { display:grid; grid-template-columns:1fr 1fr; gap:10px 6px; }
+    .bfcm-ad-num { font-size:20px; font-weight:600; color:var(--light-beige); line-height:1; }
+    .bfcm-ad-lbl { font-size:8px; letter-spacing:1.5px; text-transform:uppercase; color:rgba(237,232,224,.35); margin-top:3px; }
+    .bfcm-ad-foot { margin-top:10px; padding-top:10px; border-top:1px solid rgba(196,180,154,.1); font-size:10px; color:rgba(196,180,154,.35); }
+    .bfcm-total-bar { background:rgba(196,180,154,.06); border:1px solid rgba(196,180,154,.18); padding:18px 24px; display:flex; justify-content:space-between; align-items:center; }
+    .bfcm-total-item { text-align:center; }
+    .bfcm-total-num { font-size:22px; font-weight:600; color:var(--dark-beige); line-height:1; }
+    .bfcm-total-lbl { font-size:8px; letter-spacing:1.5px; text-transform:uppercase; color:rgba(196,180,154,.4); margin-top:5px; }
+
+    /* ══ S_PIVOT CHAPTER BREAK ══ */
+    #s-pivot { background:var(--dark-grey); display:grid; grid-template-columns:1fr 1fr; }
+    .pv-left { padding:72px 48px 72px 80px; display:flex; flex-direction:column; justify-content:center; border-right:1px solid rgba(196,180,154,.12); }
+    .pv-label { font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:rgba(196,180,154,.5); margin-bottom:28px; }
+    .pv-headline { font-family:'Argue','Cormorant Garamond',Georgia,serif; font-size:clamp(52px,6vw,82px); font-weight:400; color:var(--light-beige); line-height:1.05; letter-spacing:.02em; margin-bottom:36px; }
+    .pv-sub { font-size:14px; font-weight:300; color:rgba(237,232,224,.45); line-height:1.9; border-left:2px solid rgba(196,180,154,.3); padding-left:18px; }
+    .pv-right { padding:72px 80px 72px 48px; display:flex; align-items:center; }
+    .pv-grid { display:grid; grid-template-columns:1fr 1fr; gap:0; width:100%; }
+    .pv-tile { padding:22px 24px; border-bottom:1px solid rgba(196,180,154,.1); border-right:1px solid rgba(196,180,154,.1); }
+    .pv-tile:nth-child(even) { border-right:none; }
+    .pv-tile:nth-last-child(-n+2) { border-bottom:none; }
+    .pv-tile-num { font-size:11px; font-weight:700; letter-spacing:2px; color:rgba(196,180,154,.35); margin-bottom:8px; }
+    .pv-tile-name { font-size:16px; font-weight:500; color:var(--light-beige); margin-bottom:6px; line-height:1.3; }
+    .pv-tile-desc { font-size:12px; font-weight:300; color:rgba(237,232,224,.4); line-height:1.6; }
+
+    /* ══ S5b TURNING POINT ══ */
+    #s5b { background:var(--dark-grey); display:grid; grid-template-columns:1fr auto 1fr; }
+    .tp-col { display:flex; flex-direction:column; justify-content:center; padding:60px 50px; }
+    .tp-col.before-col { background:rgba(255,255,255,.03); border-right:none; }
+    .tp-col.after-col { background:rgba(196,180,154,.06); }
+    .tp-divider { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:0 30px; }
+    .tp-yr { font-family:'Argue',Georgia,serif; font-size:42px; font-weight:400; color:var(--dark-beige); letter-spacing:.05em; writing-mode:vertical-lr; }
+    .tp-arrow { font-size:32px; color:var(--dark-beige); margin:20px 0; }
+    .tp-era-lbl { font-size:9px; letter-spacing:3px; text-transform:uppercase; color:rgba(196,180,154,.45); margin-bottom:16px; }
+    .tp-era-title { font-family:'Cormorant Garamond',Georgia,serif; font-size:32px; color:var(--light-beige); line-height:1.2; margin-bottom:24px; }
+    .tp-era-title.muted { color:rgba(237,232,224,.3); font-size:28px; }
+    .tp-tags { display:flex; flex-wrap:wrap; gap:8px; }
+    .tp-tag { font-size:11px; padding:5px 12px; border:1px solid; }
+    .tp-tag.old { border-color:rgba(237,232,224,.15); color:rgba(237,232,224,.3); }
+    .tp-tag.new { border-color:rgba(196,180,154,.5); color:var(--dark-beige); }
+    .tp-note { margin-top:24px; font-size:13px; color:rgba(237,232,224,.35); line-height:1.7; }
+    .tp-note.new { color:rgba(237,232,224,.6); }
+
+    /* ══ Direction images ══ */
+    .dir-imgs { display:grid; grid-template-columns:1fr; gap:6px; height:260px; margin-bottom:20px; flex-shrink:0; }
+    .dir-img-cell { overflow:hidden; position:relative; }
+    .dir-img-cell img { width:100%; height:100%; object-fit:cover; display:block; }
+    .dir-a .dir-img-cell { opacity:.55; filter:saturate(.5); }
+    .dir-b .dir-img-cell { background:var(--dark-grey); }
+    .dir-b .dir-img-cell img { object-fit:contain; object-position:left center; }
+    .dir-b .dir-img-cell::after { content:''; position:absolute; inset:0; background:linear-gradient(to right, transparent 60%, var(--dark-grey) 82%); pointer-events:none; }
+
+    /* ══ KOL thumbnails ══ */
+    .kol-thumb { position:relative; overflow:hidden; background:#111; height:100%; }
+    .kol-thumb img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; }
+    .kol-thumb-lbl { position:absolute; bottom:0; left:0; right:0; background:linear-gradient(transparent,rgba(0,0,0,.75)); padding:10px 8px 7px; font-size:9px; color:rgba(255,255,255,.85); letter-spacing:1px; }
+
+    /* ══ S9b SOCIAL PLANNING ══ */
+    #s9b { background:var(--light-beige); display:flex; }
+    .soc-left { width:230px; flex-shrink:0; padding:50px 16px 50px 60px; display:flex; flex-direction:column; justify-content:center; }
+    .soc-center { flex:1; display:flex; align-items:center; justify-content:center; padding:36px 20px; }
+    .soc-right { width:230px; flex-shrink:0; padding:40px 36px 40px 10px; display:flex; flex-direction:column; justify-content:center; gap:10px; }
+    .ig-mockup { background:#fff; width:100%; max-width:420px; box-shadow:0 4px 20px rgba(58,58,58,.12); }
+    .ig-hdr { padding:10px 12px 8px; border-bottom:1px solid #f0f0f0; display:flex; align-items:center; gap:10px; }
+    .ig-avatar { width:36px; height:36px; border-radius:50%; background:var(--dark-beige); display:flex; align-items:center; justify-content:center; font-size:7px; color:#fff; letter-spacing:1px; font-weight:600; }
+    .ig-info { display:flex; flex-direction:column; }
+    .ig-name { font-size:12px; font-weight:700; color:#262626; }
+    .ig-stats-row { display:flex; gap:16px; padding:8px 12px; border-bottom:1px solid #f0f0f0; }
+    .ig-stat { text-align:center; }
+    .ig-stat-num { font-size:13px; font-weight:700; color:#262626; }
+    .ig-stat-lbl { font-size:9px; color:#8e8e8e; }
+    .ig-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; }
+    .ig-cell { aspect-ratio:1; position:relative; overflow:hidden; background:#c9bea8; }
+    .ig-cell img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; }
+    .art-post-card { background:var(--dark-grey); padding:14px; display:flex; flex-direction:column; }
+    .art-post-type { font-size:9px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--dark-beige); margin-bottom:14px; }
+    .art-post-title { font-family:'Cormorant Garamond',Georgia,serif; font-size:22px; font-style:italic; color:var(--light-beige); line-height:1.3; margin-bottom:12px; }
+    .art-post-body { font-size:12px; color:rgba(237,232,224,.6); line-height:1.75; }
+    .art-post-footer { margin-top:16px; padding-top:12px; border-top:1px solid rgba(196,180,154,.2); font-size:10px; color:rgba(196,180,154,.5); letter-spacing:1px; }
+    .soc-insight { background:rgba(196,180,154,.1); border-left:3px solid var(--dark-beige); padding:14px 18px; }
+    .soc-insight-title { font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--dark-grey); margin-bottom:8px; }
+    .soc-insight-pts { list-style:none; }
+    .soc-insight-pts li { font-size:13px; color:rgba(58,58,58,.7); padding:3px 0; }
+    .soc-insight-pts li::before { content:'— '; color:var(--dark-beige); }
+
+    /* ══ S15 CLOSING ══ */
+    #s15 { display:grid; grid-template-columns:1fr 1fr; }
+    #s15 .img-side { position:relative; overflow:hidden; }
+    #s15 .img-side img { width:100%; height:100%; object-fit:cover; }
+    #s15 .txt-side { background:var(--dark-grey); padding:80px; display:flex; flex-direction:column; justify-content:center; }
+    #s15 .big-q { font-family:'Argue','Cormorant Garamond',Georgia,serif; font-size:clamp(30px,4vw,58px); font-weight:400; color:var(--light-beige); line-height:1.2; margin:20px 0 40px; }
+    #s15 .site { font-size:12px; letter-spacing:4px; text-transform:uppercase; color:var(--dark-beige); margin-bottom:12px; }
+    #s15 .brand-n { font-family:'Argue','Cormorant Garamond',Georgia,serif; font-size:36px; font-weight:400; color:var(--light-beige); letter-spacing:.08em; }
+    #s15 .credit { margin-top:52px; font-size:11px; font-weight:300; letter-spacing:1px; color:rgba(237,232,224,.25); line-height:2; }
+
+    /* ══════════ FIX6 OVERRIDES ══════════ */
+    /* Fix conflicting duplicate CSS rules */
+    #s2b { background:#fff !important; display:flex !important; grid-template-columns:unset !important; }
+    .pa-matrix { grid-template-columns: 100px repeat(7, 1fr) !important; }
+    #s8 { background:#fff !important; }
+    /* Fix ax-lbl visibility on S5c competitive map */
+    .ax-lbl { color:rgba(196,180,154,.9) !important; font-size:11px !important; font-weight:500 !important; }
+    /* Fix S9 visual consistency with S8/S13 */
+    #s9 { background:#f7f4ef; }
+    #s9 .dir-header { background:#f7f4ef !important; }
+    #s9 .dir-a { opacity:1 !important; }
+    /* Fix ng-header consistent height so S10/S11 grids align */
+    .ng-header { min-height:72px; align-items:flex-start; }
+    .ng-sub { white-space:nowrap; }
+    /* Fix S_TRANSITION: tiles overlap footer */
+    #s-transition .pv-right { padding-bottom:80px !important; }
+    /* S2 bold highlight nodes */
+    .s2-tag-bold { color:var(--dark-beige) !important; font-weight:700 !important; }
+    .s2-node.hl .s2-yr { color:var(--dark-beige); }
+    .s2-node.hl .s2-dot { background:var(--dark-beige); box-shadow:0 0 0 4px rgba(196,180,154,.18); }
+
+
+    /* ══════════ FIX7 OVERRIDES ══════════ */
+    /* pa-matrix: dashed Routine/Specialty internal border */
+    .pa-spec { border-left: 1px dashed rgba(58,58,58,.13) !important; }
+    .pa-subsplit:not(.single) span:last-child { border-left:1px dashed rgba(58,58,58,.18); padding-left:7px; margin-left:3px; }
+    /* pa-tierprice more visible */
+    .pa-tierprice { font-size:11px !important; color:rgba(58,58,58,.68) !important; font-weight:600 !important; }
+    /* pa-linename consistent size (Hand Craftsmanship) */
+    .pa-linename { font-size:10px !important; word-break:break-word !important; line-height:1.3 !important; }
+    /* ng-header: stack h2 and sub on separate lines to prevent overlap */
+    .ng-header { flex-direction:column !important; align-items:flex-start !important; gap:5px !important;
+                 justify-content:flex-start !important; padding:20px 48px 12px !important; }
+    /* S9 dir-b: flex-start to align with dir-a after dir-note removal */
+    #s9 .dir-b { justify-content:flex-start !important; }
+    /* S2b: ensure ob-col-left doesn't overflow */
+    #s2b .ob-col-left { overflow:hidden !important; }
+
+
+    /* ══════════ FIX8 OVERRIDES ══════════ */
+    /* S_TRANSITION: fix missing 2-col grid layout */
+    #s-transition { background:var(--dark-grey); display:grid; grid-template-columns:1fr 1fr; }
+    /* S8: remove pa-spec dashed border-left (user wants group separators, not R/S split) */
+    .pa-spec { border-left: none !important; }
+    /* S8: remove pa-subsplit header separator */
+    .pa-subsplit:not(.single) span:last-child { border-left: none !important; padding-left:0 !important; margin-left:3px !important; }
+    /* S8: dashed group separator (right border on SM / Portable / Sleep Aid boundary) */
+    .pa-grpend { border-right: 1px dashed rgba(58,58,58,.2) !important; }
+    /* S8: price labels — prevent wrapping, smaller font */
+    .pa-tierprice { font-size:9px !important; white-space:nowrap !important; color:rgba(58,58,58,.65) !important; font-weight:600 !important; }
+    /* S9: fix image top clip — show top of image not center */
+    .dir-a .dir-img-cell img { object-position:top !important; }
+    .dir-b .dir-img-cell img { object-position:top left !important; }
+    .dir-imgs { padding-top:12px !important; }
+
+
+    /* ══════════ FIX9 OVERRIDES ══════════ */
+    /* S9 dir-a: show person (center-low), not window (top) */
+    .dir-a .dir-img-cell img { object-position:50% 62% !important; }
+    .dir-b .dir-img-cell img { object-position:top left !important; }
+
+
+    /* ══════════ FIX10 OVERRIDES ══════════ */
+    /* S9 dir-a: move person down in frame (head visible, not window) */
+    .dir-a .dir-img-cell img { object-position:50% 38% !important; }
+    /* Slides visual consistency: s9b & s12 match ng-slide dark bg */
+    #s9b { background:#111 !important; }
+    #s9b .soc-left { background:#111 !important; }
+    #s9b .soc-right { background:rgba(255,255,255,.04) !important; }
+    #s9b .label-tag { color:rgba(196,180,154,.6) !important; }
+    #s9b h2 { color:var(--light-beige) !important; }
+    #s9b .soc-insight-title { color:rgba(196,180,154,.7) !important; }
+    #s9b .soc-insight-pts li { color:rgba(237,232,224,.55) !important; }
+    #s9b .ig-cell-lbl { color:rgba(237,232,224,.5) !important; }
+    #s12 { background:#111 !important; }
+    #s12 .aplus-header h2 { color:var(--light-beige) !important; }
+    #s12 .aplus-header .ng-sub { color:rgba(196,180,154,.6) !important; }
+    #s12 .aplus-dual-lbl { color:rgba(196,180,154,.6) !important; }
+    /* Recap: center card content, larger text */
+    #s-recap .recap-card { text-align:center !important; align-items:center !important; }
+
+
+    /* ══════════ FIX11 OVERRIDES ══════════ */
+    /* S-PORTABLE: both product images same display size */
+    #portable-opt-a, #portable-opt-c {
+      max-width: 85% !important;
+      max-height: 200px !important;
+      object-fit: contain !important;
+      display: block !important;
+    }
+  </style>
+</head>
+<body>
+<div id="deck">
+
+  <!-- S1 COVER -->
+  <div class="slide active" id="s1">
+    <div class="left">
+      <div class="label-tag">Brand Case Study · 2023–2026</div>
+      <div class="accent-bar"></div>
+      <h1>Earnest<br>Living</h1>
+      <div class="sub">From Amazon Seller to Lifestyle Brand</div>
+    </div>
+    <div class="right"><img id="img-cover" alt="Earnest Living"></div>
+  </div>
+
+  <!-- S2 BRAND JOURNEY -->
+  <div class="slide" id="s2">
+    <div class="s2-left">
+      <div class="label-tag">Brand Journey · 2023–2026</div>
+      <div class="s2-headline">
+        <div class="s2-hl-context">從一個爆品的成功</div>
+        <div class="s2-hl-divider"></div>
+        <div class="s2-hl-main">有系統的<br>生活方式品牌</div>
+      </div>
+    </div>
+    <div class="s2-right">
+      <div class="s2-nodes">
+        <div class="s2-node">
+          <div class="s2-yr">2023</div>
+          <div class="s2-dot-wrap"><div class="s2-dot"></div></div>
+          <div class="s2-content"><div class="s2-tag">品牌問題浮現</div><div class="s2-desc">選品混亂、無識別系統，品牌個性開始崩解</div></div>
+        </div>
+        <div class="s2-node">
+          <div class="s2-yr">2024 H1</div>
+          <div class="s2-dot-wrap"><div class="s2-dot"></div></div>
+          <div class="s2-content"><div class="s2-tag">KOL 曝光嘗試</div><div class="s2-desc">$115K 投資，觸及 9.5M+ 但品牌根基未穩</div></div>
+        </div>
+        <div class="s2-node hl">
+          <div class="s2-yr">2024 H2</div>
+          <div class="s2-dot-wrap"><div class="s2-dot"></div></div>
+          <div class="s2-content"><div class="s2-tag s2-tag-bold">品牌全面 Rebrand</div><div class="s2-desc">建立核心識別、色彩系統與品牌語言</div></div>
+        </div>
+        <div class="s2-node hl">
+          <div class="s2-yr">2025–26</div>
+          <div class="s2-dot-wrap"><div class="s2-dot"></div></div>
+          <div class="s2-content"><div class="s2-tag s2-tag-bold">系統落地執行</div><div class="s2-desc">電商視覺重製、產品架構、三平台通路全面啟動</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  
+
+
+<!-- S2b ORIGINAL BRAND -->
+  <div class="slide" id="s2b">
+
+    <!-- Left: 品牌起點 — impactful visual hierarchy -->
+    <div class="ob-col ob-col-left">
+      <div class="ob-col-lbl">品牌起點 · 2017–2023</div>
+
+      <!-- Logo + brand info row (fixed) -->
+      <div style="display:flex;align-items:center;gap:12px;padding:10px 0 10px;border-bottom:1px solid rgba(58,58,58,.07);flex-shrink:0;">
+        <img id="old-logo" alt="Earnest Living 舊 Logo 2021" style="height:44px;object-fit:contain;">
+        <div>
+          <div style="font-size:14px;font-weight:700;color:var(--dark-grey);letter-spacing:.3px">Earnest Living</div>
+          <div style="font-size:9.5px;color:rgba(58,58,58,.4);margin-top:2px;line-height:1.45">Est. 2017 · Aromatherapy &amp; Home Lifestyle<br>品牌起點：單一爆品擴張路線</div>
+        </div>
+      </div>
+
+      <!-- Products: flex:1 — CD01 left (large) + 3 ext right (stacked) -->
+      <div style="flex:1;min-height:0;display:flex;gap:8px;padding:8px 0 6px;">
+
+        <!-- LEFT: CD01 hero -->
+        <div style="flex:1.6;min-height:0;display:flex;flex-direction:column;gap:4px;">
+          <div style="flex:1;min-height:0;position:relative;overflow:hidden;">
+            <img id="old-cd01" alt="CD01" style="position:absolute;inset:4px;width:calc(100% - 8px);height:calc(100% - 8px);object-fit:contain;">
+          </div>
+          <div style="flex-shrink:0;padding:2px 0 4px;border-top:1px solid rgba(58,58,58,.07);">
+            <span style="font-size:9px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:var(--dark-beige);">爆品 · 起點 </span>
+            <span style="font-size:11px;font-weight:600;color:var(--dark-grey);">CD01</span>
+          </div>
+        </div>
+
+        <!-- RIGHT: 3 extension products stacked -->
+        <div style="flex:1;min-height:0;display:flex;flex-direction:column;gap:5px;border-left:1px dashed rgba(58,58,58,.08);padding-left:8px;">
+          <div style="font-size:8px;letter-spacing:1.6px;text-transform:uppercase;color:rgba(58,58,58,.28);flex-shrink:0;">其他產品線</div>
+          <!-- SCD01 -->
+          <div style="flex:1;min-height:0;display:flex;gap:7px;align-items:center;">
+            <div style="flex-shrink:0;width:72px;height:72px;overflow:hidden;background:rgba(58,58,58,.03);border:1px solid rgba(58,58,58,.07);">
+              <img id="old-scd01" alt="SCD01" style="width:100%;height:100%;object-fit:contain;">
+            </div>
+            <div>
+              <div style="font-size:10px;font-weight:600;color:var(--dark-grey);">SCD01</div>
+              <div style="font-size:9px;color:rgba(58,58,58,.38);">Car Diffuser</div>
+            </div>
+          </div>
+          <!-- SOD02 -->
+          <div style="flex:1;min-height:0;display:flex;gap:7px;align-items:center;">
+            <div style="flex-shrink:0;width:72px;height:72px;overflow:hidden;background:rgba(58,58,58,.03);border:1px solid rgba(58,58,58,.07);">
+              <img id="old-sod02" alt="SOD02" style="width:100%;height:100%;object-fit:contain;">
+            </div>
+            <div>
+              <div style="font-size:10px;font-weight:600;color:var(--dark-grey);">SOD02</div>
+              <div style="font-size:9px;color:rgba(58,58,58,.38);">Onion Diffuser</div>
+            </div>
+          </div>
+          <!-- Essential Oil -->
+          <div style="flex:1;min-height:0;display:flex;gap:7px;align-items:center;">
+            <div style="flex-shrink:0;width:72px;height:72px;overflow:hidden;background:rgba(58,58,58,.03);border:1px solid rgba(58,58,58,.07);">
+              <img id="old-oil" alt="Essential Oil" style="width:100%;height:100%;object-fit:contain;">
+            </div>
+            <div>
+              <div style="font-size:10px;font-weight:600;color:var(--dark-grey);">精油系列</div>
+              <div style="font-size:9px;color:rgba(58,58,58,.38);">Essential Oil</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Evidence banners (fixed at bottom) -->
+      <div style="flex-shrink:0;display:flex;flex-direction:column;gap:5px;border-top:1px dashed rgba(58,58,58,.09);padding-top:8px;">
+        <div style="font-size:8px;letter-spacing:2px;text-transform:uppercase;color:rgba(58,58,58,.28);">Amazon 品牌舊視覺 · 識別碎片化</div>
+        <div class="ob-banners-row">
+          <div class="ob-banner-item"><img id="ob-banner1" alt="Banner 01"></div>
+          <div class="ob-banner-item"><img id="ob-banner2" alt="Banner 02"></div>
+          <div class="ob-banner-item"><img id="ob-banner3" alt="Banner 03"></div>
+          <div class="ob-banner-item"><img id="ob-banner4" alt="Banner 04"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: 三大問題 only — prominent -->
+    <div class="ob-col ob-col-right">
+      <div class="ob-prob-mega">
+        <div class="ob-prob-mega-lbl">識別三大問題</div>
+        <div class="ob-prob-mega-divider"></div>
+        <div class="ob-prob-mega-item">
+          <span class="ob-prob-mega-num">01</span>
+          <div>
+            <div class="ob-prob-mega-main">品牌個性模糊</div>
+            <div class="ob-prob-mega-sub">大量選品追求便宜可用，缺乏品牌一致性</div>
+          </div>
+        </div>
+        <div class="ob-prob-mega-item">
+          <span class="ob-prob-mega-num">02</span>
+          <div>
+            <div class="ob-prob-mega-main">視覺語言混亂</div>
+            <div class="ob-prob-mega-sub">各通路呈現不一，無法建立消費者記憶點</div>
+          </div>
+        </div>
+        <div class="ob-prob-mega-item">
+          <span class="ob-prob-mega-num">03</span>
+          <div>
+            <div class="ob-prob-mega-main">缺乏品牌情感連結</div>
+            <div class="ob-prob-mega-sub">停留在品類商品感，非生活方式品牌</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+<!-- S_PIVOT: 2025 EXECUTION CHAPTER BREAK -->
+  <div class="slide" id="s-pivot">
+    <div class="pv-left">
+      <div class="pv-label">2025 · 策略落地執行</div>
+      <div class="pv-headline">Strategy<br>into<br>Action.</div>
+      <div class="pv-sub">前段品牌策略已告一段落——<br>接下來進入全面執行期，<br>每一個觸點系統化落地。</div>
+    </div>
+    <div class="pv-right">
+      <div class="pv-grid">
+        <div class="pv-tile">
+          <div class="pv-tile-num">01</div>
+          <div class="pv-tile-name">三平台通路布局</div>
+          <div class="pv-tile-desc">Amazon · Etsy · Shopify 差異化定位</div>
+        </div>
+        <div class="pv-tile">
+          <div class="pv-tile-num">02</div>
+          <div class="pv-tile-name">產品線架構重整</div>
+          <div class="pv-tile-desc">四大產品線 · 三級定價策略</div>
+        </div>
+        <div class="pv-tile">
+          <div class="pv-tile-num">03</div>
+          <div class="pv-tile-name">視覺方向定調</div>
+          <div class="pv-tile-desc">Direction A vs B · 選定品牌視覺語言</div>
+        </div>
+        <div class="pv-tile">
+          <div class="pv-tile-num">04</div>
+          <div class="pv-tile-name">社群內容系統</div>
+          <div class="pv-tile-desc">社群規劃 · KOL 合作 · 廣告投放</div>
+        </div>
+        <div class="pv-tile">
+          <div class="pv-tile-num">05</div>
+          <div class="pv-tile-name">電商視覺落地</div>
+          <div class="pv-tile-desc">Amazon 首組圖 · A+ Content 全面重製</div>
+        </div>
+        <div class="pv-tile">
+          <div class="pv-tile-num">06</div>
+          <div class="pv-tile-name">新品開發方向</div>
+          <div class="pv-tile-desc">根據品牌定位延伸產品線規劃</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  
+  <!-- S5 REBRAND — Brand Identity System by Vetica -->
+  <div class="slide" id="s5">
+    <div class="hdr">
+      <div class="yr-badge">2024 H2 · Rebrand</div>
+      <h2>Brand Identity System</h2>
+    </div>
+    <div class="cols">
+      <div>
+        <div class="col-hd">Brand Core</div>
+        <div class="id-lbl">Identity</div><div class="id-val">The Elegant Healer</div>
+        <div class="id-lbl">Slogan</div><div class="id-val it">"Elegance is in the air."</div>
+        <div class="id-lbl" style="margin-bottom:10px">Core Values</div>
+        <div class="chips"><div class="chip">Elegant 優雅</div><div class="chip">Healing 療癒</div><div class="chip">Genuine 真誠</div></div>
+      </div>
+      <div>
+        <div class="col-hd">Visual Identity</div>
+        <div class="swatch-r"><div class="swatch" style="background:#C4B49A"></div><div><div class="sw-name">Dark Beige</div><div class="sw-hex">#C4B49A</div></div></div>
+        <div class="swatch-r"><div class="swatch" style="background:#EDE8E0;border-color:#ccc"></div><div><div class="sw-name">Light Beige</div><div class="sw-hex">#EDE8E0</div></div></div>
+        <div class="swatch-r"><div class="swatch" style="background:#3A3A3A"></div><div><div class="sw-name">Dark Grey</div><div class="sw-hex">#3A3A3A</div></div></div>
+        <div style="margin-top:18px"><div class="id-lbl" style="margin-bottom:8px">Typography</div>
+        <div style="font-size:14px;color:var(--dark-grey);margin-bottom:5px"><strong>Argue</strong> — Headline</div>
+        <div style="font-size:14px;color:var(--dark-grey)"><strong>Montserrat</strong> — Content</div></div>
+      </div>
+      <div>
+        <div class="col-hd">Tone of Voice</div>
+        <div class="tov-item">日常而詩意 · Daily yet poetic</div>
+        <div class="tov-item">以感官驅動 · Sensory driven</div>
+        <div class="tov-item">當下與同在 · Present &amp; mindful</div>
+        <div class="tov-item">避免誇大最高級語言</div>
+        <div class="tov-item">避免過度炫技的設計感</div>
+        <div class="s5q">"Let the day settle.<br>Let the scent rise."</div>
+      </div>
+    </div>
+  </div>
+
+<!-- S5c COMPETITIVE LANDSCAPE -->
+  <div class="slide" id="s5c">
+    <div><div class="label-tag">Brand Positioning · Market Analysis</div><h2>Competitive Landscape</h2></div>
+    <div class="map-wrap">
+      <div class="ax-h"></div>
+      <div class="ax-v"></div>
+      <div class="ax-lbl ax-top">Emotional</div>
+      <div class="ax-lbl ax-bottom">Functional</div>
+      <div class="ax-lbl ax-left">Low Price</div>
+      <div class="ax-lbl ax-right">High Price</div>
+      <div class="bd" style="top:74%;left:18%"><div class="bd-dot comp"></div><div class="bd-name">InnoGear</div></div>
+      <div class="bd" style="top:68%;left:60%"><div class="bd-dot comp"></div><div class="bd-name">Pura</div></div>
+      <div class="bd" style="top:13%;left:46%"><div class="bd-dot comp"></div><div class="bd-name">Vitruvi</div></div>
+      <div class="bd" style="top:20%;left:76%"><div class="bd-dot comp"></div><div class="bd-name">AromaTech</div></div>
+      <div class="bd" style="top:11%;left:87%"><div class="bd-dot ref"></div><div class="bd-name" style="color:rgba(196,180,154,.35)">AESOP / DIPTYQUE</div></div>
+      <!-- old position (2023) -->
+      <div class="bd" style="top:65%;left:37%">
+        <div class="bd-dot el-old"></div>
+        <div class="bd-name el-old">2023 起點</div>
+      </div>
+      <!-- arrow -->
+      <svg class="map-arrow-svg" viewBox="0 0 160 90" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <marker id="arrowhead" markerWidth="6" markerHeight="5" refX="5.5" refY="2.5" orient="auto">
+            <polygon points="0 0, 6 2.5, 0 5" fill="rgba(196,180,154,0.85)"/>
+          </marker>
+        </defs>
+        <line x1="60" y1="59" x2="97" y2="35"
+              stroke="rgba(196,180,154,0.7)" stroke-width="0.65" stroke-linecap="round"
+              marker-end="url(#arrowhead)"/>
+      </svg>
+      <!-- current target position (2026) -->
+      <div class="bd" style="top:36%;left:62%">
+        <div class="bd-dot el"></div>
+        <div class="bd-name el">Earnest Living</div>
+        <div class="bd-sub">→ 2026 定位</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S6b BRAND VALUES EVOLUTION -->
+  <div class="slide" id="s6b">
+    <div class="val-evo-wrap">
+      <div class="val-evo-left">
+        <div class="label-tag" style="color:rgba(196,180,154,.5);margin-bottom:20px">2024–2025 · Brand Strategy</div>
+        <div class="val-evo-title">Five<br>Brand<br>Values</div>
+        <p class="val-evo-note">競品圖揭示定位機會後，<br>在三核心基礎上新增兩個維度，<br>建立完整品牌定位框架。</p>
+      </div>
+      <div class="val-evo-right">
+        <!-- 2024 core values — small, subdued -->
+        <div class="val-group-2024">
+          <div class="val-group-yr">2024 · 品牌核心三值</div>
+          <div class="val-cards-3">
+            <div class="val-card s"><div class="val-num">01</div><div class="val-en">Elegant</div><div class="val-zh">優雅</div></div>
+            <div class="val-card s"><div class="val-num">02</div><div class="val-en">Healing</div><div class="val-zh">療癒</div></div>
+            <div class="val-card s"><div class="val-num">03</div><div class="val-en">Genuine</div><div class="val-zh">真誠</div></div>
+          </div>
+        </div>
+
+        <!-- Connector -->
+        <div class="val-connector">
+          <div class="val-connector-line"></div>
+          <div class="val-connector-label">競品分析 → 缺口延伸</div>
+          <div class="val-connector-line"></div>
+        </div>
+
+        <!-- 2025 new values — BIG, prominent, dark card -->
+        <div class="val-group-2025">
+          <div class="val-group-yr new">2025 · 新增差異化價值</div>
+          <div class="val-cards-2-big">
+            <div class="val-card-big">
+              <div class="val-big-num">04</div>
+              <div class="val-big-en">Craftsmanship</div>
+              <div class="val-big-zh">工藝</div>
+              <div class="val-big-note">鏤空陶瓷 · 手工設計感</div>
+            </div>
+            <div class="val-card-big">
+              <div class="val-big-num">05</div>
+              <div class="val-big-en">Sustainability</div>
+              <div class="val-big-zh">永續</div>
+              <div class="val-big-note">天然材質 · 低耗能設計</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  
+  
+  
+  <!-- S7 PERSONAS -->
+  <div class="slide" id="s7">
+    <div><div class="label-tag" style="color:var(--dark-grey)">2025 · Consumer Strategy</div><h2>Who We're Talking To</h2></div>
+    <div class="p-grid">
+      <div class="p-card">
+        <div class="p-head"><div class="p-photo"><img id="p-photo-l" alt="Lauren"></div><div class="p-name">Lauren</div><div class="p-type">Slow Living Mom</div></div>
+        <div class="p-body">
+          <div class="p-tags"><span class="p-tag">40–47</span><span class="p-tag">Social Worker</span><span class="p-tag">$60K</span><span class="p-tag">已婚有孩</span></div>
+          <div class="p-row"><div class="p-lbl">Core Drive</div><div class="p-val">自我療癒、日常儀式感、親近自然</div></div>
+          <div class="p-row"><div class="p-lbl">Discovery</div><div class="p-val">Amazon、Facebook 媽媽社群、Pinterest</div></div>
+          <div class="p-row"><div class="p-lbl">Purchase Driver</div><div class="p-val">外觀設計 + 療癒氛圍 + 媽媽社群口碑</div></div>
+        </div>
+      </div>
+      <div class="p-card">
+        <div class="p-head"><div class="p-photo"><img id="p-photo-c" alt="Claire"></div><div class="p-name">Claire</div><div class="p-type">Work Life Woman</div></div>
+        <div class="p-body">
+          <div class="p-tags"><span class="p-tag">35–42</span><span class="p-tag">Account Manager</span><span class="p-tag">$80K</span><span class="p-tag">芝加哥</span></div>
+          <div class="p-row"><div class="p-lbl">Core Drive</div><div class="p-val">下班後快速切換身心、美感與機能並重</div></div>
+          <div class="p-row"><div class="p-lbl">Discovery</div><div class="p-val">Instagram、Pinterest、Amazon 推薦</div></div>
+          <div class="p-row"><div class="p-lbl">Purchase Driver</div><div class="p-val">設計質感 + 操作簡單 + 品牌溫度</div></div>
+        </div>
+      </div>
+      <div class="p-card">
+        <div class="p-head"><div class="p-photo"><img id="p-photo-e" alt="Emily"></div><div class="p-name">Emily</div><div class="p-type">Soft Modern</div></div>
+        <div class="p-body">
+          <div class="p-tags"><span class="p-tag">28–34</span><span class="p-tag">Marketing Specialist</span><span class="p-tag">$50K</span><span class="p-tag">佛羅里達</span></div>
+          <div class="p-row"><div class="p-lbl">Core Drive</div><div class="p-val">小空間美學、情緒提升、環保意識</div></div>
+          <div class="p-row"><div class="p-lbl">Discovery</div><div class="p-val">Pinterest、eco influencers、Amazon</div></div>
+          <div class="p-row"><div class="p-lbl">Purchase Driver</div><div class="p-val">美感設計 + 情感共鳴 + 永續故事</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S_TRANSITION: CHAPTER BREAK Customer → Product -->
+  <div class="slide" id="s-transition">
+    <div class="pv-left">
+      <div class="pv-label">2025 · 執行期開始</div>
+      <div class="pv-headline">Now<br>We<br>Execute.</div>
+      <div class="pv-sub">品牌策略已確立，受眾也清楚——<br>接下來進入落地執行階段。</div>
+    </div>
+    <div class="pv-right" style="align-items:center;justify-content:center;padding:60px 72px 60px 40px;">
+      <div style="display:flex;flex-direction:column;gap:14px;width:100%;max-width:400px;">
+        <div style="font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(196,180,154,.4);margin-bottom:4px;">接下來三大執行主軸</div>
+        <!-- Tile 1 -->
+        <div style="display:flex;gap:18px;align-items:flex-start;padding:18px 22px;border:1px solid rgba(196,180,154,.15);border-left:3px solid rgba(196,180,154,.5);">
+          <div style="font-size:20px;color:var(--dark-beige);line-height:1;flex-shrink:0;padding-top:1px;">→</div>
+          <div>
+            <div style="font-size:15px;font-weight:500;color:var(--light-beige);margin-bottom:5px;">Product Strategy</div>
+            <div style="font-size:12px;color:rgba(237,232,224,.4);line-height:1.5;">四大產品線 · 三級定價架構</div>
+          </div>
+        </div>
+        <!-- Tile 2 -->
+        <div style="display:flex;gap:18px;align-items:flex-start;padding:18px 22px;border:1px solid rgba(196,180,154,.15);border-left:3px solid rgba(196,180,154,.5);">
+          <div style="font-size:20px;color:var(--dark-beige);line-height:1;flex-shrink:0;padding-top:1px;">→</div>
+          <div>
+            <div style="font-size:15px;font-weight:500;color:var(--light-beige);margin-bottom:5px;">Channel Strategy</div>
+            <div style="font-size:12px;color:rgba(237,232,224,.4);line-height:1.5;">Amazon · Etsy · Shopify 差異化布局</div>
+          </div>
+        </div>
+        <!-- Tile 3 -->
+        <div style="display:flex;gap:18px;align-items:flex-start;padding:18px 22px;border:1px solid rgba(196,180,154,.15);border-left:3px solid rgba(196,180,154,.5);">
+          <div style="font-size:20px;color:var(--dark-beige);line-height:1;flex-shrink:0;padding-top:1px;">→</div>
+          <div>
+            <div style="font-size:15px;font-weight:500;color:var(--light-beige);margin-bottom:5px;">Visual Strategy</div>
+            <div style="font-size:12px;color:rgba(237,232,224,.4);line-height:1.5;">電商主圖 · A+ Content · 社群視覺</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S8 PRODUCT ARCHITECTURE -->
+  <div class="slide exec-slide" id="s8">
+    <div class="pa-header">
+      <div class="label-tag">2025 · Product Strategy</div>
+      <h2 style="color:var(--dark-grey)">Product Architecture</h2>
+    </div>
+    <div class="pa-matrix">
+
+      <!-- TOP-LEFT CORNER -->
+      <div class="pa-corner"></div>
+
+      <!-- COLUMN GROUP HEADERS -->
+      <div class="pa-linegrp pa-grpend" style="grid-column:span 2">
+        <div class="pa-linename">Self Meditation</div>
+        <div class="pa-subsplit"><span>Routine</span><span>Specialty</span></div>
+      </div>
+      <div class="pa-linegrp pa-grpend" style="grid-column:span 2">
+        <div class="pa-linename">Portable</div>
+        <div class="pa-subsplit"><span>Routine</span><span>Specialty</span></div>
+      </div>
+      <div class="pa-linegrp pa-grpend" style="grid-column:span 2">
+        <div class="pa-linename">Sleep Aid</div>
+        <div class="pa-subsplit"><span>Routine</span><span>Specialty</span></div>
+      </div>
+      <div class="pa-linegrp">
+        <div class="pa-linename">Hand Craftsmanship</div>
+        <div class="pa-subsplit"><span>Specialty</span></div>
+      </div>
+
+      <!-- PREMIUM+ ROW -->
+      <div class="pa-tierlbl">
+        <div class="pa-tiername">Premium+</div>
+        <div class="pa-tierprice">$49.99–$99.99</div>
+        <div class="pa-tierdesc">頂級線</div>
+      </div>
+      <!-- SM Routine: MD03 -->
+      <div class="pa-cell pa-cell-has">
+        <img id="pa-md03" alt="MD03">
+        <div class="pa-cellname">MD03</div>
+      </div>
+      <!-- SM Specialty: PD03 -->
+      <div class="pa-cell pa-grpend pa-cell-has">
+        <img id="pa-pd03" alt="PD03">
+        <div class="pa-cellname">PD03</div>
+      </div>
+      <!-- Portable Routine/Specialty: empty -->
+      <div class="pa-cell"></div><div class="pa-cell pa-grpend"></div>
+      <!-- Sleep Aid Routine/Specialty: empty -->
+      <div class="pa-cell"></div><div class="pa-cell pa-grpend"></div>
+      <!-- HC Specialty: empty -->
+      <div class="pa-cell"></div>
+
+      <!-- PREMIUM ROW -->
+      <div class="pa-tierlbl">
+        <div class="pa-tiername">Premium</div>
+        <div class="pa-tierprice">$35.99–$59.99</div>
+        <div class="pa-tierdesc">精品線</div>
+      </div>
+      <!-- SM Routine: CD01 + MD02 -->
+      <div class="pa-cell pa-cell-has pa-cell-3">
+        <div class="pa-3imgs" style="grid-template-columns:1fr 1fr;">
+          <img id="pa-cd01" alt="CD01">
+          <img id="pa-md02" alt="MD02">
+        </div>
+        <div class="pa-cellname">CD01 · MD02</div>
+      </div>
+      <!-- SM Specialty: CBD01 -->
+      <div class="pa-cell pa-grpend pa-cell-has">
+        <img id="pa-cbd01" alt="CBD01">
+        <div class="pa-cellname">CBD01</div>
+      </div>
+      <!-- Portable Routine/Specialty: empty -->
+      <div class="pa-cell"></div><div class="pa-cell pa-grpend"></div>
+      <!-- Sleep Aid Routine/Specialty: empty -->
+      <div class="pa-cell"></div><div class="pa-cell pa-grpend"></div>
+      <!-- HC Specialty: empty -->
+      <div class="pa-cell"></div>
+
+      <!-- BASIC ROW -->
+      <div class="pa-tierlbl">
+        <div class="pa-tiername">Basic</div>
+        <div class="pa-tierprice">$26.99–$39.99</div>
+        <div class="pa-tierdesc">基礎線</div>
+      </div>
+      <!-- SM Routine: ROSD -->
+      <div class="pa-cell pa-cell-has">
+        <img id="pa-rosd" alt="ROSD">
+        <div class="pa-cellname">ROSD</div>
+      </div>
+      <!-- SM Specialty: CFD -->
+      <div class="pa-cell pa-cell-has pa-grpend">
+        <img id="pa-cfd" alt="CFD">
+        <div class="pa-cellname">CFD</div>
+      </div>
+      <!-- Portable Routine/Specialty: empty -->
+      <div class="pa-cell"></div><div class="pa-cell pa-grpend"></div>
+      <!-- Sleep Aid Routine/Specialty: empty -->
+      <div class="pa-cell"></div><div class="pa-cell pa-grpend"></div>
+      <!-- HC Specialty: empty -->
+      <div class="pa-cell"></div>
+
+    </div>
+  </div>
+
+
+
+  <!-- S13 CHANNEL STRATEGY -->
+  <div class="slide exec-slide" id="s13">
+    <div><div class="label-tag" style="color:var(--dark-grey)">2025 · Channel Strategy</div><h2>Go-to-Market · 三平台差異化通路布局</h2></div>
+    <div class="ch-timeline">
+      <div class="ch-tl-track">
+        <div class="ch-tl-line"></div>
+        <div class="ch-tl-pt">
+          <div class="ch-tl-dot"></div>
+          <div class="ch-tl-yr">2026 Q1</div>
+          <div class="ch-tl-txt">Shopify 籌備規劃中<br>倉儲金流架構建立</div>
+        </div>
+        <div class="ch-tl-pt">
+          <div class="ch-tl-dot"></div>
+          <div class="ch-tl-yr">2026 Q2</div>
+          <div class="ch-tl-txt">品牌內容深化<br>社群策略全面執行</div>
+        </div>
+        <div class="ch-tl-pt">
+          <div class="ch-tl-dot"></div>
+          <div class="ch-tl-yr">2026 Q4</div>
+          <div class="ch-tl-txt">線下通路擴張<br>Retail Bloom · VENDO</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ch-grid">
+      <div class="ch-card primary"><div class="ch-icon">AMZ</div><div class="ch-name">Amazon</div><div class="ch-sub">大眾市場 · 設計感家庭</div><div class="ch-desc">建立品牌初步認知，以親民設計觸及大眾消費者。CD01 系列守住 Top 50 基本盤，逐步向上建立品牌形象。</div><div class="ch-prod">核心：CD01 · MD Series · Gifting Sets</div></div>
+      <div class="ch-card"><div class="ch-icon">ETY</div><div class="ch-name">Etsy</div><div class="ch-sub">利基市場 · 手工感愛好者</div><div class="ch-desc">Hand Craftsmanship 線的市場前哨站，測試設計接受度與轉化率。</div><div class="ch-prod">核心：Artisanal · Limited Design</div></div>
+      <div class="ch-card"><div class="ch-icon">DTC</div><div class="ch-name">Shopify</div><div class="ch-sub">高收入 · 家居品味族群</div><div class="ch-desc">品牌 DTC 官網，展示高端限定產品線，正積極籌備啟動中。</div><div class="ch-prod">核心：Limited · Premium · Artisanal</div></div>
+    </div>
+  </div>
+
+  <!-- S9 DIRECTION A vs B -->
+  <div class="slide exec-slide" id="s9">
+    <div class="dir-header">
+      <div class="label-tag">2026 · Visual Strategy</div>
+      <div class="dir-header-title">電商主圖與社群內容製作前，先選定品牌視覺方向</div>
+    </div>
+    <div class="dir-panel dir-a">
+      <div class="dir-imgs">
+        <div class="dir-img-cell"><img src="" id="dir-a-img1" alt="Direction A ref 1"></div>
+      </div>
+      <div class="dir-lbl">Direction A · Not Selected</div>
+      <div class="dir-title">Daily<br>Healing Ritual</div>
+      <div class="ref-chips">
+        <span class="ref-chip" style="color:rgba(58,58,58,.4);border-color:rgba(58,58,58,.25)">SKANDINAVISK</span>
+        <span class="ref-chip" style="color:rgba(58,58,58,.4);border-color:rgba(58,58,58,.25)">VERSO</span>
+        <span class="ref-chip" style="color:rgba(58,58,58,.4);border-color:rgba(58,58,58,.25)">KERZON</span>
+      </div>
+      <div class="kw-list">
+        <div class="kw-item" style="color:rgba(58,58,58,.6)">治癒 / 日常感 / 心理療癒</div>
+        <div class="kw-item" style="color:rgba(58,58,58,.6)">自然色調、生活情境主導</div>
+        <div class="kw-item" style="color:rgba(58,58,58,.6)">觸感視覺、無格柵感</div>
+      </div>
+    </div>
+    <div class="dir-panel dir-b">
+      <div class="sel-badge">SELECTED DIRECTION</div>
+      <div class="dir-imgs">
+        <div class="dir-img-cell"><img src="" id="dir-b-img2" alt="Direction B ref 2"></div>
+      </div>
+      <div class="dir-lbl">Chosen Direction</div>
+      <div class="dir-title">Artistic<br>Elegance</div>
+      <div class="ref-chips">
+        <span class="ref-chip">AESOP</span><span class="ref-chip">BAMFORD</span>
+        <span class="ref-chip">DIPTYQUE</span><span class="ref-chip">LALIQUE</span><span class="ref-chip">GINORI</span>
+      </div>
+      <div class="kw-list">
+        <div class="kw-item">藝術性 / 精品設計感 / 生活美學</div>
+        <div class="kw-item">設計感強烈、藝術敘事優先</div>
+        <div class="kw-item">以藝術為主、生活場景為輔</div>
+      </div>
+    </div>
+  </div>
+
+    <!-- S10 CD01 NINE-GRID -->
+  <div class="slide ng-slide" id="s10">
+    <div class="ng-header"><h2>CD01-100ML · Amazon Visual 2026</h2><span class="ng-sub">Main Listing Images · 9 Shots</span></div>
+    <div class="ng-grid">
+      <div class="ng-cell"><img id="ng-cd01-1" alt="CD01 1"></div>
+      <div class="ng-cell"><img id="ng-cd01-2" alt="CD01 2"></div>
+      <div class="ng-cell"><img id="ng-cd01-3" alt="CD01 3"></div>
+      <div class="ng-cell"><img id="ng-cd01-4" alt="CD01 4"></div>
+      <div class="ng-cell"><img id="ng-cd01-5" alt="CD01 5"></div>
+      <div class="ng-cell"><img id="ng-cd01-6" alt="CD01 6"></div>
+      <div class="ng-cell"><img id="ng-cd01-7" alt="CD01 7"></div>
+      <div class="ng-cell"><img id="ng-cd01-8" alt="CD01 8"></div>
+      <div class="ng-cell"><img id="ng-cd01-9" alt="CD01 9"></div>
+    </div>
+  </div>
+
+  <!-- S11 MD02 NINE-GRID -->
+  <div class="slide ng-slide" id="s11">
+    <div class="ng-header"><h2>MD02-100ML · Amazon Visual 2026</h2><span class="ng-sub">Main Listing Images · 8 Product Shots</span></div>
+    <div class="ng-grid">
+      <div class="ng-cell"><img id="ng-md02-1" alt="MD02 1"></div>
+      <div class="ng-cell"><img id="ng-md02-2" alt="MD02 2"></div>
+      <div class="ng-cell"><img id="ng-md02-3" alt="MD02 3"></div>
+      <div class="ng-cell"><img id="ng-md02-4" alt="MD02 4"></div>
+      <div class="ng-cell"><img id="ng-md02-5" alt="MD02 5"></div>
+      <div class="ng-cell"><img id="ng-md02-6" alt="MD02 6"></div>
+      <div class="ng-cell"><img id="ng-md02-7" alt="MD02 7"></div>
+      <div class="ng-cell"><img id="ng-md02-8" alt="MD02 8"></div>
+      <div class="ng-cell ng-empty-cell"></div>
+    </div>
+  </div>
+
+  <!-- S12 A+ CONTENT (CD01 + MD02) -->
+  <div class="slide" id="s12">
+    <div class="aplus-header">
+      <h2>A+ Content · 2026</h2>
+      <span class="ng-sub">Amazon Enhanced Brand Content · Premium Line</span>
+    </div>
+    <div class="aplus-dual-wrap">
+      <div class="aplus-dual-item">
+        <div class="aplus-dual-lbl">CD01-100ML</div>
+        <div class="aplus-dual-img"><img id="aplus-cd01" alt="CD01 A+"></div>
+      </div>
+      <div class="aplus-dual-item">
+        <div class="aplus-dual-lbl">MD02-100ML</div>
+        <div class="aplus-dual-img"><img id="aplus-md02" alt="MD02 A+"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S9b SOCIAL PLANNING -->
+  <div class="slide exec-slide" id="s9b">
+    <!-- 左：標題 + 現況分析 -->
+    <div class="soc-left">
+      <div class="label-tag" style="color:var(--dark-grey)">2026 · Social Media Visual</div>
+      <div class="accent-bar" style="background:var(--dark-beige)"></div>
+      <h2 style="color:var(--dark-grey);margin-bottom:20px;font-size:clamp(20px,2.2vw,32px)">社群視覺落地</h2>
+      <div class="soc-insight">
+        <div class="soc-insight-title">現況分析</div>
+        <ul class="soc-insight-pts">
+          <li>以產品形象照及概念性圖片為主</li>
+          <li>排版風格較有藝廊感</li>
+          <li>貼文內容較詩意 / 互動性較少</li>
+        </ul>
+      </div>
+    </div>
+    <!-- 中：IG Mockup 主角 -->
+    <div class="soc-center">
+      <img id="ig-social-img" alt="Social Media Planning"
+           style="max-width:420px; width:100%; display:block;
+                  box-shadow:0 4px 24px rgba(58,58,58,.15);
+                  image-rendering:-webkit-optimize-contrast;
+                  filter:contrast(1.1) saturate(1.08) sharpen(0);
+                  border-radius:2px;">
+    </div>
+    <!-- 右：小型輔助 Vermeer 貼文 -->
+    <div class="soc-right">
+      <div class="art-post-card">
+        <div style="margin:-14px -14px 0; overflow:hidden; background:#f5f0e8;">
+          <img id="vermeer-img" alt="" style="width:100%;display:block;object-fit:contain;filter:contrast(1.06) saturate(1.04);">
+        </div>
+        <div class="art-post-type" style="margin-top:10px;font-size:8px;">幽默互動貼文 · 提案方向</div>
+        <div class="art-post-footer" style="margin-top:8px;padding-top:8px;font-size:9px;">美學不只是畫布上的色彩，更是環境氛圍的總和 · Earnest Living</div>
+      </div>
+      <div style="font-size:11px;color:rgba(58,58,58,.55);line-height:1.7;padding-top:8px;">
+        藝術趣味貼文輔助增加互動性與觸及率。
+      </div>
+    </div>
+  </div>
+
+
+
+<!-- S-RECAP Brand Strategy Summary -->
+  <div class="slide" id="s-recap" style="background:var(--dark-grey);display:flex;flex-direction:column;padding:56px 72px;justify-content:center;gap:0;">
+
+    <!-- Header -->
+    <div style="flex-shrink:0;margin-bottom:32px;">
+      <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(196,180,154,.4);margin-bottom:10px;">Brand Transformation Recap · 2023 → 2026</div>
+      <div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(28px,3.2vw,42px);font-weight:300;color:var(--light-beige);line-height:1.1;">策略總覽</div>
+      <div style="width:48px;height:1px;background:rgba(196,180,154,.35);margin-top:14px;"></div>
+    </div>
+
+    <!-- 6-card grid -->
+    <div style="flex:1;min-height:0;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:1fr 1fr;gap:16px;">
+
+      <!-- Card 1: Brand Identity -->
+      <div style="padding:20px 22px;border:1px solid rgba(196,180,154,.12);border-top:2px solid var(--dark-beige);display:flex;flex-direction:column;gap:6px;text-align:center;align-items:center;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dark-beige);text-align:center;width:100%;">Brand Identity</div>
+        <div style="font-size:16px;font-weight:500;color:var(--light-beige);line-height:1.2;margin-top:2px;">The Elegant<br>Healer</div>
+        <div style="font-size:12px;color:rgba(237,232,224,.42);line-height:1.65;margin-top:4px;">"Elegance is in the air."<br>Vetica × Earnest Living 2024 H2</div>
+      </div>
+
+      <!-- Card 2: Product Architecture -->
+      <div style="padding:20px 22px;border:1px solid rgba(196,180,154,.12);border-top:2px solid var(--dark-beige);display:flex;flex-direction:column;gap:6px;text-align:center;align-items:center;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dark-beige);text-align:center;width:100%;">Product Architecture</div>
+        <div style="font-size:16px;font-weight:500;color:var(--light-beige);margin-top:2px;">4 Lines · 3 Tiers</div>
+        <div style="font-size:10px;color:rgba(237,232,224,.38);line-height:1.65;margin-top:4px;">Self Meditation · Portable<br>Sleep Aid · Hand Craftsmanship<br>Premium+ / Premium / Basic</div>
+      </div>
+
+      <!-- Card 3: Channel Strategy -->
+      <div style="padding:20px 22px;border:1px solid rgba(196,180,154,.12);border-top:2px solid var(--dark-beige);display:flex;flex-direction:column;gap:6px;text-align:center;align-items:center;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dark-beige);text-align:center;width:100%;">Channel Strategy</div>
+        <div style="font-size:16px;font-weight:500;color:var(--light-beige);margin-top:2px;">3-Platform Strategy</div>
+        <div style="font-size:10px;color:rgba(237,232,224,.38);line-height:1.65;margin-top:4px;">Amazon · Core Sales Channel<br>Etsy · Niche Design Market<br>Shopify · Brand DTC</div>
+      </div>
+
+      <!-- Card 4: Visual Strategy -->
+      <div style="padding:20px 22px;border:1px solid rgba(196,180,154,.12);border-top:2px solid var(--dark-beige);display:flex;flex-direction:column;gap:6px;text-align:center;align-items:center;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dark-beige);text-align:center;width:100%;">Visual Strategy</div>
+        <div style="font-size:16px;font-weight:500;color:var(--light-beige);margin-top:2px;">Artistic Elegance</div>
+        <div style="font-size:10px;color:rgba(237,232,224,.38);line-height:1.65;margin-top:4px;">2026 Direction Selected<br>Amazon 9-Shot Listing System<br>A+ Content Premium Line</div>
+      </div>
+
+      <!-- Card 5: Core Customers -->
+      <div style="padding:20px 22px;border:1px solid rgba(196,180,154,.12);border-top:2px solid var(--dark-beige);display:flex;flex-direction:column;gap:6px;text-align:center;align-items:center;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dark-beige);text-align:center;width:100%;">Core Customers</div>
+        <div style="font-size:16px;font-weight:500;color:var(--light-beige);margin-top:2px;">3 Personas</div>
+        <div style="font-size:10px;color:rgba(237,232,224,.38);line-height:1.65;margin-top:4px;">Lauren · Wellness Ritualist<br>Claire · Solo Traveller<br>Emily · Design Collector</div>
+      </div>
+
+      <!-- Card 6: Social & Growth -->
+      <div style="padding:20px 22px;border:1px solid rgba(196,180,154,.12);border-top:2px solid var(--dark-beige);display:flex;flex-direction:column;gap:6px;text-align:center;align-items:center;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dark-beige);text-align:center;width:100%;">Social & Growth</div>
+        <div style="font-size:16px;font-weight:500;color:var(--light-beige);margin-top:2px;">KOL + Instagram</div>
+        <div style="font-size:10px;color:rgba(237,232,224,.38);line-height:1.65;margin-top:4px;">KOL Campaign · 2024<br>Instagram Strategy · 2026<br>New Product Launch · 2026 Q3</div>
+      </div>
+
+    </div>
+
+  </div>
+
+    <!-- S-APPENDIX -->
+  <div class=slide id=s-appendix style="background:var(--dark-grey);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;">
+    <div style="font-size:10px;letter-spacing:3px;color:rgba(196,180,154,.4);text-transform:uppercase">Appendix</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;color:var(--light-beige);line-height:1.1;text-align:center">補充資料</div>
+    <div style="width:40px;height:1px;background:rgba(196,180,154,.3)"></div>
+    <div style="font-size:12px;color:rgba(237,232,224,.4);text-align:center;line-height:1.8">KOL Campaign · 2024<br>Instagram Strategy<br>New Product Development Proposal</div>
+  </div>
+
+
+  <!-- S-KOL-COVER Appendix A: KOL Campaign overview -->
+  <div class="slide" id="s-kol-cover" style="background:var(--dark-grey);display:flex;flex-direction:column;align-items:center;justify-content:center;">
+    <div style="text-align:center;max-width:640px;">
+      <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(196,180,154,.4);margin-bottom:24px">Appendix · A</div>
+      <div style="font-family:'Argue','Cormorant Garamond',Georgia,serif;font-size:clamp(52px,6vw,82px);font-weight:400;color:var(--light-beige);line-height:1.02;letter-spacing:.02em;">KOL<br>Campaign</div>
+      <div style="width:40px;height:1px;background:rgba(196,180,154,.3);margin:28px auto;"></div>
+      <div style="font-size:12px;color:rgba(237,232,224,.4);letter-spacing:1.5px;line-height:2.0">2023 Q4 – 2024 Full Year · Influencer Strategy<br>$115,000 Investment · 19 KOLs · 9.5M+ Impressions</div>
+    </div>
+  </div>
+
+  <!-- S4 KOL STRATEGY OVERVIEW -->
+  <div class="slide" id="s4">
+    <!-- Left: Budget & timeline -->
+    <div class="left">
+      <div class="label-tag" style="color:var(--dark-grey)">2023 Q4 – 2024 · KOL Investment</div>
+      <h2 style="margin-top:20px;">Influencer Strategy<br>& Categories</h2>
+      <div style="margin-top:24px; display:flex; flex-direction:column; gap:10px;">
+        <!-- Phase 1 -->
+        <div style="padding:14px 18px; background:rgba(58,58,58,.06); border-left:3px solid var(--dark-beige);">
+          <div style="font-size:9px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--dark-beige); margin-bottom:5px;">Phase 1 · 2023 Q4</div>
+          <div style="font-size:14px; font-weight:600; color:var(--dark-grey); margin-bottom:2px;">The Influencer Marketing Factory</div>
+          <div style="font-size:12px; color:rgba(58,58,58,.5);">TikTok · 6 KOLs · 9.4M combined followers</div>
+          <div style="font-size:18px; font-weight:700; color:var(--dark-grey); margin-top:6px;">$15,000</div>
+        </div>
+        <!-- Phase 2 -->
+        <div style="padding:14px 18px; background:rgba(58,58,58,.06); border-left:3px solid rgba(58,58,58,.35);">
+          <div style="font-size:9px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(58,58,58,.5); margin-bottom:5px;">Phase 2 · 2024 Full Year</div>
+          <div style="font-size:14px; font-weight:600; color:var(--dark-grey); margin-bottom:2px;">Viral Nation</div>
+          <div style="font-size:12px; color:rgba(58,58,58,.5);">IG + TikTok + Meta · 13 KOLs · 7 Activations</div>
+          <div style="font-size:18px; font-weight:700; color:var(--dark-grey); margin-top:6px;">$100,000</div>
+        </div>
+        <!-- Total -->
+        <div style="padding:12px 18px; background:var(--dark-beige); display:flex; justify-content:space-between; align-items:center;">
+          <div style="font-size:9px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--dark-grey);">Total Investment</div>
+          <div style="font-size:22px; font-weight:700; color:var(--dark-grey);">$115,000</div>
+        </div>
+      </div>
+    </div>
+    <!-- Right: Categories + KOL thumbnails -->
+    <div class="right">
+      <div class="label-tag">KOL 分類 · Influencer Categories</div>
+      <div class="accent-bar" style="margin-bottom:14px;"></div>
+      <div style="display:flex; flex-wrap:wrap; gap:7px; margin-bottom:16px; flex-shrink:0;">
+        <span style="font-size:9px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; padding:5px 11px; border:1px solid rgba(196,180,154,.4); color:var(--dark-beige);">Mom Creator</span>
+        <span style="font-size:9px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; padding:5px 11px; border:1px solid rgba(196,180,154,.4); color:var(--dark-beige);">Interior &amp; Home</span>
+        <span style="font-size:9px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; padding:5px 11px; border:1px solid rgba(196,180,154,.4); color:var(--dark-beige);">Lifestyle</span>
+        <span style="font-size:9px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; padding:5px 11px; border:1px solid rgba(196,180,154,.4); color:var(--dark-beige);">ASMR · Product Demo</span>
+        <span style="font-size:9px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; padding:5px 11px; border:1px solid rgba(196,180,154,.4); color:var(--dark-beige);">Beauty · Wellness</span>
+        <span style="font-size:9px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; padding:5px 11px; border:1px solid rgba(196,180,154,.4); color:var(--dark-beige);">Fitness · Health</span>
+      </div>
+      <div style="font-size:9px; letter-spacing:2px; text-transform:uppercase; color:rgba(196,180,154,.4); margin-bottom:8px; flex-shrink:0;">KOL Roster · 19 Influencers Total</div>
+      <div style="flex:1; min-height:0;">
+        <div style="display:grid; grid-template-columns:repeat(4,1fr); grid-template-rows:1fr 1fr; gap:6px; height:100%;">
+          <div class="kol-thumb"><img id="kol-t1" alt="KOL 1"><div class="kol-thumb-lbl">Beauty · Skincare</div></div>
+          <div class="kol-thumb"><img id="kol-t2" alt="KOL 2"><div class="kol-thumb-lbl">Lifestyle · WFH</div></div>
+          <div class="kol-thumb"><img id="kol-t3" alt="KOL 3"><div class="kol-thumb-lbl">Home Decor</div></div>
+          <div class="kol-thumb"><img id="kol-t4" alt="KOL 4"><div class="kol-thumb-lbl">Mom · Cozy</div></div>
+          <div class="kol-thumb"><img id="kol-t5" alt="KOL 5"><div class="kol-thumb-lbl">Interior</div></div>
+          <div class="kol-thumb"><img id="kol-t6" alt="KOL 6"><div class="kol-thumb-lbl">ASMR</div></div>
+          <div class="kol-thumb"><img id="kol-t7" alt="KOL 7"><div class="kol-thumb-lbl">Fashion</div></div>
+          <div class="kol-thumb"><img id="kol-t8" alt="KOL 8"><div class="kol-thumb-lbl">Family</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S4b VIRAL NATION RESULTS -->
+  <div class="slide" id="s4b">
+    <!-- Left: Awareness overview (organic + paid condensed) -->
+    <div class="vn-panel left-p">
+      <div class="label-tag" style="color:var(--dark-beige)">2024 · Viral Nation · Campaign Overview</div>
+      <div class="accent-bar"></div>
+      <div class="vn-big">9.5M+</div>
+      <div class="vn-big-lbl">Total Impressions & Reach</div>
+      <!-- Compact stat rows -->
+      <div style="display:flex; flex-direction:column; gap:0; margin-bottom:22px;">
+        <div style="display:flex; justify-content:space-between; padding:11px 0; border-bottom:1px solid rgba(196,180,154,.1);">
+          <div style="font-size:11px; color:rgba(237,232,224,.5);">Organic Accounts Reached</div>
+          <div style="font-size:16px; font-weight:600; color:var(--light-beige);">1.6M</div>
+        </div>
+        <div style="display:flex; justify-content:space-between; padding:11px 0; border-bottom:1px solid rgba(196,180,154,.1);">
+          <div style="font-size:11px; color:rgba(237,232,224,.5);">Organic Views</div>
+          <div style="font-size:16px; font-weight:600; color:var(--light-beige);">1.1M</div>
+        </div>
+        <div style="display:flex; justify-content:space-between; padding:11px 0; border-bottom:1px solid rgba(196,180,154,.1);">
+          <div style="font-size:11px; color:rgba(237,232,224,.5);">Avg Engagement Rate</div>
+          <div style="font-size:16px; font-weight:600; color:var(--light-beige);">4.22%</div>
+        </div>
+        <div style="display:flex; justify-content:space-between; padding:11px 0; border-bottom:1px solid rgba(196,180,154,.1);">
+          <div style="font-size:11px; color:rgba(237,232,224,.5);">Meta Paid Impressions <span style="font-size:9px; color:rgba(196,180,154,.4);">$24K spend</span></div>
+          <div style="font-size:16px; font-weight:600; color:var(--light-beige);">7.9M</div>
+        </div>
+        <div style="display:flex; justify-content:space-between; padding:11px 0; border-bottom:1px solid rgba(196,180,154,.1);">
+          <div style="font-size:11px; color:rgba(237,232,224,.5);">Meta Video Views</div>
+          <div style="font-size:16px; font-weight:600; color:var(--light-beige);">5.15M</div>
+        </div>
+        <div style="display:flex; justify-content:space-between; padding:11px 0;">
+          <div style="font-size:11px; color:rgba(237,232,224,.5);">CPV · CPM</div>
+          <div style="font-size:16px; font-weight:600; color:var(--light-beige);">$0.0047 · $3.04</div>
+        </div>
+      </div>
+      <div class="vn-insight">
+        13 KOLs · 26 Posts · 7 Activations<br>
+        母親節 · Prime Day · 聖誕節 · IG + TikTok + Meta
+      </div>
+    </div>
+    <!-- Right: Amazon Attribution as main focus -->
+    <div class="vn-panel">
+      <div class="label-tag" style="color:var(--dark-beige)">Amazon Attribution · 實際轉化成效</div>
+      <div class="accent-bar"></div>
+      <!-- Funnel -->
+      <div style="display:flex; flex-direction:column; gap:0; margin-bottom:24px;">
+        <div style="display:flex; align-items:center; gap:16px; padding:14px 0; border-bottom:1px solid rgba(196,180,154,.1);">
+          <div style="font-size:9px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:rgba(196,180,154,.4); width:24px; text-align:center;">01</div>
+          <div style="flex:1; font-size:12px; color:rgba(237,232,224,.5);">Click-throughs</div>
+          <div style="font-size:28px; font-weight:600; color:var(--light-beige); line-height:1;">1,665</div>
+        </div>
+        <div style="display:flex; align-items:center; gap:16px; padding:14px 0; border-bottom:1px solid rgba(196,180,154,.1);">
+          <div style="font-size:9px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:rgba(196,180,154,.4); width:24px; text-align:center;">02</div>
+          <div style="flex:1; font-size:12px; color:rgba(237,232,224,.5);">Detail Page Views</div>
+          <div style="font-size:28px; font-weight:600; color:var(--light-beige); line-height:1;">2,609</div>
+        </div>
+        <div style="display:flex; align-items:center; gap:16px; padding:14px 0; border-bottom:1px solid rgba(196,180,154,.1);">
+          <div style="font-size:9px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:rgba(196,180,154,.4); width:24px; text-align:center;">03</div>
+          <div style="flex:1; font-size:12px; color:rgba(237,232,224,.5);">Add to Cart</div>
+          <div style="font-size:28px; font-weight:600; color:var(--light-beige); line-height:1;">68</div>
+        </div>
+        <div style="display:flex; align-items:center; gap:16px; padding:14px 0; border-bottom:1px solid rgba(196,180,154,.25); background:rgba(196,180,154,.06); margin:0 -8px; padding:14px 8px;">
+          <div style="font-size:9px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--dark-beige); width:24px; text-align:center;">04</div>
+          <div style="flex:1; font-size:12px; color:rgba(237,232,224,.7);">Purchases</div>
+          <div style="font-size:36px; font-weight:700; color:var(--dark-beige); line-height:1;">12</div>
+        </div>
+        <div style="display:flex; align-items:center; gap:16px; padding:14px 8px; background:rgba(196,180,154,.06); margin:0 -8px; border-bottom:1px solid rgba(196,180,154,.15);">
+          <div style="font-size:9px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--dark-beige); width:24px; text-align:center;">05</div>
+          <div style="flex:1; font-size:12px; color:rgba(237,232,224,.7);">Product Sales</div>
+          <div style="font-size:36px; font-weight:700; color:var(--dark-beige); line-height:1;">$414</div>
+        </div>
+      </div>
+      <!-- Campaign breakdown compact -->
+      <div style="display:flex; flex-direction:column; gap:6px;">
+        <div style="font-size:9px; letter-spacing:2px; text-transform:uppercase; color:rgba(196,180,154,.4); margin-bottom:4px;">Best Performing Campaigns</div>
+        <div style="display:flex; justify-content:space-between; font-size:11px; color:rgba(237,232,224,.55); padding:6px 0; border-bottom:1px solid rgba(196,180,154,.08);">
+          <span>Prime Day · Instagram</span>
+          <span style="color:var(--dark-beige);">7 purchases · $252.90</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; font-size:11px; color:rgba(237,232,224,.55); padding:6px 0; border-bottom:1px solid rgba(196,180,154,.08);">
+          <span>Mother's Day · Instagram</span>
+          <span style="color:var(--dark-beige);">3 purchases · $75.97</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; font-size:11px; color:rgba(237,232,224,.55); padding:6px 0;">
+          <span>Aug Non-seasonal · Instagram</span>
+          <span style="color:var(--dark-beige);">1 purchase · $39.55</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- S-IG SOCIAL STRATEGY COVER (Appendix C) -->
+  <div class="slide" id="s-ig" style="background:var(--dark-grey);display:flex;flex-direction:column;align-items:center;justify-content:center;">
+    <div style="text-align:center;max-width:640px;">
+      <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(196,180,154,.4);margin-bottom:24px">Appendix · C</div>
+      <div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(44px,5.5vw,70px);font-weight:300;color:var(--light-beige);line-height:1.05;letter-spacing:.02em;">社群<br>規劃</div>
+      <div style="width:40px;height:1px;background:rgba(196,180,154,.3);margin:28px auto;"></div>
+      <div style="font-size:12px;color:rgba(237,232,224,.4);text-align:center;line-height:1.8">Instagram · 2024 · Social Strategy</div>
+    </div>
+  </div>
+
+    <!-- S4c CHRISTMAS BFCM CAMPAIGN -->
+  <div class="slide" id="s4c">
+    <!-- Left: Social Post -->
+    <div class="bfcm-left">
+      <div class="bfcm-left-top">
+        <div class="label-tag" style="color:var(--dark-beige)">2024 · Christmas · BFCM</div>
+        <div class="accent-bar"></div>
+        <div style="font-family:'Cormorant Garamond',Georgia,serif; font-size:26px; font-style:italic; color:var(--light-beige); line-height:1.3; margin-bottom:6px">節慶社群搭配<br>廣告整合行銷</div>
+        <div style="font-size:11px; color:rgba(237,232,224,.4); line-height:1.7">Instagram 貼文 × Facebook 付費廣告<br>雙管道觸及美國消費者</div>
+      </div>
+      <div class="bfcm-post-wrap">
+        <img id="bfcm-post" alt="BFCM Instagram Campaign Post">
+      </div>
+      <div class="bfcm-caption">Instagram Campaign Post · Black Friday</div>
+    </div>
+    <!-- Right: Ad Performance -->
+    <div class="bfcm-right">
+      <div>
+        <div class="label-tag" style="color:rgba(196,180,154,.55)">Facebook Paid Ad Results · USA · Christmas 2024</div>
+        <div class="accent-bar" style="margin:12px 0 0"></div>
+      </div>
+      <div class="bfcm-ads-row">
+        <!-- Ad 1 -->
+        <div class="bfcm-ad-card">
+          <div class="bfcm-ad-img-wrap"><img id="bfcm-ad1" alt="Ad Creative A"></div>
+          <div class="bfcm-ad-body">
+            <div class="bfcm-ad-tag">Creative A · 白底清晰版</div>
+            <div class="bfcm-ad-metrics">
+              <div><div class="bfcm-ad-num">1,621</div><div class="bfcm-ad-lbl">Reach</div></div>
+              <div><div class="bfcm-ad-num">1,730</div><div class="bfcm-ad-lbl">Impressions</div></div>
+              <div><div class="bfcm-ad-num">13</div><div class="bfcm-ad-lbl">Website Visits</div></div>
+              <div><div class="bfcm-ad-num">$1.54</div><div class="bfcm-ad-lbl">Cost / Visit</div></div>
+            </div>
+            <div class="bfcm-ad-foot">Spend $20 · 4 days · 🇺🇸 USA</div>
+          </div>
+        </div>
+        <!-- Ad 2 -->
+        <div class="bfcm-ad-card">
+          <div class="bfcm-ad-img-wrap"><img id="bfcm-ad2" alt="Ad Creative B"></div>
+          <div class="bfcm-ad-body">
+            <div class="bfcm-ad-tag">Creative B · 情境光影版</div>
+            <div class="bfcm-ad-metrics">
+              <div><div class="bfcm-ad-num">1,845</div><div class="bfcm-ad-lbl">Reach</div></div>
+              <div><div class="bfcm-ad-num">2,063</div><div class="bfcm-ad-lbl">Impressions</div></div>
+              <div><div class="bfcm-ad-num">14</div><div class="bfcm-ad-lbl">Website Visits</div></div>
+              <div><div class="bfcm-ad-num">$1.43</div><div class="bfcm-ad-lbl">Cost / Visit</div></div>
+            </div>
+            <div class="bfcm-ad-foot">Spend $20 · 4 days · 🇺🇸 USA</div>
+          </div>
+        </div>
+      </div>
+      <!-- Combined Totals -->
+      <div class="bfcm-total-bar">
+        <div class="bfcm-total-item"><div class="bfcm-total-num">3,466</div><div class="bfcm-total-lbl">Combined Reach</div></div>
+        <div class="bfcm-total-item"><div class="bfcm-total-num">3,793</div><div class="bfcm-total-lbl">Impressions</div></div>
+        <div class="bfcm-total-item"><div class="bfcm-total-num">27</div><div class="bfcm-total-lbl">Website Visits</div></div>
+        <div class="bfcm-total-item"><div class="bfcm-total-num">$40</div><div class="bfcm-total-lbl">Total Spend</div></div>
+        <div class="bfcm-total-item"><div class="bfcm-total-num">$1.48</div><div class="bfcm-total-lbl">Avg Cost / Visit</div></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- S-PORTABLE-COVER Appendix B cover -->
+  <div class="slide" id="s-portable-cover" style="background:var(--dark-grey);display:flex;flex-direction:column;align-items:center;justify-content:center;">
+    <div style="text-align:center;max-width:640px;">
+      <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(196,180,154,.4);margin-bottom:24px">Appendix · B</div>
+      <div style="font-family:'Argue','Cormorant Garamond',Georgia,serif;font-size:clamp(44px,5.5vw,70px);font-weight:400;color:var(--light-beige);line-height:1.05;letter-spacing:.02em;">便攜型<br>新品開發</div>
+      <div style="width:40px;height:1px;background:rgba(196,180,154,.3);margin:28px auto;"></div>
+      <div style="font-size:12px;color:rgba(237,232,224,.4);letter-spacing:1.5px;line-height:2.0">市場分析 · 產品定義 · 開發提案<br>Portable Product Line · 2026 Q3 Launch Plan</div>
+    </div>
+  </div>
+
+  <!-- S-PORTABLE 便攜型新品提案 — Research + Brief + Proposal -->
+  <div class="slide" id="s-portable" style="display:grid;grid-template-columns:1fr 1fr;">
+
+    <!-- Left: 分析過程 + 設計 Brief -->
+    <div style="background:var(--light-beige);padding:48px 52px;display:flex;flex-direction:column;justify-content:flex-start;padding-top:72px;gap:28px;overflow:hidden;">
+      <div style="padding-bottom:24px;">
+        <div class="label-tag" style="color:var(--dark-grey)">Appendix · B · 便攜型旅行系列</div>
+        <div class="accent-bar" style="background:rgba(58,58,58,.25);margin-bottom:12px;"></div>
+        <h2 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(20px,2.6vw,34px);font-weight:300;color:var(--dark-grey);line-height:1.2;">如何分析市場<br>並落地設計 Brief</h2>
+      </div>
+
+      <!-- Market Research: 3 key points -->
+      <div>
+        <div style="font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--dark-grey);padding-bottom:8px;border-bottom:1px solid rgba(58,58,58,.15);margin-bottom:11px;">Market Research · 市場研究</div>
+        <div style="display:flex;flex-direction:column;gap:9px;">
+          <div style="display:flex;gap:12px;align-items:flex-start;">
+            <div style="font-size:9px;color:var(--dark-beige);font-weight:700;flex-shrink:0;padding-top:2px;min-width:22px;letter-spacing:.5px">01</div>
+            <div style="font-size:11.5px;color:rgba(58,58,58,.72);line-height:1.6;"><strong style="color:var(--dark-grey);">搜尋趨勢驗證機會：</strong>Portable diffuser 搜尋量持續攀升，Waterless 格式強勁成長，旅行健康意識持續驅動品類需求</div>
+          </div>
+          <div style="display:flex;gap:12px;align-items:flex-start;">
+            <div style="font-size:9px;color:var(--dark-beige);font-weight:700;flex-shrink:0;padding-top:2px;min-width:22px;letter-spacing:.5px">02</div>
+            <div style="font-size:11.5px;color:rgba(58,58,58,.72);line-height:1.6;"><strong style="color:var(--dark-grey);">族群高度吻合：</strong>35歲以上女性是 Road Trip 主動備品族群，女性佔 Solo Travel 55%，與 EL 核心 TA 高度重疊</div>
+          </div>
+          <div style="display:flex;gap:12px;align-items:flex-start;">
+            <div style="font-size:9px;color:var(--dark-beige);font-weight:700;flex-shrink:0;padding-top:2px;min-width:22px;letter-spacing:.5px">03</div>
+            <div style="font-size:11.5px;color:rgba(58,58,58,.72);line-height:1.6;"><strong style="color:var(--dark-grey);">消費者核心需求：</strong>True Portability · Multi-scenario · Low Maintenance · Zero Stress —— 消費者希望香氛自然融入旅程全程</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Brief Summary -->
+      <div>
+        <div style="font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--dark-grey);padding-bottom:8px;border-bottom:1px solid rgba(58,58,58,.15);margin-bottom:11px;">Product Brief · 設計任務書</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="display:flex;gap:10px;align-items:baseline;font-size:11.5px;">
+            <span style="color:var(--dark-beige);font-weight:700;flex-shrink:0;font-size:9px;letter-spacing:.5px">任務</span>
+            <span style="color:rgba(58,58,58,.72);line-height:1.55;">完善 EL 產品矩陣，布局 Portable 線，深化「優雅 × 藝術」品牌定位</span>
+          </div>
+          <div style="display:flex;gap:10px;align-items:baseline;font-size:11.5px;">
+            <span style="color:var(--dark-beige);font-weight:700;flex-shrink:0;font-size:9px;letter-spacing:.5px">受眾</span>
+            <span style="color:rgba(58,58,58,.72);line-height:1.55;">35–45 歲獨旅 / Road Trip 女性，追求設計感與旅途儀式感</span>
+          </div>
+          <div style="display:flex;gap:10px;align-items:baseline;font-size:11.5px;">
+            <span style="color:var(--dark-beige);font-weight:700;flex-shrink:0;font-size:9px;letter-spacing:.5px">設計</span>
+            <span style="color:rgba(58,58,58,.72);line-height:1.55;">延續鏤空工藝設計語言 · 一手可操作 · 旅行元素 · 售價 $35–50</span>
+          </div>
+          <div style="display:flex;gap:10px;align-items:baseline;font-size:11.5px;">
+            <span style="color:var(--dark-beige);font-weight:700;flex-shrink:0;font-size:9px;letter-spacing:.5px">優先</span>
+            <span style="color:rgba(58,58,58,.72);line-height:1.55;">品牌調性 → 外觀設計 → 永續體驗 → 獨特功能</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: 設計落地 — Product Visuals -->
+    <div style="background:var(--dark-grey);padding:48px 52px;display:flex;flex-direction:column;justify-content:center;gap:16px;">
+      <div>
+        <div class="label-tag" style="color:rgba(196,180,154,.5)">Proposal Highlights · 設計落地</div>
+        <div class="accent-bar"></div>
+      </div>
+
+      <!-- Two product images side by side — each centered -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;flex:1;min-height:0;">
+        <!-- Option A: centered, contain -->
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="flex:1;min-height:0;display:flex;align-items:center;justify-content:center;overflow:hidden;background:transparent;border:1px solid rgba(196,180,154,.18);">
+            <img id="portable-opt-a" alt="Option A" style="max-width:100%;max-height:100%;object-fit:contain;">
+          </div>
+          <div style="text-align:center;">
+            <div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dark-beige);margin-bottom:3px;">Option A · 圓柱形</div>
+            <div style="font-size:10px;color:rgba(237,232,224,.45);line-height:1.5;">真皮皮帶 · Hangable · 白金配色</div>
+          </div>
+        </div>
+        <!-- Option C: centered, contain -->
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="flex:1;min-height:0;display:flex;align-items:center;justify-content:center;overflow:hidden;background:transparent;border:1px solid rgba(196,180,154,.18);">
+            <img id="portable-opt-c" alt="Option C" style="max-width:100%;max-height:100%;object-fit:contain;">
+          </div>
+          <div style="text-align:center;">
+            <div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dark-beige);margin-bottom:3px;">Option C · 車載款</div>
+            <div style="font-size:10px;color:rgba(237,232,224,.6);line-height:1.5;">車用夾具 · LED · 5–7hr</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Brand alignment (kept) -->
+      <div style="flex-shrink:0;padding:12px 16px;background:rgba(196,180,154,.08);border:1px solid rgba(196,180,154,.15);">
+        <div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(196,180,154,.6);margin-bottom:6px;">品牌策略契合度 · Brand Alignment</div>
+        <div style="font-size:10px;color:rgba(237,232,224,.5);line-height:1.65;">Artistic Elegance 視覺方向貫穿設計 · 旅行元素 · 場景整合 · $35–50 定價</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- S15 CLOSING -->
+  <div class="slide" id="s15">
+    <div class="img-side"><img id="img-closing" alt="Earnest Living"></div>
+    <div class="txt-side" style="background:var(--dark-grey)">
+      <div class="closing-inner">
+        <div class="label-tag" style="color:rgba(196,180,154,.5)">Earnest Living · 2026</div>
+        <div class="accent-bar"></div>
+        <h2 style="color:var(--light-beige)">Brand Strategy<br>in Action.</h2>
+        <p style="color:rgba(237,232,224,.45);font-size:13px;line-height:1.9;margin-top:20px">從品牌識別到電商視覺，<br>從受眾策略到產品架構——<br>每一步都在為品牌長期價值奠基。</p>
+        <div style="margin-top:40px;font-size:10px;letter-spacing:2px;color:rgba(196,180,154,.35)">EARNEST LIVING · STRATEGIC BRAND STUDY</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /deck -->
+
+<button class="nav-btn" id="btn-prev">&#8249;</button>
+<button class="nav-btn" id="btn-next">&#8250;</button>
+<div class="progress" id="progress"></div>
+<div class="footer-brand">Earnest Living</div>
+<div class="footer-page" id="footer-page">01 / 21</div>
+
+<script>
+function ip(p){ return p.split('/').map(s=>encodeURIComponent(s)).join('/'); }
+
+const staticImgs = {
+  /* S2b: Original Brand */
+  'old-logo':    'Old/亞馬遜 舊LOGO 2021 金1.jpg',
+  'old-cd01':    'Rebrand/Amazon Images/Before/CD01-100ML/HH0016 2000X2000 P1.jpg',
+  'old-scd01':   'Old/Product/Car Diffuser/SCD01 300x300 P1.jpg',
+  'old-sod02':   'Old/Product/Onion Diffuser/SOD-02 300X400.jpg',
+  'old-oil':     'Old/Product/Essential Oil/Summer Daydream精油1 (1).jpg',
+  /* S8: Product Architecture */
+  'pa-md03': 'Rebrand/Amazon Images/After/MD03/MD03_首組圖_1_去背首圖.jpg',
+  'pa-cd01': 'Rebrand/Amazon Images/After/CD01-100ML/CD01_100ml_首組圖_1_去背首圖.jpg',
+  'pa-md02': 'Rebrand/Amazon Images/After/MD02/MD02_100ml_首組圖_1_去背首圖.jpg',
+  /* Cover & Closing */
+  'img-cover':   'Rebrand/Amazon Images/After/CD01-100ML/CD01_100ml_首組圖_7_設計形象.jpg',
+  'img-closing': 'Rebrand/Amazon Images/After/CD01-250ML/CD01_250ml_首組圖_4_廚房情境.jpg',
+  /* S9 Direction A/B */
+  'dir-a-img1':  'Brand Images/s42_img87.jpg',
+  'dir-b-img2':  'User Images/img2_diffuser_ceramic.jpg',
+  /* S9b: Instagram mockup & Vermeer */
+  'ig-social-img': 'User Images/img2_Social_Instagram.png',
+  'vermeer-img':   'User Images/img5_vermeer_card.jpg',
+  /* Appendix KOL thumbnails */
+  'kol-t1': 'User Images/img3_influencer_skincare.jpg',
+  'kol-t2': 'User Images/img4_influencer_wfh.jpg',
+  'kol-t3': 'User Images/圖片_2026-03-31_135619_881.png',
+  'kol-t4': 'User Images/圖片_2026-03-31_135646_037.png',
+  'kol-t5': 'User Images/圖片_2026-03-31_135701_086.png',
+  'kol-t6': 'User Images/圖片_2026-03-31_135707_518.png',
+  'kol-t7': 'User Images/圖片_2026-03-31_135714_580.png',
+  'kol-t8': 'User Images/圖片_2026-03-31_135720_958.png',
+  /* Appendix S4c: BFCM campaign */
+  /* Persona photos from 3 Core Customer */
+  'p-photo-l': '3 Core Customer/Lauren.png',
+  'p-photo-c': '3 Core Customer/Claire.png',
+  'p-photo-e': '3 Core Customer/Emily.png',
+  /* CD01 nine-grid */
+  'ng-cd01-1': 'Rebrand/Amazon Images/After/CD01-100ML/CD01_100ml_首組圖_1_去背首圖.jpg',
+  'ng-cd01-2': 'Rebrand/Amazon Images/After/CD01-100ML/CD01_100ml_首組圖_2_尺寸圖.jpg',
+  'ng-cd01-3': 'Rebrand/Amazon Images/After/CD01-100ML/CD01_100ml_首組圖_3_特色總覽.jpg',
+  'ng-cd01-4': 'Rebrand/Amazon Images/After/CD01-100ML/CD01_100ml_首組圖_4_床邊靜音.jpg',
+  'ng-cd01-5': 'Rebrand/Amazon Images/After/CD01-100ML/CD01_100ml_首組圖_5_七色光模式.jpg',
+  'ng-cd01-6': 'Rebrand/Amazon Images/After/CD01-100ML/CD01_100ml_首組圖_6_四段時間.jpg',
+  'ng-cd01-7': 'Rebrand/Amazon Images/After/CD01-100ML/CD01_100ml_首組圖_7_設計形象.jpg',
+  'ng-cd01-8': 'Rebrand/Amazon Images/After/CD01-100ML/CD01_100ml_首組圖_8_全系列合照.jpg',
+  'ng-cd01-9': 'Rebrand/Amazon Images/After/CD01-100ML/CD01_100ml_首組圖_9_全系列比較表.jpg',
+  /* MD02 nine-grid */
+  'ng-md02-1': 'Rebrand/Amazon Images/After/MD02/MD02_100ml_首組圖_1_去背首圖.jpg',
+  'ng-md02-2': 'Rebrand/Amazon Images/After/MD02/MD02_100ml_首組圖_2_尺寸圖.jpg',
+  'ng-md02-3': 'Rebrand/Amazon Images/After/MD02/MD02_100ml_首組圖_3_特色總覽.jpg',
+  'ng-md02-4': 'Rebrand/Amazon Images/After/MD02/MD02_100ml_首組圖_4_冥想靜音.jpg',
+  'ng-md02-5': 'Rebrand/Amazon Images/After/MD02/MD02_100ml_首組圖_5_七色光模式.jpg',
+  'ng-md02-6': 'Rebrand/Amazon Images/After/MD02/MD02_100ml_首組圖_6_四段時間.jpg',
+  'ng-md02-7': 'Rebrand/Amazon Images/After/MD02/MD02_100ml_首組圖_7_設計形象.jpg',
+  'ng-md02-8': 'Rebrand/Amazon Images/After/MD02/MD02_100ml_首組圖_8_居家風格情境.jpg',
+  'ng-md02-9': 'Rebrand/Amazon Images/After/MD02/MD02_100ml_A+_版面示意.jpg',
+  /* A+ Content */
+  'aplus-cd01': 'Rebrand/Amazon Images/After/CD01-100ML/CD01_100ml_A+_版面示意.jpg',
+  /* CD01 250ML and 500ML */
+  'pa-cd01-250': 'Rebrand/Amazon Images/After/CD01-250ML/CD01_250ml_首組圖_1_去背首圖.jpg',
+  'pa-cd01-500': 'Rebrand/Amazon Images/After/CD01-500ML/CD01_500ml_首組圖_1_去背首圖.jpg',
+  /* MD02 A+ Content */
+  'aplus-md02': 'Rebrand/Amazon Images/After/MD02/MD02_100ml_A+_版面示意.jpg',
+  /* Old Brand banners */
+  'ob-banner1': 'Old/Banner/Banner 01.jpg',
+  'ob-banner2': 'Old/Banner/Banner 02.jpg',
+  'ob-banner3': 'Old/Banner/Banner 03.jpg',
+  'ob-banner4': 'Old/Banner/Banner 04.jpg',
+  'ob-old-page': 'Old/舊版SOD03頁面截圖.png',
+  /* Basic tier products */
+  'pa-rosd': 'Rebrand/Amazon Images/Before/ROSD/EL Rose香氛燈 首圖-白.jpg',
+  'pa-cfd':  'Rebrand/Amazon Images/Before/CFD/EL-CFD-首圖-白底 (1).jpg',
+  'pa-pd03': 'Rebrand/Amazon Images/Before/PD03/PD03_首組圖_1_灰背首圖.jpg',
+  'pa-cbd01': 'Rebrand/Amazon Images/Before/CBD01/CBD01 2000X2000 P1.jpg',
+  /* Portable proposal renders */
+  'portable-opt-a': 'portable_opt_a.png',
+  'portable-opt-c': 'portable_opt_c.png',
+  /* Persona photos from 3 Core Customer */
+  'bfcm-post':  'User Images/ig_post_before_1.jpg',
+  'bfcm-ad1':   'Social/Images/圖片_2026-03-31_160248_389.png',
+  'bfcm-ad2':   'Social/Images/圖片_2026-03-31_160216_451.png',
+};
+for(const [id,path] of Object.entries(staticImgs)){
+  const el = document.getElementById(id);
+  if(el) el.src = ip(path);
+}
+
+/* gallery grids for Before/After slides */
+function makeGrid(cid, paths){
+  const c = document.getElementById(cid);
+  if(!c) return;
+  c.innerHTML = paths.map(p=>`<div class="ba-img-cell"><img src="${ip(p)}" loading="lazy"></div>`).join('');
+}
+
+
+
+
+
+/* ── Nine-grid square cell sizing ── */
+function resizeNineGrids() {
+  document.querySelectorAll('.ng-slide').forEach(function(slide) {
+    const hdr = slide.querySelector('.ng-header');
+    const grid = slide.querySelector('.ng-grid');
+    if (!grid) return;
+    const avail = slide.clientHeight - (hdr ? hdr.offsetHeight : 0) - 50;
+    const cell = Math.floor((avail - 6) / 3); // 6px for 2 gaps
+    grid.style.gridTemplateColumns = 'repeat(3,' + cell + 'px)';
+    grid.style.gridAutoRows = cell + 'px';
+    grid.style.width = (cell * 3 + 6) + 'px';
+    grid.style.height = (cell * 3 + 6) + 'px';
+  });
+}
+window.addEventListener('load', resizeNineGrids);
+window.addEventListener('resize', resizeNineGrids);
+
+/* navigation */
+const slides = Array.from(document.querySelectorAll('.slide'));
+const total = slides.length;
+let cur = 0;
+
+function goTo(n){
+  slides[cur].classList.remove('active');
+  cur = Math.max(0, Math.min(n, total-1));
+  slides[cur].classList.add('active');
+  document.getElementById('progress').style.width = ((cur+1)/total*100)+'%';
+  const pg = document.getElementById('footer-page');
+  if(pg) pg.textContent = String(cur+1).padStart(2,'0')+' / '+String(total).padStart(2,'0');
+}
+
+document.getElementById('btn-prev').addEventListener('click', ()=>goTo(cur-1));
+document.getElementById('btn-next').addEventListener('click', ()=>goTo(cur+1));
+document.addEventListener('keydown', e=>{
+  if(e.key==='ArrowRight'||e.key==='ArrowDown') goTo(cur+1);
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp') goTo(cur-1);
+});
+
+goTo(0);
+</script>
+</body>
+</html>
