@@ -794,7 +794,11 @@ const cases = {
       'Mini Cup 社群創意提案（延伸小專案）'
     ],
     slides: [],
-    pdfUrl: 'presentations/magnum_intense_dark.pdf',
+    pdfUrl: [
+      { label: 'Intense Dark TVC Storyboard', url: 'https://drive.google.com/file/d/1b67BUdrBI8JbheFftt9mFMpvVs-hFBSZ/preview' },
+      { label: 'Intense Dark TVC 剪輯', url: 'https://drive.google.com/file/d/1qo4LH4kZB2N-n-78jiY1HR-15EgCRsLh/preview' },
+      { label: 'Mini Cup 社群提案', url: 'https://drive.google.com/file/d/17R0PcCPdglQXUe4LBYsev3q0BCQ9tWe1/preview' }
+    ],
     scale: 'Intense Dark 系列 Global TVC 主責製作 | Mini Cup 延伸小專案'
   },
   mizone: {
@@ -938,12 +942,26 @@ function openModal(id) {
     slidesEl.innerHTML = '';
     slidesSection.style.display = 'block';
   } else if (c.pdfUrl) {
-    const isDrive = c.pdfUrl.startsWith('https://');
-    pdfFrame.src = isDrive ? c.pdfUrl : c.pdfUrl + '#toolbar=0&navpanes=0';
-    pdfWrap.classList.remove('site-mode');
-    pdfWrap.style.display = 'block';
-    slidesEl.innerHTML = '';
-    slidesSection.style.display = 'block';
+    // Support multi-PDF (array of {label, url}) or single string
+    if (Array.isArray(c.pdfUrl)) {
+      const firstUrl = c.pdfUrl[0].url;
+      pdfFrame.src = firstUrl;
+      pdfWrap.classList.remove('site-mode');
+      pdfWrap.style.display = 'block';
+      // Build tab switcher
+      slidesEl.innerHTML = '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;">' +
+        c.pdfUrl.map((p, i) =>
+          `<button onclick="document.getElementById('modalPdfFrame').src='${p.url}';this.parentElement.querySelectorAll('button').forEach(b=>b.style.background='transparent');this.style.background='${c.accent}';this.style.color='#fff'" style="padding:8px 16px;border-radius:100px;border:1.5px solid ${c.accent};background:${i===0?c.accent:'transparent'};color:${i===0?'#fff':c.accent};font-size:12px;font-family:inherit;cursor:pointer;transition:all 0.2s;letter-spacing:0.03em">${p.label}</button>`
+        ).join('') + '</div>';
+      slidesSection.style.display = 'block';
+    } else {
+      const isDrive = c.pdfUrl.startsWith('https://');
+      pdfFrame.src = isDrive ? c.pdfUrl : c.pdfUrl + '#toolbar=0&navpanes=0';
+      pdfWrap.classList.remove('site-mode');
+      pdfWrap.style.display = 'block';
+      slidesEl.innerHTML = '';
+      slidesSection.style.display = 'block';
+    }
   } else if (c.slides && c.slides.length > 0) {
     pdfFrame.src = '';
     pdfWrap.style.display = 'none';
